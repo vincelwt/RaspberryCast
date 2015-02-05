@@ -4,6 +4,9 @@ from bottle import *
 from process import *
 import os 
 
+#Trying to create the FIFO is it is the 1st time
+os.system("mkfifo /tmp/cmd")
+
 app = Bottle()
 
 @app.route('/')
@@ -43,5 +46,5 @@ def sound():
 		os.system("amixer set PCM playback 3db-")
 		os.system("echo -n - > /tmp/cmd")
 	
+run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
 
-run(app, reloader=False, host='0.0.0.0', debug=True, port=80)
