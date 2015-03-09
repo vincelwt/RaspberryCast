@@ -47,4 +47,3 @@ def sound():
 		os.system("echo -n - > /tmp/cmd")
 	
 run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
-
