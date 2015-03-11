@@ -6,6 +6,8 @@ import os
 
 #Trying to create the FIFO is it is the 1st time
 os.system("mkfifo /tmp/cmd")
+os.system("cat images/cast.asc | wall")
+
 
 app = Bottle()
 
@@ -30,6 +32,7 @@ def video():
 		os.system("echo -n p > /tmp/cmd")
 	elif control == "stop" :
 		os.system("echo -n q > /tmp/cmd")
+		os.system("cat images/stop.asc | wall")
 	elif control == "right" :
 		os.system("echo -n $'\x1b\x5b\x43' > /tmp/cmd")
 	elif control == "left" :
@@ -40,11 +43,8 @@ def sound():
 	vol = request.query['vol']
 	print vol + " volume"
 	if vol == "more" :
-		os.system("amixer set PCM playback 3db+")
 		os.system("echo -n + > /tmp/cmd")
 	elif vol == "less" :
-		os.system("amixer set PCM playback 3db-")
 		os.system("echo -n - > /tmp/cmd")
 	
 run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
-
