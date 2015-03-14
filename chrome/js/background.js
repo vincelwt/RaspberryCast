@@ -7,7 +7,7 @@ function notif() {
 	var opt = {
 		type: "basic",
 		title: "Raspberry Pi",
-		message: "The link should be successfully sent to the Raspberry Pi ! Please wait ~ 20/30 seconds. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.",
+		message: "The link should be successfully sent to the Raspberry Pi ! Please wait ~ 15/20 seconds. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.",
 		iconUrl: "48.png"
 	};
 
@@ -20,14 +20,12 @@ function notif() {
 chrome.contextMenus.onClicked.addListener(function(info) {	
 	try {
 		var url_encoded_url = encodeURIComponent(info.linkUrl);
-		var newURL = "http://"+localStorage.getItem('raspip')+":"+localStorage.getItem('rasport')+"/stream?url=" + url_encoded_url;
+		var newURL = "http://"+localStorage.raspip+":"+localStorage.rasport+"/"+localStorage.cmFunction+"?url=" + url_encoded_url;
 
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( "GET", newURL, true);
 		xmlHttp.send();
 		notif();
-		
-		//tempAlert("The link should be successfully sent to the Raspberry Pi ! Please wait ~ 20/30 seconds. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
 	} 
 	catch(err) {
 		alert('Error while trying to send the video to the Raspberry Pi. Please make sure the ip/port are corrects, and the server is running.');
@@ -36,10 +34,12 @@ chrome.contextMenus.onClicked.addListener(function(info) {
 });
 
 chrome.runtime.onInstalled.addListener(function() {
+	
 	chrome.contextMenus.create({
-		"title": "Cast this link now",
-		"contexts" : ["link"],
-		"id" : "Castnow"
+		id: "Castnow",
+		title: "Send to Rpi",
+		contexts: ["link"]
 	});
 });
+
 

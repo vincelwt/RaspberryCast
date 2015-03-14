@@ -6,8 +6,6 @@ import os
 
 #Trying to create the FIFO is it is the 1st time
 os.system("mkfifo /tmp/cmd")
-os.system("cat images/cast.asc | wall")
-
 
 os.system("cat images/cast.asc | wall")
 
@@ -30,10 +28,14 @@ def stream():
 @app.route('/queue')
 def queue():
         url = request.query['url']
-        print "adding to queue : " + url
-	#Writing url to file
-	with open('video.queue', 'a') as f:
-		f.write(url+'\n')
+	if is_running("omxplayer.bin") == False :
+		print "adding to queue : " + url
+		#Writing url to file
+		with open('video.queue', 'a') as f:
+			f.write(url+'\n')
+	else :
+		print "casting now : " + url
+		launchvideo(url)
 
 @app.route('/video')
 def video():

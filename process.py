@@ -1,21 +1,14 @@
 #!/usr/bin/env python
 
-<<<<<<< HEAD
 import subprocess, os, signal, sys, re
 from time import *
-=======
-import subprocess, os, signal, sys
-from time import *
-#from timeout import timeout
->>>>>>> ba9f1de9fc0c68e94a6866f9000f2cd20b7a37e5
 from config import *
 
-already_played = False
-
 def launchvideo(url):
-	
-	global already_played
-	
+
+	if is_running("omxplayer.bin") == True : 
+		os.system("killall omxplayer.bin")
+
 	os.system("cat images/url.asc | wall")
 
 	if low_mode == True:
@@ -37,33 +30,11 @@ def launchvideo(url):
 	#print "Program output is:", out	
 	#os.system('echo "Video link is: ' + out + '" | wall')
 	out = out.rstrip()
-<<<<<<< HEAD
 
-	if is_running("omxplayer.bin") == True : 
-		os.system("killall omxplayer.bin")
-	
 	os.system("cat images/omx.asc | wall")
 
 	omx = "omxplayer -b -o "+audio_output+" '"+out+"' < /tmp/cmd"
-	omxplay = subprocess.Popen(omx, stdout=subprocess.PIPE, shell=True)
-=======
-
-	#trytostopRunning()
-	os.system("killall omxplayer.bin")
-	
-	os.system("cat images/omx.asc | wall")
-
-	omx = "omxplayer -b -o "+audio_output+" '"+out+"' < /tmp/cmd"
-	omxplay = subprocess.Popen(omx, stdout=subprocess.PIPE, shell=True)
-
-	os.system("echo . > /tmp/cmd")
-
-#@timeout(3)
-def trytostopRunning() :
-	os.system("echo -n q > /tmp/cmd")
-	print "Video was running"
-	os.system("cat images/stop.asc | wall")
->>>>>>> ba9f1de9fc0c68e94a6866f9000f2cd20b7a37e5
+	os.system(omx+" &")
 
 	os.system("echo . > /tmp/cmd")
 

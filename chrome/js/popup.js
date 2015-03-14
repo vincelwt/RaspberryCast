@@ -31,15 +31,31 @@ $(function() {
 			var url_encoded_url = encodeURIComponent(tabs[0].url);
 
 			if (mkrequest("/stream?url=" + url_encoded_url) != "wrong") {
-				popalert("The video should be successfully sent to the Raspberry Pi ! Please wait ~ 20/30 seconds. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
+				popalert("The video should be successfully sent to the Raspberry Pi ! Please wait ~ 15/20 seconds. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
 			}
 		});
 			
 	});
+
+	$( "#addqueue" ).click(function() {
+		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+			var url_encoded_url = encodeURIComponent(tabs[0].url);
+
+			if (mkrequest("/queue?url=" + url_encoded_url) != "wrong") {
+				popalert("The video should be successfully added to queue. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
+			}
+		});
+			
+	});	
+
 	$( "#pause" ).click(function() {
 		mkrequest("/video?control=pause");
 	});
 	
+	$( "#remqueue" ).click(function() {
+		mkrequest("/video?control=emptyqueue");
+	});	
+
 	$( "#stop" ).click(function() {
 		mkrequest("/video?control=stop");
 	});

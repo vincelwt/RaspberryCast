@@ -5,7 +5,7 @@
    },
    "browser_action": {
       "default_icon": "20.png",
-      "default_title": "Send to Rpi",
+      "default_title": "RasperryCast remote",
       "default_popup": "popup.html"
    },
    "description": "Share videos to Rpi",
@@ -17,7 +17,7 @@
    "options_page": "options.html",
 
    "manifest_version": 2,
-   "name": "RaStream",
+   "name": "RaspberryCast",
    "permissions": [ "contextMenus", "tabs", "notifications" ],
    "version": "0.3.0"
 }
