@@ -6,6 +6,8 @@ import os
 
 #Trying to create the FIFO is it is the 1st time
 os.system("mkfifo /tmp/cmd")
+os.system("cat images/cast.asc | wall")
+
 
 os.system("cat images/cast.asc | wall")
 
