@@ -7,6 +7,8 @@ import os
 #Trying to create the FIFO is it is the 1st time
 os.system("mkfifo /tmp/cmd")
 
+os.system("cat images/cast.asc | wall")
+
 app = Bottle()
 
 @app.route('/')
@@ -20,8 +22,16 @@ def index():
 @app.route('/stream')	
 def stream(): 
 	url = request.query['url']	
-	print url
+	print "casting now : " + url
 	launchvideo(url)
+
+@app.route('/queue')
+def queue():
+        url = request.query['url']
+        print "adding to queue : " + url
+	#Writing url to file
+	with open('video.queue', 'a') as f:
+		f.write(url+'\n')
 
 @app.route('/video')
 def video():
@@ -30,21 +40,22 @@ def video():
 		os.system("echo -n p > /tmp/cmd")
 	elif control == "stop" :
 		os.system("echo -n q > /tmp/cmd")
+		os.system("cat images/stop.asc | wall")
 	elif control == "right" :
 		os.system("echo -n $'\x1b\x5b\x43' > /tmp/cmd")
 	elif control == "left" :
 		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd")
+	elif control == "emptyqueue" :
+		#Empty queue file
+		open('video.queue', 'w').close()
 
 @app.route('/sound')
 def sound():
 	vol = request.query['vol']
 	print vol + " volume"
 	if vol == "more" :
-		os.system("amixer set PCM playback 3db+")
 		os.system("echo -n + > /tmp/cmd")
 	elif vol == "less" :
-		os.system("amixer set PCM playback 3db-")
 		os.system("echo -n - > /tmp/cmd")
 	
 run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
-
