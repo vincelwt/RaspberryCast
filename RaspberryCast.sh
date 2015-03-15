@@ -5,7 +5,7 @@ if [ $1 = "start" ]; then
 	./server.py &
 	
 	echo "Starting queue daemon."
-	./daemon_queue.py
+	./daemon_queue.py &
 	
 	exit
 elif [ $1 = "stop" ] ; then
