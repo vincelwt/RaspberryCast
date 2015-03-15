@@ -43,7 +43,7 @@ def launchvideo(url):
 	
 	os.system("rm process.running")
 
-def is_running:
+def is_running():
 	
         s = subprocess.Popen(["ps", "axw"],stdout=subprocess.PIPE)
         for x in s.stdout:
