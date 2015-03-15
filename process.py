@@ -27,13 +27,14 @@ def launchvideo(url):
 
 	(out, err) = proc.communicate()
 
-	#print "Program output is:", out	
+	print "Full video URL is : ", out	
 	#os.system('echo "Video link is: ' + out + '" | wall')
 	out = out.rstrip()
 
 	os.system("cat images/omx.asc | wall")
 
 	omx = "omxplayer -b -o "+audio_output+" '"+out+"' < /tmp/cmd"
+
 	os.system(omx+" &")
 
 	os.system("echo . > /tmp/cmd")
