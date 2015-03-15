@@ -6,7 +6,7 @@ if [ $1 = "start" ]; then
 	
 	echo "Starting queue daemon."
 	./daemon_queue.py &
-	
+	echo "Done."
 	exit
 elif [ $1 = "stop" ] ; then
 	if [ `id -u` -ne 0 ]
@@ -20,7 +20,9 @@ elif [ $1 = "stop" ] ; then
 	killall omxplayer.bin
 	killall python
 	kill $(lsof -t -i :2020)
-	exit	
+	rm *.pyc
+	echo "Done."
+	exit
 
 else 
 	echo "Error, wrong argument. Try with 'stop' or 'start'. Don't forget the root privileges."

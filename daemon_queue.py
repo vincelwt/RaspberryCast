@@ -5,11 +5,11 @@ from process import *
 from time import sleep
 
 while 1:
-	if is_running("omxplayer.bin") == False:
+	if is_running() == False:
 		with open('video.queue', 'r') as f:
 			first_line = f.readline()
 			if first_line != "" :
-				print "Lancement de la video ! "+first_line
+				print "No video currently playing, starting next into queue. "+first_line
 				launchvideo(first_line)
 				with open('video.queue', 'r') as fin:
 					data = fin.read().splitlines(True)

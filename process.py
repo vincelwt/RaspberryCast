@@ -6,6 +6,8 @@ from config import *
 
 def launchvideo(url):
 
+	os.system("touch process.running")
+
 	if is_running("omxplayer.bin") == True : 
 		os.system("killall omxplayer.bin")
 
@@ -38,10 +40,17 @@ def launchvideo(url):
 	os.system(omx+" &")
 
 	os.system("echo . > /tmp/cmd")
+	
+	os.system("rm process.running")
 
-def is_running(process):
+def is_running:
+	
         s = subprocess.Popen(["ps", "axw"],stdout=subprocess.PIPE)
         for x in s.stdout:
-                if re.search(process, x):
+                if re.search("omxplayer.bin", x):
                         return True
-        return False
+        if os.path.exists("process.running") == True:
+		return True
+	else :
+		return False
+

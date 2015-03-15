@@ -28,7 +28,7 @@ def stream():
 @app.route('/queue')
 def queue():
         url = request.query['url']
-	if is_running("omxplayer.bin") == True :
+	if is_running() == True :
 		print "adding to queue : " + url
 		#Writing url to file
 		with open('video.queue', 'a') as f:
