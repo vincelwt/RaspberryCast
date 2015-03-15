@@ -8,7 +8,7 @@ def launchvideo(url):
 
 	os.system("touch process.running")
 
-	if is_running("omxplayer.bin") == True : 
+	if is_running() == True : 
 		os.system("killall omxplayer.bin")
 
 	os.system("cat images/url.asc | wall")
