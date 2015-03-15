@@ -13,25 +13,32 @@ def launchvideo(url):
 
 	os.system("cat images/url.asc | wall")
 
-	if low_mode == True:
-		if url[0:14] in ("https://youtu.", "http://youtu.b", "https://www.yo", "http://www.you", "http://youtub", "http://youtube") :
-			print "Youtube, setting to 360p"
-			command = "youtube-dl -f 18 -g "
-		elif url[0:12] in ("https://vime", "http://vimeo") :
-			print "Vimeo, setting to 360p"
-			command = "youtube-dl -f h264-sd -g "
-		else :
+	if url[-4:] in (".avi", ".mkv", ".mp4", ".mp3") :	
+		print "No need to Youtube-dl."	
+		out = url
+	else :
+		if low_mode == True:
+			if url[0:14] in ("https://youtu.", "http://youtu.b", "https://www.yo", "http://www.you", "http://youtub", "http://youtube") :
+				print "Youtube, setting to 360p"
+				command = "youtube-dl -f 18 -g "
+			elif url[0:12] in ("https://vime", "http://vimeo") :
+				print "Vimeo, setting to 360p"
+				command = "youtube-dl -f h264-sd -g "
+			else :
+				command = "youtube-dl -g "
+		else:
+			print "Trying to extract full url..."
 			command = "youtube-dl -g "
-	else:
-		command = "youtube-dl -g "
 
-	proc = subprocess.Popen(command+url, stdout=subprocess.PIPE, shell=True)
+	
 
-	(out, err) = proc.communicate()
+		proc = subprocess.Popen(command+url, stdout=subprocess.PIPE, shell=True)
 
-	print "Full video URL is : ", out	
-	#os.system('echo "Video link is: ' + out + '" | wall')
-	out = out.rstrip()
+		(out, err) = proc.communicate()
+
+		print "Full video URL is : ", out	
+		#os.system('echo "Video link is: ' + out + '" | wall')
+		out = out.rstrip()
 
 	os.system("cat images/omx.asc | wall")
 
