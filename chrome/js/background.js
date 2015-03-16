@@ -20,7 +20,7 @@ function notif() {
 chrome.contextMenus.onClicked.addListener(function(info) {	
 	try {
 		var url_encoded_url = encodeURIComponent(info.linkUrl);
-		var newURL = "http://"+localStorage.raspip+":"+localStorage.rasport+"/"+localStorage.cmFunction+"?url=" + url_encoded_url;
+		var newURL = "http://"+localStorage.raspip+":2020/"+localStorage.cmFunction+"?url=" + url_encoded_url;
 
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( "GET", newURL, true);
@@ -34,7 +34,7 @@ chrome.contextMenus.onClicked.addListener(function(info) {
 });
 
 chrome.runtime.onInstalled.addListener(function() {
-	
+	chrome.tabs.create({url: "../options.html"});
 	chrome.contextMenus.create({
 		id: "Castnow",
 		title: "Send to Rpi",

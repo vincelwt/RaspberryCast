@@ -1,6 +1,6 @@
 #whole {
 	width: 130px ;
-	height: 210px;
+	height: 240px;
 	margin: auto; 
 	text-align: center; 
 	
@@ -31,3 +31,6 @@
 	margin: 10px;
 }
 
+.form-control {
+	max-width: 105px;
+}

@@ -1,6 +1,5 @@
 function saveSettings() {
 	localStorage.raspip = document.getElementById("raspip").value;
-	localStorage.rasport = document.getElementById("rasport").value;
 	var radios = document.getElementsByName('cmFunction');
 	for (var i = 0, length = radios.length; i < length; i++) {
 	    if (radios[i].checked) {
@@ -15,13 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	if (localStorage.raspip != undefined) {
 		document.getElementById("raspip").value = localStorage.raspip;
 		
-	}
-
-	if (localStorage.rasport == undefined) {
-		localStorage.rasport = "2020";
-		document.getElementById("rasport").value = localStorage.rasport;
-	} else {
-		document.getElementById("rasport").value = localStorage.rasport;
 	}
 
 	if (localStorage.cmFunction == undefined) {
