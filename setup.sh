@@ -65,7 +65,7 @@ then
   exit 0
 fi
 
-pip install youtube-dl Flask requests
+pip install youtube-dl
 
 if [ "$?" = "1" ]
 then
@@ -81,49 +81,6 @@ echo ""
 echo "============================================================"
 
 git clone https://github.com/vincent-lwt/RaspberryCast.git
-
-echo ""
-echo "============================================================"
-echo ""
-echo "Installing Node & Peerflix (takes a while)..."
-echo ""
-echo "============================================================"
-echo ""
-echo "Downloading node.js..."
-
-wget -q http://node-arm.herokuapp.com/node_latest_armhf.deb > /dev/null
-
-if [ "$?" = "1" ]
-then
-  echo "An unexpected error occured while downloading!"
-  exit 0
-fi
-
-echo ""
-echo "Installing node.js..."
-
-sudo dpkg -i node_latest_armhf.deb > /dev/null
-
-if [ "$?" = "1" ]
-then
-  echo "An unexpected error occured!"
-  exit 0
-fi
-
-rm node_latest_armhf.deb > /dev/null
-
-echo ""
-echo "Installing Peerflix..."
-
-echo "============================================================"
-npm install -g peerflix
-echo "============================================================"
-
-if [ "$?" = "1" ]
-then
-  echo "An unexpected error occured!"
-  exit 0
-fi
 
 echo "============================================================"
 echo "Setup was successful!"

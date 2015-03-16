@@ -2,7 +2,7 @@
 
 from bottle import *
 from process import *
-import os 
+import os
 
 #Trying to create the FIFO is it is the 1st time
 os.system("mkfifo /tmp/cmd")
@@ -11,19 +11,23 @@ os.system("cat images/cast.asc | wall")
 
 app = Bottle()
 
+
+SimpleTemplate.defaults["get_url"] = app.get_url
+
+@app.route('/static/<filename>', name='static')
+def server_static(filename):
+	return static_file(filename, root='static')
+	
 @app.route('/')
 def index():
-	return '''
-	<a href='/video?control=pause'><button type='button'>Pause</button></a>  <a href='/video?control=stop'><button type='button'>Stop</button></a><br>
-	<a href='/video?control=left'><button type='button'>&lt;</button></a>  <a href='/video?control=right'><button type='button'>&gt;</button></a><br><br>
-	<a href='/sound?vol=more'><button type='button'>+</button></a>  <a href='/sound?vol=less'><button type='button'>-</button></a>'''
+	return template('index')
 
 
 @app.route('/stream')	
 def stream(): 
 	url = request.query['url']	
 	print "casting now : " + url
-	launchvideo(url)
+	launchvideo(url, False)
 
 @app.route('/queue')
 def queue():
@@ -35,7 +39,23 @@ def queue():
 			f.write(url+'\n')
 	else :
 		print "casting now : " + url
-		launchvideo(url)
+		launchvideo(url, False)
+
+@app.route('/popcorn')
+def queue():
+        url = request.query['url']
+	ip = request.environ['REMOTE_ADDR']
+	port = url.split(":")[2]
+	url = "http://"+ip+":"+port
+
+	print "downloading subtitle"
+
+	# Try to remove subtitle	
+	os.system("rm subtitle.srt")
+	wget = "wget http://"+ip+":9999/subtitle.srt"
+	os.system(wget)
+
+	launchvideo(url, True)
 
 @app.route('/video')
 def video():

@@ -4,7 +4,7 @@ import subprocess, os, signal, sys, re
 from time import *
 from config import *
 
-def launchvideo(url):
+def launchvideo(url, sub):
 
 	os.system("touch process.running")
 
@@ -13,9 +13,10 @@ def launchvideo(url):
 
 	os.system("cat images/url.asc | wall")
 
-	if url[-4:] in (".avi", ".mkv", ".mp4", ".mp3") :	
+	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub == True) :	
 		print "No need to Youtube-dl."	
 		out = url
+		
 	else :
 		if low_mode == True:
 			if url[0:14] in ("https://youtu.", "http://youtu.b", "https://www.yo", "http://www.you", "http://youtub", "http://youtube") :
@@ -36,18 +37,38 @@ def launchvideo(url):
 
 		(out, err) = proc.communicate()
 
-		print "Full video URL is : ", out	
-		#os.system('echo "Video link is: ' + out + '" | wall')
+		print "Full video URL is : ", out
 		out = out.rstrip()
 
 	os.system("cat images/omx.asc | wall")
-
-	omx = "omxplayer -b -o "+audio_output+" '"+out+"' < /tmp/cmd"
+	
+	if sub == True :
+		omx = "omxplayer -b -o "+audio_output+" '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
+	else :
+		omx = "omxplayer -b -o "+audio_output+" '"+out+"' < /tmp/cmd"
 
 	os.system(omx+" &")
 
 	os.system("echo . > /tmp/cmd")
 	
+	os.system("rm process.running")
+
+def popcorn(url):
+	os.system("touch process.running")
+
+	if is_running() == True : 
+		os.system("killall omxplayer.bin")
+
+	print "No need to Youtube-dl (PopcornTime)."	
+	out = url
+
+	os.system("cat images/url.asc | wall")
+
+	omx = "omxplayer -b -o "+audio_output+" '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
+
+	os.system(omx+" &")
+	os.system("echo . > /tmp/cmd")
+
 	os.system("rm process.running")
 
 def is_running():

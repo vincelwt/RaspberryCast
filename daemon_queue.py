@@ -10,7 +10,7 @@ while 1:
 			first_line = f.readline()
 			if first_line != "" :
 				print "No video currently playing, starting next into queue. "+first_line
-				launchvideo(first_line)
+				launchvideo(first_line, False)
 				with open('video.queue', 'r') as fin:
 					data = fin.read().splitlines(True)
 				with open('video.queue', 'w') as fout:

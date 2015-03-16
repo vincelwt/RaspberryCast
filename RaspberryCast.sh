@@ -21,6 +21,7 @@ elif [ $1 = "stop" ] ; then
 	killall python
 	kill $(lsof -t -i :2020)
 	rm *.pyc
+	rm *.srt
 	echo "Done."
 	exit
 
