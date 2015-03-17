@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="{{get_url('static', filename='style.css') }}" rel="stylesheet">
 		<link href="{{get_url('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+		<link rel="icon" type="image/png" sizes="192x192" href="{{get_url('static', filename='favicon.png') }}" />
 	</head>
 	<body>
 		<center>
