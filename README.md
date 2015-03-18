@@ -21,14 +21,14 @@ sudo sh setup.sh
 ```
 
 This will :
-- Install the necessaries dependencies
+- Install the necessary dependencies
 - Install RaspberryCast
 - Enable auto login at boot
 - Autostart RaspberryCast at boot
 
 Take a look at the config.py file to configure the audio output and the fast loading mode.
 
-## Load the extension
+## Extension
 
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/extension.png)
 
