@@ -57,8 +57,10 @@ Use the following version : https://popcorntime.io/
 
 **Todo**
 
-- Cleaner/better code (!!)
+- Better handling errors (!!)
+- Cleaner/better code
 - Firefox extension
 - Android/Ios app for control & sharing
+- HDMI-CEC support
 
 Please contribute to the project :)
