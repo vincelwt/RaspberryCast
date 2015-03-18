@@ -1,10 +1,9 @@
 #!/bin/sh
+cd /home/pi/RaspberryCast/
 
 if [ $1 = "start" ]; then
 	echo "Starting server."
 	./server.py &
-	
-	echo "Starting queue daemon."
 	./daemon_queue.py &
 	echo "Done."
 	exit
@@ -15,17 +14,16 @@ elif [ $1 = "stop" ] ; then
 	  echo "Try again with sudo."
 	  exit 0
 	fi
-	
 	echo "Killing RaspberryCast..."
-	killall omxplayer.bin
-	killall python
-	kill $(lsof -t -i :2020)
-	rm *.pyc
-	rm *.srt
+	killall omxplayer.bin >/dev/null 2>&1
+	killall python >/dev/null 2>&1
+	kill $(lsof -t -i :2020) >/dev/null 2>&1
+	rm *.pyc >/dev/null 2>&1
+	rm *.srt >/dev/null 2>&1
 	echo "Done."
 	exit
 
-else 
+else
 	echo "Error, wrong argument. Try with 'stop' or 'start'. Don't forget the root privileges."
 	exit
 fi
