@@ -3,7 +3,7 @@
 
 ## Still in Alpha !
 
-**Supported services**
+**Supported services:**
 
 All youtube-dl supported websites: 
 http://rg3.github.io/youtube-dl/supportedsites.html
@@ -27,6 +27,14 @@ This will :
 - Autostart RaspberryCast at boot
 
 Take a look at the config.py file to configure the audio output and the fast loading mode.
+
+**Update:**
+
+```
+cd /RaspberryCast
+sudo git pull
+sudo reboot
+```
 
 ## Extension
 
@@ -66,7 +74,7 @@ Use the following version : https://popcorntime.io/
 
 DON'T CLOSE POPCORNTIME OR SHUTDOWN YOUR COMPUTER DURING PLAY
 
-**Todo**
+**Todo:**
 
 - Better handling errors (!!)
 - Cleaner/better code
