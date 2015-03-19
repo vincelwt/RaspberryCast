@@ -91,6 +91,7 @@ echo "Adding project to startup"
 echo ""
 echo "============================================================"
 
+chmod 666 /dev/tty1
 
 cat > /etc/inittab  << EOF
 id:2:initdefault:

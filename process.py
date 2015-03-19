@@ -6,7 +6,8 @@ from config import *
 
 def launchvideo(url, sub):
 
-	os.system("touch process.running")
+	#Wake up the screen
+	os.system("echo -ne '\033[9;0]' >/dev/tty1")
 
 	if is_running() == True : 
 		os.system("killall omxplayer.bin")
@@ -50,35 +51,11 @@ def launchvideo(url, sub):
 	os.system(omx+" &")
 
 	os.system("echo . > /tmp/cmd")
-	
-	os.system("rm process.running")
-
-def popcorn(url):
-	os.system("touch process.running")
-
-	if is_running() == True : 
-		os.system("killall omxplayer.bin")
-
-	print "No need to Youtube-dl (PopcornTime)."	
-	out = url
-
-	os.system("cat images/url.asc | wall")
-
-	omx = "omxplayer -b -o "+audio_output+" '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
-
-	os.system(omx+" &")
-	os.system("echo . > /tmp/cmd")
-
-	os.system("rm process.running")
 
 def is_running():
-	
         s = subprocess.Popen(["ps", "axw"],stdout=subprocess.PIPE)
         for x in s.stdout:
                 if re.search("omxplayer.bin", x):
                         return True
-        if os.path.exists("process.running") == True:
-		return True
-	else :
-		return False
+	return False
 
