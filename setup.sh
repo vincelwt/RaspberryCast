@@ -78,36 +78,7 @@ echo "============================================================"
 
 chmod 666 /dev/tty1
 
-cat > /etc/inittab  << EOF
-id:2:initdefault:
-
-si::sysinit:/etc/init.d/rcS
-
-~~:S:wait:/sbin/sulogin
-
-l0:0:wait:/etc/init.d/rc 0
-l1:1:wait:/etc/init.d/rc 1
-l2:2:wait:/etc/init.d/rc 2
-l3:3:wait:/etc/init.d/rc 3
-l4:4:wait:/etc/init.d/rc 4
-l5:5:wait:/etc/init.d/rc 5
-l6:6:wait:/etc/init.d/rc 6
-
-ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
-
-pf::powerwait:/etc/init.d/powerfail start
-pn::powerfailnow:/etc/init.d/powerfail now
-po::powerokwait:/etc/init.d/powerfail stop
-
-1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1
-2:23:respawn:/sbin/getty 38400 tty2
-3:23:respawn:/sbin/getty 38400 tty3
-4:23:respawn:/sbin/getty 38400 tty4
-5:23:respawn:/sbin/getty 38400 tty5
-6:23:respawn:/sbin/getty 38400 tty6
-
-T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100
-EOF
+sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
 
 cat > /etc/rc.local  << EOF
 _IP=$(hostname -I) || true
