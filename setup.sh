@@ -40,21 +40,6 @@ echo ""
 echo "Installing necessary dependencies... (This could take a while)"
 echo ""
 echo "============================================================"
-apt-get update
-
-if [ "$?" = "1" ]
-then
-  echo "An unexpected error occured!"
-  exit 0
-fi
-
-apt-get upgrade -y
-
-if [ "$?" = "1" ]
-then
-  echo "An unexpected error occured!"
-  exit 0
-fi
 
 apt-get install -y lsof x11-xserver-utils python-pip git wget omxplayer
 echo "============================================================"
@@ -125,7 +110,6 @@ T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100
 EOF
 
 cat > /etc/rc.local  << EOF
-
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
@@ -141,9 +125,9 @@ rm setup.sh
 echo "============================================================"
 echo "Setup was successful!"
 echo "Do not delete the 'RaspberryCast' folder as it contains all application data!"
-echo "REBOOTING..."
+echo "STARTING RASPBERRYCAST..."
 echo "============================================================"
 
-sleep 4
-reboot
+su - pi -c "/home/pi/RaspberryCast.sh start"
+
 exit 0
