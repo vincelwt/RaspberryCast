@@ -80,16 +80,7 @@ chmod 666 /dev/tty1
 
 sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
 
-cat > /etc/rc.local  << EOF
-_IP=$(hostname -I) || true
-if [ "$_IP" ]; then
-  printf "My IP address is %s\n" "$_IP"
-
-fi
-su - pi -c "/home/pi/RaspberryCast.sh start"
-exit 0
-EOF
-
+sed -i '/exit/c\su - pi -c \"/home/pi/RaspberryCast.sh start\"\nexit 0' /etc/rc.local
 
 rm setup.sh
 
