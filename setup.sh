@@ -80,7 +80,7 @@ echo "Cloning project..."
 echo ""
 echo "============================================================"
 
-git clone https://github.com/vincent-lwt/RaspberryCast.git
+su - pi -c "git clone https://github.com/vincent-lwt/RaspberryCast.git"
 mv RaspberryCast/RaspberryCast.sh RaspberryCast.sh
 chmod +x RaspberryCast.sh
 
@@ -131,7 +131,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 
 fi
-/home/pi/RaspberryCast.sh start
+su - pi -c "/home/pi/RaspberryCast.sh start"
 exit 0
 EOF
 

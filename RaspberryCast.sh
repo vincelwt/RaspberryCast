@@ -1,13 +1,6 @@
 #!/bin/sh
 cd /home/pi/RaspberryCast/
 
-if [ `id -u` -ne 0 ]
-then
-	echo "Please start this script with root privileges!"
-	echo "Try again with sudo."
-	exit 0
-fi
-
 if [ $1 = "start" ]; then
 	echo "Starting server."
 	./server.py &
@@ -15,6 +8,13 @@ if [ $1 = "start" ]; then
 	echo "Done."
 	exit
 elif [ $1 = "stop" ] ; then
+	if [ `id -u` -ne 0 ]
+	then
+		echo "Please start this script with root privileges!"
+		echo "Try again with sudo."
+		exit 0
+	fi
+
 	echo "Killing RaspberryCast..."
 	killall omxplayer.bin >/dev/null 2>&1
 	killall python >/dev/null 2>&1
