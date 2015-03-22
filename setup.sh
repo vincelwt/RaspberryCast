@@ -131,7 +131,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 
 fi
-su - pi -c "/home/pi/RaspberryCast.sh start"
+/home/pi/RaspberryCast.sh start
 exit 0
 EOF
 
