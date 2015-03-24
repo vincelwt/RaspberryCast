@@ -21,9 +21,9 @@ SimpleTemplate.defaults["get_url"] = app.get_url
 def server_static(filename):
 	return static_file(filename, root='static')
 	
-@app.route('/')
-def index():
-	return template('index')
+@app.route('/remote')
+def remote():
+	return template('remote')
 
 
 @app.route('/stream')	
