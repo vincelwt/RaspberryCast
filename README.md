@@ -1,11 +1,11 @@
 # RaspberryCast
-> Transform your RaspberryPi into a true Chromecast
+> Transform your Raspberry Pi into a streaming device
 
 ## Still in Alpha !
 
 **Supported services:**
 
-All youtube-dl supported websites: 
+It should works with all youtube-dl supported websites: 
 http://rg3.github.io/youtube-dl/supportedsites.html
 
 Youtube, Soundcloud, Dailymotion, Vimeo, etc...
@@ -60,7 +60,7 @@ Alternatively, you can drag and drop the directory where your extension files li
 
 On any device connected to the same network as you Pi, you can visit the page :
 ```
-http://<your-Pi-ip>:2020/
+http://<your-Pi-ip>:2020/remote/
 ```
 On Chrome for Android, we recommend you to use the "Add to homescreen" button.
 
