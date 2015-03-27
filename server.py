@@ -21,13 +21,25 @@ SimpleTemplate.defaults["get_url"] = app.get_url
 def server_static(filename):
 	return static_file(filename, root='static')
 	
+@app.route('/')
+def index():
+	return template('index')
+
 @app.route('/remote')
 def remote():
 	return template('remote')
 
+@app.route('/torrent')
+def torrent():
+	url = request.query['url']	
+	logging.info('Torrent URL: '+url)
+	os.system("peerflix "+url)
+	launchvideo("http://localhost:8888", False)
+	return template('index')
+
 
 @app.route('/stream')	
-def stream(): 
+def stream():
 	url = request.query['url']	
 	logging.info('Casting URL: '+url)
 	try :

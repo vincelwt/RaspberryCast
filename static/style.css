@@ -1,35 +1,135 @@
-#whole {
+body {
+	background: #282827;
 	width: 100%;
-	max-width: 500px;
-	height: 240px;
+	height: 100%;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+#overlay {
+	display: none;
+	z-index: -1;
+	opacity: .5;
+	background-color: black;
+	position: absolute;
+	left: 0; top: 0; height: 100%; width: 100%;
+}
+
+a {
+	cursor: pointer;
+}
+
+.white {
+	color: #fff;
+}
+
+.element {
+	margin: 6px;
+	float: left;
+	overflow: hidden;
+	padding: 5px;
+	width: 136px;
+	display: block;
+}
+
+.title {
+	font-size: 13px;
+	overflow: hidden;
+	width: 100%;
+	height: 17px;
+	color: #fff;
+	font-weight: bold;
+	white-space: nowrap;
+	margin-top: 3px;
+}
+
+.year {
+	font-size: 11px;
+	color: #666;
+}
+
+.poster {
+	cursor: pointer;
+	height: 205px;
+	width: 100%;
+	overflow: hidden;
+	background: #000;
+	border: 1px #000 solid;
+	border-radius: 3px;
+	position: relative;
+}
+
+#infos {
+	color: #fff;
+	position : relative;
+}
+
+#home {
+	position : relative;
+}
+
+.detail_poster {
+	float: left;
+	width: 100%;
+	max-width: 50vh;
+	max-height: 75vh;
+	position: relative;
+	margin-right: 2vw;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #17181b;
+}
+
+.detail_title {
+	position: relative;
+	top: -4px;
+	text-stroke: 1px rgba(0,0,0,0.1);
+	font-size: 38px;
+	-webkit-font-smoothing: antialiased;
+}
+
+.detail_infos {
+	font-size: 12px;
+	text-stroke: 1px rgba(0,0,0,0.1);
+	-webkit-font-smoothing: antialiased;
+}
+
+.btn {
+	margin: 5px;
 	
 }
 
-.fifty {
-	width: 45%;
-	max-width: 250px;
-	margin: 10px 5px;
-	
+.pages {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
 }
 
-.ninety {
-	width: 93%;
-	max-width: 500px;
-	margin: 10px;
+#close-btn {
+	position: absolute;
+	top : 0;
+	right : 0;
 }
 
-button {
-	height: 70px;
+#menu-toggle {
+	z-index: 10000;
+	position: fixed;
+	bottom: 40px;
+	left: 20px;
 }
 
-.input-group {
-	margin-top: 20px;
-	margin-bottom: -10px;
-	width: 93%;
-	max-width: 500px;
+#search_term {
+	display: block;
+	margin-left: -20px;
 }
 
-.form-control {
-	height: 70px !important;
+#sidebar-wrapper {
+	overflow: hidden;
 }
 
+@media(min-width:768px) {
+	#menu-toggle {
+		display: none;	
+	}
+}
