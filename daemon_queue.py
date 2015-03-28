@@ -5,6 +5,7 @@ from process import *
 from time import sleep
 
 while 1:
+    #Playlist management
 	if is_running() == False:
 		with open('video.queue', 'r') as f:
 			first_line = f.readline()
@@ -14,5 +15,5 @@ while 1:
 				with open('video.queue', 'r') as fin:
 					data = fin.read().splitlines(True)
 				with open('video.queue', 'w') as fout:
-   					 fout.writelines(data[1:])				
+   					 fout.writelines(data[1:])				    
 	sleep(1)

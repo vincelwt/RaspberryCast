@@ -1,5 +1,4 @@
 #!/bin/sh
-cd /home/pi/RaspberryCast/
 
 if [ $1 = "start" ]; then
 	if [ `id -u` -eq 0 ]
@@ -9,6 +8,9 @@ if [ $1 = "start" ]; then
 		exit 0
 	fi
 	echo "Starting server."
+	rm RaspberryCast.log
+	touch RaspberryCast.log
+	tail -f RaspberryCast.log &
 	./server.py &
 	./daemon_queue.py &
 	echo "Done."
@@ -24,7 +26,6 @@ elif [ $1 = "stop" ] ; then
 	killall omxplayer.bin >/dev/null 2>&1
 	killall python >/dev/null 2>&1
 	kill $(lsof -t -i :2020) >/dev/null 2>&1
-	rm *.pyc >/dev/null 2>&1
 	rm *.srt >/dev/null 2>&1
 	echo "Done."
 	exit
