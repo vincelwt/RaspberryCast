@@ -10,7 +10,7 @@ import logging
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
 
 #Trying to create the FIFO if it is the 1st time
-os.system("mkfifo /tmp/cmd &")
+os.system("mkfifo /tmp/cmd >/dev/null 2>&1")
 
 #os.system("cat images/cast.asc | wall")
 logging.info('RaspberryCast started.')
