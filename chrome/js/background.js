@@ -1,52 +1,26 @@
-/*function currentStatus() {
-	var req = new XMLHttpRequest();
-	req.open('GET', "http://"+localStorage.raspip+":2020/status", true);
-	req.onreadystatechange = function (aEvt) {
-		if (req.readyState == 4) {
-			if(req.status == 200) {
-				var status = req.responseText;
-				console.log(status);
-			} else {
-				return "error";
-			}
-		}
-	};
-	req.send(null);
+function stopNote1() {
+	chrome.notifications.clear('notif1', function(id) { console.log("Last error:", chrome.runtime.lastError); });
 }
 
-currentStatus();
+function stopNote2() {
+	chrome.notifications.clear('notif2', function(id) { console.log("Last error:", chrome.runtime.lastError); });
+}
 
-
-window.setInterval(function(){
-	currentStatus();
-
-	var status2 = currentStatus();
-	console.log(status2);
-	if (status1 != status2) {
-		alert(status2);
-	} else {
-		console.log("style the same");	
-	}
-
-}, 1000);*/
-
-
-function stopNote() {
-	chrome.notifications.clear('notif1');
-	chrome.notifications.clear('notif2');
+function stopNote3(n) {
+	chrome.notifications.clear('notif3', function(id) { console.log("Last error:", chrome.runtime.lastError); });
 }
 
 function notif1() {
 	var opt = {
 		type: "basic",
 		title: "Raspberry Pi",
-		message: "Trying to retrieve video stream URL. Please wait ~ 10-30 seconds.",
+		message: "Trying to get video stream URL. Please wait ~ 10-30 seconds.",
 		iconUrl: "48.png"
 	};
 
 	chrome.notifications.create('notif1', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
 
-	setTimeout(stopNote, 4000);		
+	setTimeout(stopNote1, 4000);		
 }
 
 function notif2() {
@@ -60,7 +34,7 @@ function notif2() {
 
 	chrome.notifications.create('notif2', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
 
-	setTimeout(stopNote, 4000);		
+	setTimeout(stopNote2, 4000);		
 }
 
 function notif3() {
@@ -71,40 +45,49 @@ function notif3() {
 		iconUrl: "48.png"
 	};
 
-	chrome.notifications.create('notif2', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
+	chrome.notifications.create('notif3', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
 
-	setTimeout(stopNote, 4000);		
+	setTimeout(stopNote3, 4000);		
 }
 
-chrome.contextMenus.onClicked.addListener(function(info) {	
+function mkrequest(url, response) {
 	try {
-		var url_encoded_url = encodeURIComponent(info.linkUrl);
-		var newURL = "http://"+localStorage.raspip+":2020/"+localStorage.cmFunction+"?url=" + url_encoded_url;
-		notif1();
+		var newURL = "http://"+localStorage.getItem('raspip')+":2020"+url;
+		if (response == 1) {
+			notif1();
+			//window.close();
+		}
 		var req = new XMLHttpRequest();
 		req.open('GET', newURL, true);
 		req.onreadystatechange = function (aEvt) {
 			if (req.readyState == 4) {
-				if(req.status == 200) {
+				if (req.status == 200) {
 					if (req.responseText == "1") {
-						var status = req.responseText;
-						notif2();
+						if (response == 1) {
+							notif2();	
+						}
 					} else {
 						notif3();
 					}
 				} else {
-					alert("error!");
+					chrome.notifications.clear('notif1', function(id) { console.log("Last error:", chrome.runtime.lastError); });
+					alert("Error during connecting requesting from server !");
 				}
 			}
 		};
 		req.send(null);
-
-		
 	} 
 	catch(err) {
-		alert('Error! Please make sure the ip/port are corrects, and the server is running.');
-		
+		alert("Error ! Make sure the ip/port are corrects, and the server is running.")
+		return "wrong";
 	}
+}
+
+
+chrome.contextMenus.onClicked.addListener(function(info) {
+	var url_encoded_url = encodeURIComponent(info.linkUrl);	
+	var url = "/"+localStorage.cmFunction+"?url="+url_encoded_url;
+	mkrequest(url, 1);
 });
 
 chrome.runtime.onInstalled.addListener(function() {

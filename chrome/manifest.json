@@ -1,6 +1,6 @@
 {
    "background": {
-      "persistent": false,
+      "persistent": true,
       "scripts": [ "js/background.js", "js/popup.js", "js/jquery-2.1.3.min.js" ]
    },
    "browser_action": {
