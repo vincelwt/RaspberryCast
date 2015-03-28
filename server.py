@@ -8,7 +8,7 @@ import logging
 
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
 
-#Trying to create the FIFO is it is the 1st time
+#Trying to create the FIFO if it is the 1st time
 os.system("mkfifo /tmp/cmd")
 
 os.system("cat images/cast.asc | wall")
@@ -29,6 +29,7 @@ def remote():
 
 @app.route('/stream')	
 def stream(): 
+	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']	
 	logging.info('Casting URL: '+url)
 	try :
@@ -40,7 +41,8 @@ def stream():
 
 @app.route('/queue')
 def queue():
-        url = request.query['url']
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	url = request.query['url']
 	
 	if is_running() == True :
 		logging.info('Adding to queue: '+url)
@@ -61,9 +63,10 @@ def queue():
 
 @app.route('/popcorn')
 def popcorn():
+	response.headers['Access-Control-Allow-Origin'] = '*'
 	logging.info('Starting popcorntime function.')
 
-        url = request.query['url']
+    url = request.query['url']
 	logging.info('URL is :'+url)
 
 	ip = request.environ['REMOTE_ADDR']
@@ -99,6 +102,7 @@ def popcorn():
 
 @app.route('/video')
 def video():
+	response.headers['Access-Control-Allow-Origin'] = '*'
 	control = request.query['control']
 	if control == "pause" :
 		logging.info('Command : pause')
@@ -123,6 +127,7 @@ def video():
 
 @app.route('/sound')
 def sound():
+	response.headers['Access-Control-Allow-Origin'] = '*'
 	vol = request.query['vol']
 	print vol + " volume"
 	if vol == "more" :
@@ -135,6 +140,7 @@ def sound():
 
 @app.route('/shutdown')
 def shutdown():
+	response.headers['Access-Control-Allow-Origin'] = '*'
 	time = request.query['time']
 	if time == "cancel":
 		os.system("shutdown -c")
@@ -152,7 +158,8 @@ def shutdown():
 		return "1"
 
 @app.route('/settings')
-def sound():
+def settings():
+	response.headers['Access-Control-Allow-Origin'] = '*'
 	sound_output = request.query['audioout']
 	print "Audio setting is :"+sound_output
 	mode_slow = request.query['modeslow']
@@ -163,10 +170,10 @@ def sound():
 
 @app.route('/status')
 def getlog():
+	response.headers['Access-Control-Allow-Origin'] = '*'
 	last_log = file("RaspberryCast.log", "r").readlines()[-1]
 	penultimate_log = file("RaspberryCast.log", "r").readlines()[-2]
 	response.headers['Access-Control-Allow-Origin'] = '*'
-	response.headers['Content-Type'] = 'application/json'
 	return last_log
 
 		
