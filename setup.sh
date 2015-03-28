@@ -66,8 +66,7 @@ echo ""
 echo "============================================================"
 
 su - pi -c "git clone https://github.com/vincent-lwt/RaspberryCast.git"
-ln -s RaspberryCast/RaspberryCast.sh RaspberryCast.sh
-chmod +x RaspberryCast.sh
+chmod +x ./RaspberryCast/RaspberryCast.sh
 
 echo ""
 echo "============================================================"
@@ -79,11 +78,11 @@ echo "============================================================"
 #Gives right to all user to get out of screen standby
 chmod 666 /dev/tty1
 
-#Autologin (no need for user to enter its password to open session)
+#Autologin option (no need for user to enter its password to open session)
 #sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
 
 #Add to rc.local startup
-sed -i '/exit/c\su - pi -c \"/home/pi/RaspberryCast.sh start\"\nexit 0' /etc/rc.local
+sed -i '/exit/c\su - pi -c \"cd ./RaspberryCast/ && ./RaspberryCast.sh start\"\nexit 0' /etc/rc.local
 
 #Adding right to current pi user to shutdown
 chmod +s /sbin/shutdown
@@ -96,6 +95,6 @@ echo "Do not delete the 'RaspberryCast' folder as it contains all application da
 echo "Starting RaspberryCast now..."
 echo "============================================================"
 
-su - pi -c "/home/pi/RaspberryCast.sh start"
+su - pi -c "cd ./RaspberryCast/ && ./RaspberryCast.sh start"
 
 exit 0

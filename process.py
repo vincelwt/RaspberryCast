@@ -14,7 +14,7 @@ def launchvideo(url, sub):
 	if is_running() == True : 
 		os.system("killall omxplayer.bin")
 
-	os.system("cat images/url.asc | wall")
+	#os.system("cat images/url.asc | wall")
 	logging.info('Trying to retrieve video URL...')
 	
 
@@ -51,7 +51,7 @@ def launchvideo(url, sub):
 
 	logging.info("Full video URL is : " + out)	
 
-	os.system("cat images/omx.asc | wall")
+	#os.system("cat images/omx.asc | wall")
 	logging.info("Trying to start OMX")
 	
 	if sub == True :

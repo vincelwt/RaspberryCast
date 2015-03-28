@@ -6,12 +6,13 @@ from json import dumps
 import os
 import logging
 
+#Setting log
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
 
 #Trying to create the FIFO if it is the 1st time
-os.system("mkfifo /tmp/cmd")
+os.system("mkfifo /tmp/cmd >/dev/null 2>&1")
 
-os.system("cat images/cast.asc | wall")
+#os.system("cat images/cast.asc | wall")
 logging.info('RaspberryCast started.')
 
 app = Bottle()
@@ -36,7 +37,7 @@ def stream():
 		launchvideo(url, False)
 	except :
 		logging.error('Error in launchvideo function.')
-		os.system("cat images/error.asc | wall")
+		#os.system("cat images/error.asc | wall")
 	return "1"
 
 @app.route('/queue')
@@ -57,7 +58,7 @@ def queue():
 			launchvideo(url, False)
 		except :
 			logging.error('Error in launchvideo function.')
-			os.system("cat images/error.asc | wall")
+			#os.system("cat images/error.asc | wall")
 		return "1"
 	
 
@@ -66,7 +67,7 @@ def popcorn():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	logging.info('Starting popcorntime function.')
 
-    url = request.query['url']
+	url = request.query['url']
 	logging.info('URL is :'+url)
 
 	ip = request.environ['REMOTE_ADDR']
@@ -79,7 +80,7 @@ def popcorn():
 	logging.info('Final url:'+url)
 
 	# Try to remove subtitle
-	os.system("rm subtitle.srt")
+	os.system("rm subtitle.srt &")
 		
 	try :
 		os.system("wget http://"+ip+":9999/subtitle.srt")
@@ -88,7 +89,7 @@ def popcorn():
 			launchvideo(url, True)
 		except :
 			logging.error('Error in launchvideo function (with subtitles).')
-			os.system("cat images/error.asc | wall")
+			#os.system("cat images/error.asc | wall")
 	except :
 		logging.info('Error with Wget, starting without subtitles.')
 	
@@ -96,7 +97,7 @@ def popcorn():
 			launchvideo(url, False)
 		except :
 			logging.error('Error in launchvideo function (without subtitles).')
-			os.system("cat images/error.asc | wall")
+			#os.system("cat images/error.asc | wall")
 	
 	return "1"
 
@@ -106,23 +107,23 @@ def video():
 	control = request.query['control']
 	if control == "pause" :
 		logging.info('Command : pause')
-		os.system("echo -n p > /tmp/cmd")
+		os.system("echo -n p > /tmp/cmd &")
 		return "1"
 	elif control == "stop" :
 		logging.info('Command : stop')
-		os.system("echo -n q > /tmp/cmd")
-		os.system("cat images/stop.asc | wall")
+		os.system("echo -n q > /tmp/cmd &")
+		#os.system("cat images/stop.asc | wall")
 		logging.info('Command : empty queue file')
 		#Empty queue file
 		open('video.queue', 'w').close()
 		return "1"
 	elif control == "right" :
 		logging.info('Command : forward')
-		os.system("echo -n $'\x1b\x5b\x43' > /tmp/cmd")
+		os.system("echo -n $'\x1b\x5b\x43' > /tmp/cmd &")
 		return "1"
 	elif control == "left" :
 		logging.info('Command : backward')
-		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd")
+		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd &")
 		return "1"
 
 @app.route('/sound')
@@ -132,10 +133,10 @@ def sound():
 	print vol + " volume"
 	if vol == "more" :
 		logging.info('Command : Sound ++')
-		os.system("echo -n + > /tmp/cmd")
+		os.system("echo -n + > /tmp/cmd &")
 	elif vol == "less" :
 		logging.info('Command : Sound --')
-		os.system("echo -n - > /tmp/cmd")
+		os.system("echo -n - > /tmp/cmd &")
 	return "1"
 
 @app.route('/shutdown')
@@ -164,17 +165,18 @@ def settings():
 	print "Audio setting is :"+sound_output
 	mode_slow = request.query['modeslow']
 	print "Mode slow setting is :"+mode_slow
-	os.system("sed -i '/low_mode/c\low_mode = "+mode_slow+"' config.py")
-	os.system("sed -i '/audio_output/c\sound_output = \""+sound_output+"\"' config.py")
+	os.system("sed -i '/low_mode/c\low_mode = "+mode_slow+"' config.py &")
+	os.system("sed -i '/audio_output/c\sound_output = \""+sound_output+"\"' config.py &")
 	return "1"
 
 @app.route('/status')
 def getlog():
 	response.headers['Access-Control-Allow-Origin'] = '*'
-	last_log = file("RaspberryCast.log", "r").readlines()[-1]
-	penultimate_log = file("RaspberryCast.log", "r").readlines()[-2]
-	response.headers['Access-Control-Allow-Origin'] = '*'
+	f = open('RaspberryCast.log', 'r')
+	line = f.readline()[-1]
+	if line:
+		last_log = line
 	return last_log
 
 		
-run(app, reloader=True, host='0.0.0.0', debug=True, port=2020)
+run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
