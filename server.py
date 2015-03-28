@@ -165,6 +165,8 @@ def sound():
 def getlog():
 	last_log = file("RaspberryCast.log", "r").readlines()[-1]
 	penultimate_log = file("RaspberryCast.log", "r").readlines()[-2]
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	response.headers['Content-Type'] = 'application/json'
 	return last_log
 
 		
