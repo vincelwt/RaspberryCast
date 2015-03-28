@@ -7,8 +7,7 @@ if [ $1 = "start" ]; then
 		echo "Try again without sudo."
 		exit 0
 	fi
-	echo "Starting server."
-	pwd
+	echo "Starting RaspBerryCast server."
 	rm RaspberryCast.log >/dev/null 2>&1
 	touch RaspberryCast.log
 	tail -f RaspberryCast.log &
