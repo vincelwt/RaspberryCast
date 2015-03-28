@@ -66,8 +66,7 @@ echo ""
 echo "============================================================"
 
 su - pi -c "git clone https://github.com/vincent-lwt/RaspberryCast.git"
-#ln -s RaspberryCast/RaspberryCast.sh RaspberryCast.sh
-chmod +x RaspberryCast.sh
+chmod +x ./RaspberryCast/RaspberryCast.sh
 
 echo ""
 echo "============================================================"
@@ -88,7 +87,7 @@ sed -i '/exit/c\su - pi -c \"/home/pi/RaspberryCast/RaspberryCast.sh start\"\nex
 #Adding right to current pi user to shutdown
 chmod +s /sbin/shutdown
 
-#rm setup.sh
+rm setup.sh
 
 echo "============================================================"
 echo "Setup was successful."
