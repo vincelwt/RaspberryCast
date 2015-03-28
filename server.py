@@ -35,6 +35,7 @@ def stream():
 	except :
 		logging.error('Error in launchvideo function.')
 		os.system("cat images/error.asc | wall")
+	return "1"
 
 @app.route('/queue')
 def queue():
@@ -46,6 +47,7 @@ def queue():
 		#Writing url to file
 		with open('video.queue', 'a') as f:
 			f.write(url+'\n')
+		return "1"
 	else :
 		logging.info('Casting URL (no video in queue): '+url)
 		try :
@@ -53,6 +55,8 @@ def queue():
 		except :
 			logging.error('Error in launchvideo function.')
 			os.system("cat images/error.asc | wall")
+		return "1"
+	
 
 @app.route('/popcorn')
 def popcorn():
@@ -90,6 +94,7 @@ def popcorn():
 			logging.error('Error in launchvideo function (without subtitles).')
 			os.system("cat images/error.asc | wall")
 	
+	return "1"
 
 @app.route('/video')
 def video():
@@ -97,20 +102,26 @@ def video():
 	if control == "pause" :
 		logging.info('Command : pause')
 		os.system("echo -n p > /tmp/cmd")
+		return "1"
 	elif control == "stop" :
 		logging.info('Command : stop')
 		os.system("echo -n q > /tmp/cmd")
 		os.system("cat images/stop.asc | wall")
+		return "1"
 	elif control == "right" :
 		logging.info('Command : forward')
 		os.system("echo -n $'\x1b\x5b\x43' > /tmp/cmd")
+		return "1"
 	elif control == "left" :
 		logging.info('Command : backward')
 		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd")
+		return "1"
 	elif control == "emptyqueue" :
 		logging.info('Command : empty queue file')
 		#Empty queue file
 		open('video.queue', 'w').close()
+		return "1"
+
 
 @app.route('/sound')
 def sound():
@@ -122,5 +133,16 @@ def sound():
 	elif vol == "less" :
 		logging.info('Command : Sound --')
 		os.system("echo -n - > /tmp/cmd")
+	return "1"
+
+@app.route('/settings')
+def sound():
+	audio_output = request.query['audioout']
+	print "Audio setting is :"+audio_output
+	mode_slow = request.query['modeslow']
+	print "Mode slow setting is :"+mode_slow
+	os.system("sed -i '/low_mode/c\ low_mode = "+mode_slow+"' config.py")
+	os.system("sed -i '/audio_output/c\ audio_output = \""+audio_output+"\"' config.py")
+	return "1"
 	
 run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)

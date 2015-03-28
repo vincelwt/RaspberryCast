@@ -9,7 +9,7 @@ function popalert(msg) {
 }
 
 
-function mkrequest(url) {
+function mkrequestXML(url) {
 	try {
 		var newURL = "http://"+localStorage.getItem('raspip')+":2020"+url;
 		var xmlHttp = new XMLHttpRequest();
@@ -25,6 +25,11 @@ function mkrequest(url) {
 	
 }
 
+function mkrequest(url) {
+	// Send settings every time a connection is made
+	mkrequestXML("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow);
+	mkrequestXML(url);
+}
 
 
 $(function() {
