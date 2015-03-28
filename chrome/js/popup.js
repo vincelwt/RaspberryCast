@@ -19,7 +19,7 @@ $( document ).ready(function() {
 		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 			var url_encoded_url = encodeURIComponent(tabs[0].url);
 			chrome.extension.getBackgroundPage().mkrequest("/stream?url=" + url_encoded_url, 1);
-			//chrome.extension.getBackgroundPage().mkrequest("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow, 0);
+			chrome.extension.getBackgroundPage().mkrequest("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow, 0);
 		});
 			
 	});
@@ -28,7 +28,7 @@ $( document ).ready(function() {
 		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 			var url_encoded_url = encodeURIComponent(tabs[0].url);
 			chrome.extension.getBackgroundPage().mkrequest("/queue?url="+url_encoded_url, 1);
-			//chrome.extension.getBackgroundPage().mkrequest("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow, 0);
+			chrome.extension.getBackgroundPage().mkrequest("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow, 0);
 		});
 			
 	});	
