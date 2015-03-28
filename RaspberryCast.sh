@@ -40,8 +40,8 @@ elif [ $1 = "restart" ] ; then
 	rm *.srt >/dev/null 2>&1
 	echo "Done."
 	echo "Starting server."
-	su - pi -c "./server.py &"
-	su - pi -c "./daemon_queue.py &"
+	su - pi -c "/home/pi/server.py &"
+	su - pi -c "/home/pi/daemon_queue.py &"
 	echo "Done."
 	exit
 
