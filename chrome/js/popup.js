@@ -8,7 +8,6 @@ function popalert(msg) {
 	
 }
 
-
 function mkrequestXML(url) {
 	try {
 		var newURL = "http://"+localStorage.getItem('raspip')+":2020"+url;
@@ -34,7 +33,14 @@ function mkrequest(url) {
 
 $(function() {
 
-	$("#popcorn_url").focus();
+	if (localStorage.popcorn == "off") {
+		$("#popcorn_form").hide();
+		$("#whole").css("height","215px");
+	} else {
+		$("#popcorn_form").show();
+		$("#popcorn_url").focus();
+		$("#whole").css("height","240px");
+	}	
 
 	$("#popcorn_form").submit(function() {
 
@@ -70,10 +76,6 @@ $(function() {
 
 	$( "#pause" ).click(function() {
 		mkrequest("/video?control=pause");
-	});
-	
-	$( "#remqueue" ).click(function() {
-		mkrequest("/video?control=emptyqueue");
 	});	
 
 	$( "#stop" ).click(function() {

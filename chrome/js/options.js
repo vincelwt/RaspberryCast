@@ -25,6 +25,14 @@ function saveSettings() {
 	    }
 	}
 
+	var radios = document.getElementsByName('popcorn');
+	for (var i = 0, length = radios.length; i < length; i++) {
+	    if (radios[i].checked) {
+		localStorage.popcorn = radios[i].value;
+		break;
+	    }
+	}
+
 	alert("Settings were successfully saved !");
 }
 
@@ -53,6 +61,17 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.getElementById("high_qual").checked = true;
 		} else {
 			document.getElementById("bad_qual").checked = true;
+		}
+	}
+	
+	if (localStorage.popcorn == undefined) {
+		localStorage.popcorn = "off";
+		document.getElementById("popcorn_off").checked = true;
+	} else {
+		if (localStorage.popcorn == "off") {
+			document.getElementById("popcorn_off").checked = true;
+		} else {
+			document.getElementById("popcorn_on").checked = true;
 		}
 	}
 	

@@ -22,14 +22,11 @@
 					</div>
 				</form>
 				
-				<div>
+				<!-- <div>
 					<button id="addqueue" title="Add current video to queue" type="button" class="fifty btn btn-primary">
 						<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 					</button>
-					<button id="remqueue" title="Empty queue" type="button" class="fifty btn btn-primary">
-						<span class="glyphicon glyphicon-trash" aria-hidden="true"></a></span>
-					</button>
-				</div>
+				</div>-->
 				<div>
 					<button id="pause" type="button" title="Play/pause" class="fifty btn btn-info">
 						<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>

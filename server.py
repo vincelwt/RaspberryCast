@@ -107,6 +107,9 @@ def video():
 		logging.info('Command : stop')
 		os.system("echo -n q > /tmp/cmd")
 		os.system("cat images/stop.asc | wall")
+		logging.info('Command : empty queue file')
+		#Empty queue file
+		open('video.queue', 'w').close()
 		return "1"
 	elif control == "right" :
 		logging.info('Command : forward')
@@ -116,12 +119,6 @@ def video():
 		logging.info('Command : backward')
 		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd")
 		return "1"
-	elif control == "emptyqueue" :
-		logging.info('Command : empty queue file')
-		#Empty queue file
-		open('video.queue', 'w').close()
-		return "1"
-
 
 @app.route('/sound')
 def sound():

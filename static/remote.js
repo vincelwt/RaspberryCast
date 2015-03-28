@@ -58,10 +58,6 @@ $(function() {
 
 	$( "#pause" ).click(function() {
 		mkrequest("/video?control=pause");
-	});
-	
-	$( "#remqueue" ).click(function() {
-		mkrequest("/video?control=emptyqueue");
 	});	
 
 	$( "#stop" ).click(function() {
