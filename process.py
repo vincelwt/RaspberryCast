@@ -56,11 +56,11 @@ def launchvideo(url, sub):
 	
 	if sub == True :
 		logging.info('Starting OMX with subtitles.')
-		omx = "omxplayer -b -o "+audio_output+" '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
+		omx = "omxplayer -b -o "+sound_output+" '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
 		
 	else :
 		logging.info('Starting OMX without subtitles.')
-		omx = "omxplayer -b -o "+audio_output+" '"+out+"' < /tmp/cmd"
+		omx = "omxplayer -b -o "+sound_output+" '"+out+"' < /tmp/cmd"
 			
 
 	try :

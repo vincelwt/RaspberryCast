@@ -137,12 +137,12 @@ def sound():
 
 @app.route('/settings')
 def sound():
-	audio_output = request.query['audioout']
-	print "Audio setting is :"+audio_output
+	sound_output = request.query['audioout']
+	print "Audio setting is :"+sound_output
 	mode_slow = request.query['modeslow']
 	print "Mode slow setting is :"+mode_slow
-	os.system("sed -i '/low_mode/c\ low_mode = "+mode_slow+"' config.py")
-	os.system("sed -i '/audio_output/c\ audio_output = \""+audio_output+"\"' config.py")
+	os.system("sed -i '/low_mode/c\low_mode = "+mode_slow+"' config.py")
+	os.system("sed -i '/audio_output/c\sound_output = \""+sound_output+"\"' config.py")
 	return "1"
 	
 run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
