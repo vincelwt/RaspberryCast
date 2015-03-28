@@ -2,6 +2,7 @@
 
 from bottle import *
 from process import *
+from json import dumps
 import os
 import logging
 
@@ -159,5 +160,12 @@ def sound():
 	os.system("sed -i '/low_mode/c\low_mode = "+mode_slow+"' config.py")
 	os.system("sed -i '/audio_output/c\sound_output = \""+sound_output+"\"' config.py")
 	return "1"
-	
-run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
+
+@app.route('/status')
+def getlog():
+	last_log = file("RaspberryCast.log", "r").readlines()[-1]
+	penultimate_log = file("RaspberryCast.log", "r").readlines()[-2]
+	return last_log
+
+		
+run(app, reloader=True, host='0.0.0.0', debug=True, port=2020)
