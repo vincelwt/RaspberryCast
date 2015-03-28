@@ -47,6 +47,16 @@ $(function() {
 			popalert("The video should be successfully added to queue. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
 		}
 			
+	});
+
+	$( "#shutbtn" ).click(function() {
+				
+		var time = $( "#time_shut" ).val();
+		console.log($( "#time_shut" ).val());
+		if (mkrequest("/shutdown?time=" + time) != "wrong") {
+			popalert("The shutdown should be programmed. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
+		}
+			
 	});	
 
 	$( "#pause" ).click(function() {
