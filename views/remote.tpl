@@ -54,6 +54,14 @@
 						<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 					</button>
 				</div>
+				<form id="shut_form" class="form-inline">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="number" class="form-control input-lg" id="time_shut" placeholder="Delayed shutdown (minutes)" pattern="\d*" min="0" max="400" step="5">
+							<div class="input-group-btn"><button id="shutbtn" class="btn btn-lg btn-info form_button" type="button"><span class="glyphicon glyphicon-time" aria-hidden="true"></button></div>
+						</div>
+					</div>
+				</form>
 			
 			
 		</div>

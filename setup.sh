@@ -61,7 +61,7 @@ fi
 echo ""
 echo "============================================================"
 echo ""
-echo "Cloning project..."
+echo "Cloning project from GitHub.."
 echo ""
 echo "============================================================"
 
@@ -72,22 +72,28 @@ chmod +x RaspberryCast.sh
 echo ""
 echo "============================================================"
 echo ""
-echo "Adding project to startup"
+echo "Adding project to startup sequence and custom options"
 echo ""
 echo "============================================================"
 
+#Gives right to all user to get out of screen standby
 chmod 666 /dev/tty1
 
-sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
+#Autologin (no need for user to enter its password to open session)
+#sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
 
+#Add to rc.local startup
 sed -i '/exit/c\su - pi -c \"/home/pi/RaspberryCast.sh start\"\nexit 0' /etc/rc.local
+
+#Adding right to current pi user to shutdown
+chmod +s /sbin/shutdown
 
 rm setup.sh
 
 echo "============================================================"
-echo "Setup was successful!"
+echo "Setup was successful."
 echo "Do not delete the 'RaspberryCast' folder as it contains all application data!"
-echo "STARTING RASPBERRYCAST..."
+echo "Starting RaspberryCast now..."
 echo "============================================================"
 
 su - pi -c "/home/pi/RaspberryCast.sh start"

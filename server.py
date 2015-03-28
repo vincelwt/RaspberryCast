@@ -135,6 +135,24 @@ def sound():
 		os.system("echo -n - > /tmp/cmd")
 	return "1"
 
+@app.route('/shutdown')
+def shutdown():
+	time = request.query['time']
+	if time == "cancel":
+		os.system("shutdown -c")
+		logging.info("Shutdown canceled.")
+		return "1"
+	else:	
+		try:
+			time = int(time)
+			if (time<400 and time>=0):
+				shutdown_command = "shutdown -h +" + str(time) + " now &"
+				os.system(shutdown_command)
+				logging.info("Shutdown should be successfully programmed")
+		except:
+			logging.error("Error in shutdown command parameter")
+		return "1"
+
 @app.route('/settings')
 def sound():
 	sound_output = request.query['audioout']
