@@ -10,18 +10,15 @@ function popalert(msg) {
 
 function mkrequest(url) {
 	try {
-		var newURL = document.URL+url;
+		var newURL = document.location.origin+url;
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( "GET", newURL, true);
 		xmlHttp.send();
-		
-		
 	}
 	catch(err){
 		popalert("Something went wrong. Make sure the ip/port are corrects, and the server is running."+err)
 		return "wrong";
 	}
-	
 }
 
 $(function() {
