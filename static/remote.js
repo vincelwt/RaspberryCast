@@ -8,24 +8,18 @@ function popalert(msg) {
 	
 }
 
-
 function mkrequest(url) {
 	try {
-		var newURL = document.URL+url;
+		var newURL = document.location.origin+url;
 		var xmlHttp = new XMLHttpRequest();
 		xmlHttp.open( "GET", newURL, true);
 		xmlHttp.send();
-		
-		
 	}
 	catch(err){
 		popalert("Something went wrong. Make sure the ip/port are corrects, and the server is running."+err)
 		return "wrong";
 	}
-	
 }
-
-
 
 $(function() {
 
@@ -35,7 +29,7 @@ $(function() {
 
 		var url_encoded_url = encodeURIComponent(url);
 
-		if (mkrequest("stream?url=" + url_encoded_url) != "wrong") {
+		if (mkrequest("/stream?url=" + url_encoded_url) != "wrong") {
 			popalert("The medi should be successfully sent to the Raspberry Pi ! Please wait ~ 15/20 seconds. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
 		}
 			
@@ -46,38 +40,48 @@ $(function() {
 		var url = $( "#media_url" ).val();
 		var url_encoded_url = encodeURIComponent(url);
 
-		if (mkrequest("queue?url=" + url_encoded_url) != "wrong") {
+		if (mkrequest("/queue?url=" + url_encoded_url) != "wrong") {
 			popalert("The video should be successfully added to queue. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
+		}
+			
+	});
+
+	$( "#shutbtn" ).click(function() {
+				
+		var time = $( "#time_shut" ).val();
+		console.log($( "#time_shut" ).val());
+		if (mkrequest("/shutdown?time=" + time) != "wrong") {
+			popalert("The shutdown should be programmed. If it doesn't works, please make sure the ip/ports are corrects, and the server is running.");
 		}
 			
 	});	
 
 	$( "#pause" ).click(function() {
-		mkrequest("video?control=pause");
+		mkrequest("/video?control=pause");
 	});
 	
 	$( "#remqueue" ).click(function() {
-		mkrequest("video?control=emptyqueue");
+		mkrequest("/video?control=emptyqueue");
 	});	
 
 	$( "#stop" ).click(function() {
-		mkrequest("video?control=stop");
+		mkrequest("/video?control=stop");
 	});
 	
 	$( "#backward" ).click(function() {
-		mkrequest("video?control=left");
+		mkrequest("/video?control=left");
 	});
 	
 	$( "#forward" ).click(function() {
-		mkrequest("video?control=right");
+		mkrequest("/video?control=right");
 	});
 	
 	$( "#vol_down" ).click(function() {
-		mkrequest("sound?vol=less");
+		mkrequest("/sound?vol=less");
 	});
 	
 	$( "#vol_up" ).click(function() {
-		mkrequest("sound?vol=more");
+		mkrequest("/sound?vol=more");
 	});
 	
 	

@@ -4,4 +4,4 @@
 low_mode = True
 
 # Audio output : hdmi or local (using the jack) or both (jack & hdmi) (default)
-audio_output = "both"
+sound_output = "both"

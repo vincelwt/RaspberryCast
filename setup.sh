@@ -66,7 +66,7 @@ echo ""
 echo "============================================================"
 
 su - pi -c "git clone https://github.com/vincent-lwt/RaspberryCast.git"
-mv RaspberryCast/RaspberryCast.sh RaspberryCast.sh
+ln -s RaspberryCast/RaspberryCast.sh RaspberryCast.sh
 chmod +x RaspberryCast.sh
 
 echo ""

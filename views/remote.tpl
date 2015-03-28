@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>RaspberryCast</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="{{get_url('static', filename='style.css') }}" rel="stylesheet">
+		<link href="{{get_url('static', filename='remote.css') }}" rel="stylesheet">
 		<link href="{{get_url('static', filename='bootstrap.min.css') }}" rel="stylesheet">
 		<link rel="icon" type="image/png" sizes="192x192" href="{{get_url('static', filename='favicon.png') }}" />
 	</head>
@@ -54,6 +54,14 @@
 						<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 					</button>
 				</div>
+				<form id="shut_form" class="form-inline">
+					<div class="form-group">
+						<div class="input-group">
+							<input type="number" class="form-control input-lg" id="time_shut" placeholder="Delayed shutdown (minutes)" pattern="\d*" min="0" max="400" step="5">
+							<div class="input-group-btn"><button id="shutbtn" class="btn btn-lg btn-info form_button" type="button"><span class="glyphicon glyphicon-time" aria-hidden="true"></button></div>
+						</div>
+					</div>
+				</form>
 			
 			
 		</div>
@@ -64,6 +72,6 @@
 		<!-- script references -->
 		
 		<script src="{{get_url('static', filename='jquery-2.1.3.min.js') }}"></script>
-		<script src="{{get_url('static', filename='script.js') }}"></script>
+		<script src="{{get_url('static', filename='remote.js') }}"></script>
 	</body>
 </html>

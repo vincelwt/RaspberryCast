@@ -1,5 +1,6 @@
 function saveSettings() {
 	localStorage.raspip = document.getElementById("raspip").value;
+
 	var radios = document.getElementsByName('cmFunction');
 	for (var i = 0, length = radios.length; i < length; i++) {
 	    if (radios[i].checked) {
@@ -7,6 +8,23 @@ function saveSettings() {
 		break;
 	    }
 	}
+
+	var radios = document.getElementsByName('mode_slow');
+	for (var i = 0, length = radios.length; i < length; i++) {
+	    if (radios[i].checked) {
+		localStorage.modeslow = radios[i].value;
+		break;
+	    }
+	}
+
+	var radios = document.getElementsByName('audio_out');
+	for (var i = 0, length = radios.length; i < length; i++) {
+	    if (radios[i].checked) {
+		localStorage.audioout = radios[i].value;
+		break;
+	    }
+	}
+
 	alert("Settings were successfully saved !");
 }
 
@@ -17,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	if (localStorage.cmFunction == undefined) {
-		localStorage.rasport = "stream";
+		localStorage.cmFunction = "stream";
 		document.getElementById("cmFstream").checked = true;
 	} else {
 		if (localStorage.cmFunction == "stream") {
@@ -27,7 +45,29 @@ document.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 
-	var el;
-	el = document.getElementById("saveButton");
+	if (localStorage.modeslow == undefined) {
+		localStorage.modeslow = "False";
+		document.getElementById("high_qual").checked = true;
+	} else {
+		if (localStorage.modeslow == "False") {
+			document.getElementById("high_qual").checked = true;
+		} else {
+			document.getElementById("bad_qual").checked = true;
+		}
+	}
+	
+	if (localStorage.audioout == undefined) {
+		document.getElementById("audio_both").checked = true;
+	} else {
+		if (localStorage.audioout == "both") {
+			document.getElementById("audio_both").checked = true;
+		} else if (localStorage.audioout == "hdmi") {
+			document.getElementById("audio_hdmi").checked = true;
+		} else {
+			document.getElementById("audio_local").checked = true;
+		}
+	}
+
+	var el = document.getElementById("saveButton");
 	el.addEventListener("click", saveSettings, false);
 });
