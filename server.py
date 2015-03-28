@@ -128,14 +128,16 @@ def sound():
 def shutdown():
 	time = request.query['time']
 	if time == "cancel":
-		os.system("shutdown -c")	
-	try:
-		time = integer(time)
-		if (time<400 && time>=0):
-		shutdown_command = "shutdown -h +" + string(time) + " now"
-			os.system(shutdown_command)
-	except:
-		logging.info("Error in shutdown command parameter")
-	return "1"
+		os.system("shutdown -c")
+	else:	
+		try:
+			time = int(time)
+			if (time<400 and time>=0):
+				shutdown_command = "shutdown -h +" + str(time) + " now &"
+				print shutdown_command
+				os.system(shutdown_command)
+		except:
+			logging.info("Error in shutdown command parameter")
+		return "1"
 
 run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
