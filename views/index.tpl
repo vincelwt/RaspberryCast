@@ -11,6 +11,7 @@
 		<link rel="icon" type="image/png" sizes="192x192" href="{{get_url('static', filename='favicon.png') }}" />
 	</head>
 	<body onLoad="showMovies('seeds', '1', '');">
+		<p id="ip" hidden>{{ip}}</p>
 		<!-- <nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<div class="navbar-header">

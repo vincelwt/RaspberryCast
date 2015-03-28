@@ -4,6 +4,7 @@ from bottle import *
 from process import *
 import os
 import logging
+import socket
 
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
 
@@ -23,7 +24,7 @@ def server_static(filename):
 	
 @app.route('/')
 def index():
-	return template('index')
+	return template('index', ip=getIp())
 
 @app.route('/remote')
 def remote():
@@ -35,7 +36,7 @@ def torrent():
 	logging.info('Torrent URL: '+url)
 	os.system("peerflix "+url)
 	launchvideo("http://localhost:8888", False)
-	return template('index')
+	return "1"
 
 
 @app.route('/stream')	
@@ -134,5 +135,12 @@ def sound():
 	elif vol == "less" :
 		logging.info('Command : Sound --')
 		os.system("echo -n - > /tmp/cmd")
-	
+
+def getIp():
+	s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+	s.connect(("google.com",80))
+	ip = s.getsockname()[0]
+	s.close()
+	return ip	
+
 run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)

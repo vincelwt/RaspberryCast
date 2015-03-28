@@ -32,6 +32,7 @@ function showInfos(id) {
 	$("#overlay").show();
 	$("#home").hide();
 	$('#infos').html("");
+	var ip = $('#ip').text();
 	$.ajax({
 		url: "https://yts.to/api/v2/movie_details.jsonp?movie_id="+id+"&with_images=true",
 		dataType: 'jsonp',
@@ -56,11 +57,11 @@ function showInfos(id) {
 				var url = results.data.torrents[i].url;
 				var quality = results.data.torrents[i].quality;
 				if (quality != "3D") {
-					$('#infos').append('<a class="btn btn-lg btn-danger" href="http://localhost:2020/torrent?url='+url+'">'+quality+'</a>');
+					$('#infos').append('<a class="btn btn-lg btn-danger" href="http://'+ip+':2020/torrent?url='+url+'">'+quality+'</a>');
 				}
 			})
 			if (yt_trailer != "") {
-				$('#infos').append('<a class="btn btn-lg btn-info" href="http://localhost:2020/stream?url=http://youtube.com/watch?v='+yt_trailer+'">Trailer</a>');
+				$('#infos').append('<a class="btn btn-lg btn-info" href="http://'+ip+':2020/stream?url=http://youtube.com/watch?v='+yt_trailer+'">Trailer</a>');
 			}
 		}
 	});
