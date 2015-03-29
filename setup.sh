@@ -82,7 +82,9 @@ chmod 666 /dev/tty1
 #sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
 
 #Add to rc.local startup
-sed -i '/exit/c\su - pi -c \"cd ./RaspberryCast/ && ./RaspberryCast.sh start\"\nexit 0' /etc/rc.local
+sed -i '$ d' /etc/rc.local
+echo "su - pi -c \"cd ./RaspberryCast/ && ./RaspberryCast.sh start\"" >> /etc/rc.local
+echo "exit 0" >> /etc/rc.local
 
 #Adding right to current pi user to shutdown
 chmod +s /sbin/shutdown
