@@ -3,9 +3,9 @@
 import subprocess, os, signal, sys, re
 from time import *
 from config import *
-import logger
 
 def launchvideo(url, sub):
+	#Waking up screen
 	try :
 		os.system("echo -ne '\033[9;0]' >/dev/tty1")
 	except :

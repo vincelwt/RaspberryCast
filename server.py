@@ -8,7 +8,12 @@ import logging
 
 #Setting log
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
-logger = logging.getLogger(' ||| RaspberryCast ||| ')
+logger = logging.getLogger(" | RaspberryCast | ")
+
+#Printing-like log
+os.system("rm RaspberryCast.log >/dev/null 2>&1")
+os.system("touch RaspberryCast.log")
+os.system("tail -f RaspberryCast.log &")
 
 #Trying to create the FIFO if it is the 1st time
 os.system("mkfifo /tmp/cmd >/dev/null 2>&1")
@@ -185,4 +190,4 @@ def getlog():
 	return last_log
 
 		
-run(app, reloader=False, host='0.0.0.0', debug=True, port=2020)
+run(app, reloader=False, host='0.0.0.0', debug=True, quiet=True, port=2020)

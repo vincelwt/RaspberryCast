@@ -8,9 +8,6 @@ if [ $1 = "start" ]; then
 		exit 0
 	fi
 	echo "Starting RaspBerryCast server."
-	rm RaspberryCast.log >/dev/null 2>&1
-	touch RaspberryCast.log
-	tail -f RaspberryCast.log &
 	./server.py &
 	./daemon_queue.py &
 	echo "Done."
