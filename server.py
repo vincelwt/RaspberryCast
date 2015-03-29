@@ -179,7 +179,7 @@ def settings():
 	mode_slow = request.query['modeslow']
 	logger.info("SETTINGS: Mode slow setting is :"+mode_slow)
 	os.system("sed -i '/low_mode/c\low_mode = "+mode_slow+"' config.py &")
-	os.system("sed -i '/audio_output/c\sound_output = \""+sound_output+"\"' config.py &")
+	os.system("sed -i '/sound_output/c\sound_output = \""+sound_output+"\"' config.py &")
 	return "1"
 
 @app.route('/status')
