@@ -8,7 +8,7 @@ if [ $1 = "start" ]; then
 		exit 0
 	fi
 	echo "Starting RaspBerryCast server."
-    ./server.py >/dev/tty 2>&1 &
+	./server.py >/dev/tty1 2>&1 &
 	./daemon_queue.py &
 	echo "Done."
 	exit
