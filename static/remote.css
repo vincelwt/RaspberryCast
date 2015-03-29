@@ -9,7 +9,6 @@
 	width: 45%;
 	max-width: 250px;
 	margin: 10px 5px;
-	
 }
 
 .ninety {
@@ -33,3 +32,12 @@ button {
 	height: 70px !important;
 }
 
+
+span.glyphicon {
+	font-size: 1.4em;
+}
+
+span.tb {
+	top: -20px;
+	font-size: 1.2em;
+}

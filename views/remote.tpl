@@ -11,36 +11,31 @@
 	<body>
 		<center>
 		<div id="whole">
-			
+				
+				<div id="message"></div>			
 				
 				<form id="stream_form" class="form-inline">
 					<div class="form-group">
 						<div class="input-group">
 							<input type="text" class="form-control input-lg" id="media_url" placeholder="Media's URL">
-							<div class="input-group-btn"><button id="castbtn" class="btn btn-lg btn-danger form_button" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></button></div>
+							<div class="input-group-btn"><button id="addqueue" title="Add current video to queue" class="btn btn-lg btn-info form_button" type="button"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></button><button id="castbtn" class="btn btn-lg btn-danger form_button" title="Cast now" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></button></div>
 						</div>
 					</div>
 				</form>
-				
-				<!-- <div>
-					<button id="addqueue" title="Add current video to queue" type="button" class="fifty btn btn-primary">
-						<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-					</button>
-				</div>-->
 				<div>
 					<button id="pause" type="button" title="Play/pause" class="fifty btn btn-info">
 						<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
 					</button>
 					<button id="stop" type="button" title="Stop video/Next queue video" class="fifty btn btn-danger">
-						<span class="glyphicon glyphicon-stop" aria-hidden="true"></a></span>
+						<span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
 					</button>
 				</div>
 				<div>
 					<button id="backward" type="button" title="Backward" class="fifty btn btn-warning">
-						<span class="glyphicon glyphicon-backward" aria-hidden="true"></a></span>
+						<span class="glyphicon glyphicon-backward" aria-hidden="true"></span><span class="tb"> -30s</span>
 					</button>
 					<button id="forward" type="button" title="Forward" class="fifty btn btn-warning">
-						<span class="glyphicon glyphicon-forward" aria-hidden="true"></a></span>
+						<span class="tb">+30s </span><span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
 					</button>
 				</div>
 				<div>
