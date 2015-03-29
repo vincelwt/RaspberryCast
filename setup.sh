@@ -24,7 +24,7 @@ then
 fi
 
 echo "This script will install RaspberryCast"
-echo "Do you wish to continue?"
+echo "Do you wish to continue? (y/n)"
 
 while true; do
   read -p "" yn
@@ -94,9 +94,11 @@ rm setup.sh
 echo "============================================================"
 echo "Setup was successful."
 echo "Do not delete the 'RaspberryCast' folder as it contains all application data!"
-echo "Starting RaspberryCast now..."
+echo "Rebooting system now..."
 echo "============================================================"
 
-su - pi -c "cd ./RaspberryCast/ && ./RaspberryCast.sh start"
+sleep 3
+
+reboot
 
 exit 0
