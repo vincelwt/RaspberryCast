@@ -4,6 +4,10 @@ import subprocess, re
 from process import *
 from time import sleep
 
+#
+# Functionality/file not used at the moment.
+#
+
 sleep(1)
 
 f = open('RaspberryCast.log', 'r')
