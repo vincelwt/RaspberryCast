@@ -10,8 +10,11 @@ function message(msg, importance) {
 	}
 	setTimeout(function() {
 		$( "#message" ).hide("slow");
-	}, 3000);
-	
+	}, 3000);	
+}
+
+function advanced() {
+	$( "#advanced" ).toggle("fast");
 }
 
 function mkrequest(url, response) {
@@ -37,6 +40,8 @@ function mkrequest(url, response) {
 							message("Success ! Video has been added to queue.", 1);	
 						} else if (response == 3) {
 							message("Success ! Shutdown has been successfully programmed.", 1);	
+						} else if (response == 4) {
+							message("Success ! Shutdown has been cancelled.", 1);	
 						}
 						
 					} else {
@@ -85,6 +90,14 @@ $(function() {
 			message("You must enter a duration !", 2)
 		}
 	});	
+
+	$( "#cancelshut" ).click(function() {
+		mkrequest("/shutdown?time=cancel", 4)
+	});
+
+	$( "#nextqueue" ).click(function() {
+		mkrequest("/video?control=next", 1)
+	});
 
 	$( "#pause" ).click(function() {
 		mkrequest("/video?control=pause", 0);

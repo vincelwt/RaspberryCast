@@ -46,20 +46,30 @@
 						<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>
 					</button>
 				</div>
-				<form id="shut_form" class="form-inline">
-					<div class="form-group">
-						<div class="input-group">
-							<input type="number" class="form-control input-lg" id="time_shut" placeholder="Delayed shutdown (minutes)" pattern="\d*" min="0" max="400" step="5">
-							<div class="input-group-btn"><button id="shutbtn" class="btn btn-lg btn-info form_button" type="button"><span class="glyphicon glyphicon-time" aria-hidden="true"></button></div>
+				<br>
+				<a onClick="advanced()">More</a>
+				<div id="advanced" style="display:none">
+					<form id="shut_form" class="form-inline">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="number" class="form-control input-lg" id="time_shut" placeholder="Delayed shutdown (minutes)" pattern="\d*" min="0" max="400" step="5">
+								<div class="input-group-btn"><button id="shutbtn" class="btn btn-lg btn-info form_button" type="button"><span class="glyphicon glyphicon-time" aria-hidden="true"></button></div>
+							</div>
 						</div>
+					</form>
+					<div>
+						<button id="nextqueue" type="button" title="Next video in playlist" class="fifty btn btn-primary">
+							<span class="tb">Next video </span><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+						</button>
+						<button id="cancelshut" type="button" title="Cancel shutdown" class="fifty btn btn-danger">
+							<span class="tb">Cancel shutdown </span><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+						</button>
 					</div>
-				</form>
-			
+				</div>
 			
 		</div>
 		</center>
-		<div id="popalert" style="display:none">
-		</div>
+		
 
 		<!-- script references -->
 		

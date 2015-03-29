@@ -148,6 +148,10 @@ def video():
 		logger.info('REMOTE: Command : backward')
 		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd &")
 		return "1"
+	elif control == "next" :
+		logger.info('REMOTE: Command : next video in queue')
+		os.system("echo -n q > /tmp/cmd &")
+		return "1"
 
 @app.route('/sound')
 def sound():
