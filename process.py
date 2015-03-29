@@ -3,6 +3,8 @@
 import subprocess, os, signal, sys, re
 from time import *
 from config import *
+import logging
+logger = logging.getLogger(" | RaspberryCast | ")
 
 def launchvideo(url, sub):
 	#Waking up screen

@@ -43,8 +43,9 @@ def stream():
 	try :
 		launchvideo(url, False)
 		return "1"
-	except :
+	except Exception, e:
 		logger.error('STREAM: Error in launchvideo function.')
+		logger.exception(e)
 		#os.system("cat images/error.asc | wall")
 		return "0"
 
@@ -65,8 +66,9 @@ def queue():
 		try :
 			launchvideo(url, False)
 			return "1"
-		except :
+		except Exception, e:
 			logger.error('QUEUE: Error in launchvideo function.')
+			logger.exception(e)
 			#os.system("cat images/error.asc | wall")
 			return "0"
 	
