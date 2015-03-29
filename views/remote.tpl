@@ -62,7 +62,7 @@
 							<span class="tb">Next video </span><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
 						</button>
 						<button id="cancelshut" type="button" title="Cancel shutdown" class="fifty btn btn-danger">
-							<span class="tb">Cancel shutdown </span><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+							<span class="tb">Cancel <br>shutdown </span><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
 						</button>
 					</div>
 				</div>
