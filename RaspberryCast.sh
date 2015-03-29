@@ -29,10 +29,7 @@ elif [ $1 = "stop" ] ; then
 	rm *.srt >/dev/null 2>&1
 	echo "Done."
 	exit
-elif [ $1 = "restart" ] ; then
-        ./RaspberryCast.sh stop
-        su - pi -c "./RaspberryCast.sh start"
 else
-	echo "Error, wrong argument. Try with 'stop', 'start' or 'restart'."
+	echo "Error, wrong argument. Try with 'stop', 'start'."
 	exit
 fi
