@@ -3,6 +3,12 @@
 import subprocess, re
 from process import *
 from time import sleep
+import logging
+logger = logging.getLogger(" | RaspberryCast | ")
+
+#
+# Functionality/file not used at the moment.
+#
 
 sleep(1)
 
