@@ -3,9 +3,11 @@
 Videos can be sent from mobile devices or computers (Chrome extension).
 
 Demo video 1 :
+
 [![Alt text for your video](http://img.youtube.com/vi/0wEcYPSm_f8/0.jpg)](http://www.youtube.com/watch?v=0wEcYPSm_f8)
 
 Demo video 2 :
+
 [![Alt text for your video](http://img.youtube.com/vi/ZafqI4ZtJkI/0.jpg)](http://www.youtube.com/watch?v=ZafqI4ZtJkI)
 
 ## Supported services
@@ -28,8 +30,6 @@ The installation script will:
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
 - Reboot (necessary to print logs on first use)
 
-You can also configure your settings in the config.py file (audio output and video download quality).
-
 If you want to disable login at boot:
 ```
 sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
@@ -50,6 +50,8 @@ sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1'
 
 Alternatively, you can drag and drop the directory where your extension files live onto chrome://extensions in your browser to load it.
 
+You can configure settings in the option page.
+
 # Remote control (mobile devices)
 
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/android.png)
@@ -58,13 +60,13 @@ On any device connected to the same network as you Pi, you can visit the page:
 ```
 http://<your-Pi-ip>:2020/remote
 ```
-To use your mobile device as a remote, you can "Add to homescreen" this page.
+"Add to homescreen" this page is recommended
 
 ## Use with PopcornTime
 
 Use the following version: https://popcorntime.io/
 
-First, you need to enable the PopcornTime support in the extensions options
+First, you need to enable the PopcornTime support in the extension options
 
 1. When the selected movie/show is playing click "u" (keyboard).
 2. Open your browser, click on the extension and paste the URL in the textbox (ctrl-v).
