@@ -5,15 +5,26 @@ from process import *
 from json import dumps
 import os
 import logging
+import sys
 
 #Setting log
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
 logger = logging.getLogger(" | RaspberryCast | ")
 
-#Printing-like log
+#Creating handler to print messages on stdout
+root = logging.getLogger()
+root.setLevel(logging.DEBUG)
+
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+root.addHandler(ch)
+
+
+#Reset log
 os.system("rm RaspberryCast.log >/dev/null 2>&1")
 os.system("touch RaspberryCast.log")
-os.system("tail -f RaspberryCast.log &")
 
 #Trying to create the FIFO if it is the 1st time
 os.system("mkfifo /tmp/cmd >/dev/null 2>&1")
