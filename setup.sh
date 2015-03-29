@@ -97,8 +97,9 @@ echo "Do not delete the 'RaspberryCast' folder as it contains all application da
 echo "Rebooting system now..."
 echo "============================================================"
 
-sleep 3
+sleep 2
 
+#Reboot to ensure cleaness of Pi memory and displaying of log
 reboot
 
 exit 0

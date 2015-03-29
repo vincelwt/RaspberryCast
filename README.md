@@ -1,4 +1,4 @@
-# RaspberryCast
+# RaspberryCast 0.1
 > Transform your Raspberry Pi into a streaming device.
 Videos can be sent from mobile devices or computers (Chrome extension).
 
@@ -23,9 +23,9 @@ The installation script will:
 - Install RaspberryCast
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
 - Reboot (necessary to print logs on first use)
+You can review the [install script](https://github.com/vincent-lwt/RaspberryCast/blob/master/setup.sh).
 
 # Remote control (mobile devices)
-
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/android.png)
 
 On any device connected to the same network as you Pi, you can visit the page:
@@ -48,26 +48,28 @@ Note that you can "Add to homescreen" this link.
 
 Alternatively, you can drag and drop the directory where your extension files live onto chrome://extensions in your browser to load it.
 
-You can configure settings in the extension option page.
+You can configure RaspberryCast settings in the extension option page.
 
 
-**Todo:**
-
+## Todo
 - Less invasive installation script
 - Firefox extension
 - Android/iOS app for control & sharing
 - HDMI-CEC support
 
-## Alpha: RasberryCast also works with PopcornTime.
-Use the following version: https://popcorntime.io/
+## PopcornTime integration
+On your computer, use the following version: https://popcorntime.io/
 
-First, you need to enable the PopcornTime support in the extension options
-
-1. When the selected movie/show is playing click "u" (keyboard).
+You need to enable the PopcornTime support in the extension options.
+1. On computer, when the selected movie/show is playing click "u" (keyboard).
 2. Open your browser, click on the extension and paste the URL in the textbox (ctrl-v).
 3. Press enter, and wait a few seconds.
 
 Keep Popcorntime running during play.
+
+##Uninstall
+Remove reference to RaspberryPi.sh in /etc/rc.local
+Delete the /home/pi/RaspberryCast/ folder.
 
 ##Tips
 
