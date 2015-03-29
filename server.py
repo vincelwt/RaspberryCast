@@ -28,7 +28,8 @@ SimpleTemplate.defaults["get_url"] = app.get_url
 @app.route('/static/<filename>', name='static')
 def server_static(filename):
 	return static_file(filename, root='static')
-	
+
+@app.route('/')	
 @app.route('/remote')
 def remote():
 	logger.debug('REMOTE: Template requested.')
