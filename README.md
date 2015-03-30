@@ -61,7 +61,8 @@ You can configure RaspberryCast settings in the extension option page.
 On your computer, use the following version: https://popcorntime.io/
 
 You need to enable the PopcornTime support in the extension options.
-1. On computer, when the selected movie/show is playing click "u" (keyboard).
+
+1. On computer, when the selected movie/show is playing press "u" (keyboard).
 2. Open your browser, click on the extension and paste the URL in the textbox (ctrl-v).
 3. Press enter, and wait a few seconds.
 
