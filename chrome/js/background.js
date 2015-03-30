@@ -12,7 +12,7 @@ function notif(msg) {
 
 	chrome.notifications.create('notif', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
 
-	setTimeout(stopNote1, 4000);		
+	setTimeout(stopNote, 4000);		
 }
 
 
