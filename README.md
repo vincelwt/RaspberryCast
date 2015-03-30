@@ -1,6 +1,6 @@
 # RaspberryCast 0.1
 > Transform your Raspberry Pi into a streaming device.
-Videos can be sent from mobile devices or computers (Chrome extension).
+Cast YouTube/Vimeo videos from mobile devices or computers with the Chrome extension.
 
 Demo video with the Chrome extension:
 [![Alt text for your video](http://img.youtube.com/vi/0wEcYPSm_f8/0.jpg)](http://www.youtube.com/watch?v=0wEcYPSm_f8)
@@ -43,7 +43,7 @@ Note that you can "Add to homescreen" this link.
 2. Visit chrome://extensions in your browser 
 3. Ensure that the Developer mode checkbox in the top right-hand corner is checked.
 4. Click Load unpacked extension… to pop up a file-selection dialog.
-5. Navigate to the directory /RaspberryCast/chrome (the folder you unpacked), and select it.
+5. Navigate to the directory /RaspberryCast/ChromeExtension (the folder you unpacked), and select it.
 6. The option page will open, configure the Raspberry Pi IP on your local network.
 
 Alternatively, you can drag and drop the directory where your extension files live onto chrome://extensions in your browser to load it.
