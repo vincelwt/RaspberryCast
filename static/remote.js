@@ -82,7 +82,7 @@ $(function() {
 	});
 
 	$( "#shutbtn" ).click(function() {
-		if ( $( "#media_url" ).val() !== "" ) {
+		if ( $( "#time_shut" ).val() !== "" ) {
 			var time = $( "#time_shut" ).val();
 			console.log($( "#time_shut" ).val());
 			mkrequest("/shutdown?time=" + time, 3)
