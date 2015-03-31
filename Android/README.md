@@ -1,4 +1,4 @@
-# Raspberry Cast-Android CLient
+# Raspberry Cast-Android Client
 >The very First version of the Android app for the Raspberry Cast webapp.
 About the PiCast Project here: https://github.com/vincent-lwt/RaspberryCast
 ##Changes to be made
