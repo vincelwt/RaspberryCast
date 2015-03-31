@@ -8,6 +8,8 @@ Demo video with the Chrome extension:
 Demo video with an Android (also works on iOS):
 [![Alt text for your video](http://img.youtube.com/vi/ZafqI4ZtJkI/0.jpg)](http://www.youtube.com/watch?v=ZafqI4ZtJkI)
 
+**ANDROID APP COMING SOON!**
+
 ## Supported services
 Works with all youtube-dl supported websites: http://rg3.github.io/youtube-dl/supportedsites.html (YouTube, SoundCloud, Dailymotion, Vimeo, etc...) but also any direct link to mp3, mp4, avi and mkv file.
 
@@ -39,17 +41,14 @@ Note that you can "Add to homescreen" this link.
 
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/rightclick.png)
 
-1. Download and extract https://github.com/vincent-lwt/RaspberryCast/archive/master.zip on your computer
-2. Visit chrome://extensions in your browser 
-3. Ensure that the Developer mode checkbox in the top right-hand corner is checked.
-4. Click Load unpacked extension… to pop up a file-selection dialog.
-5. Navigate to the directory /RaspberryCast/ChromeExtension (the folder you unpacked), and select it.
-6. The option page will open, configure the Raspberry Pi IP on your local network.
+1. Download https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/ChromeExtension/ChromeExtension.crx
+2. Visit chrome://extensions in your browser
+3. Drag and drop on the page to install it
+4. The option page will open, configure the Raspberry Pi IP on your local network.
 
 Alternatively, you can drag and drop the directory where your extension files live onto chrome://extensions in your browser to load it.
 
 You can configure RaspberryCast settings in the extension option page.
-
 
 ## Todo
 - Less invasive installation script
