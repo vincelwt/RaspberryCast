@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PiCast</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Change IP Address</string>
+    <string name="title_activity_choose_ip">ChooseIp</string>
+    <string name="prompt">Choose the IP address of your Raspberry Pi.\n(only the IP address)</string>
+    <string name="hnt">Raspberry Pi\'s IP</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="ipset">Raspberry Pi IP Address</string>
+    <string name="save">Save Changes</string>
+</resources>
