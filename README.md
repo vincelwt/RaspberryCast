@@ -78,7 +78,15 @@ Delete the /home/pi/RaspberryCast/ folder.
 
 ```
 cd /RaspberryCast
-sudo git pull
+git pull
+sudo ./RasberryCast.sh stop
+./RasberryCast.sh start
+```
+
+**Restart RaspberryCast (i.e. adress already in use):**
+
+```
+cd /RaspberryCast
 sudo ./RasberryCast.sh stop
 ./RasberryCast.sh start
 ```
