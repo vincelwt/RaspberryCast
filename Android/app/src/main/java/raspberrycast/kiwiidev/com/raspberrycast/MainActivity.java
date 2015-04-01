@@ -7,10 +7,12 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -30,7 +32,7 @@ public class MainActivity extends Activity {
         SharedPreferences settings = getSharedPreferences(getIPsettings(),MODE_PRIVATE);
         setIp(settings.getString(IPsettings,"Not Available"));
         ip = settings.getString(getIPsettings(), "Not Available");
-        final String notavailable = "<html><title>Server name not Valid</title><body><h2>The IP Address is not Valid</h2><p>The IP Address is invalid or not entered at all</p><p>If you have not set it yet, please go to the <b>Settings</b> and set the IP Address of your Raspberry Pi</p></body></html>";
+        final String notavailable = "<html><title>Server name not Valid</title><body><h2>The IP Address is not Valid</h2><p>The IP Address is invalid or not entered at all</p><p>If you have not set it yet, please <b>Set the IP Address of your Raspberry Pi</b></p></body></html>";
         setUrl("http://" + getIp() + ":2020/remote");
         WebView remote = (WebView) findViewById(R.id.remote);
 
@@ -40,7 +42,6 @@ public class MainActivity extends Activity {
         remote.getSettings().setJavaScriptEnabled(true);
 
         if(getIp() != "Not Available" ) {
-
 
             remote.loadUrl(getUrl());
             Log.d("WebView", "Loading Site");
@@ -55,12 +56,13 @@ public class MainActivity extends Activity {
             remote.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                    Log.d("WebView", "Not F***ING found");
+                    Log.d("WebView", "Not found");
                     finalRemote.loadData(notavailable, "text/html", null);
+                    setIPAddress();
                 }
             });
         }
-        else if(getIp() == "Not Available"){
+        else if(getIp() == "Not Available" || getIp().contains("\n")){
             setIPAddress();
             Log.d("WebView","Not Available");
             remote.loadData(notavailable, "text/html", null);}
@@ -80,10 +82,6 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        // int id = item.getItemId();
         final Context context = this;
         final SharedPreferences settings = getSharedPreferences(getIPsettings(),MODE_PRIVATE);
         final SharedPreferences.Editor PrefEditor = settings.edit();
@@ -119,6 +117,9 @@ public class MainActivity extends Activity {
 
                 //setContentView(R.layout.activity_settings);
                 return true;
+            case R.id.refresh:
+                remote.loadData("<html><h1>REFRESHING</h1><p>Please wait while the page loads</p></html>","text/html",null);
+                remote.loadUrl(getUrl());
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -140,6 +141,7 @@ public class MainActivity extends Activity {
     }
 
     public void setIPAddress(){
+        Log.d("SetIPAddress","Setting using popup menu");
         final Context context = this;
         final SharedPreferences settings = getSharedPreferences(getIPsettings(),MODE_PRIVATE);
         final SharedPreferences.Editor PrefEditor = settings.edit();
