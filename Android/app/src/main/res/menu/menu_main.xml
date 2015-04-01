@@ -4,7 +4,6 @@
         android:orderInCategory="99" android:showAsAction="never" />
 
     <item android:id="@+id/refresh" android:title="@string/refresh"
-        android:orderInCategory="100" android:showAsAction="ifRoom" android:icon="@drawable/ic_action_refresh"
-        android:menuCategory="system"
-        />
+        android:orderInCategory="100" android:showAsAction="never" android:icon="@drawable/ic_action_refresh"
+        android:menuCategory="system" />
 </menu>
