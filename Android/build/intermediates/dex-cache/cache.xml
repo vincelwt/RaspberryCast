@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/Shared/sdk/extras/android/m2repository/com/android/support/support-v4/19.1.0/support-v4-19.1.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="/Users/Aditya/AndroidStudioProjects/Raspberrycast/app/build/intermediates/pre-dexed/debug/support-v4-19.1.0-094a9e0138097568d1402e4c80699a34b4ab6209.jar" />
+    </item>
+
+</items>

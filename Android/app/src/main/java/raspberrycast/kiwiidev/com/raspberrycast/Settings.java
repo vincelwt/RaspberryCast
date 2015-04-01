@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import static raspberrycast.kiwiidev.com.raspberrycast.R.menu.menu_main;
+
 
 public class Settings extends Activity {
 
