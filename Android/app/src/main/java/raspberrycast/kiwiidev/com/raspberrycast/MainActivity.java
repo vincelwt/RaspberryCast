@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -24,6 +26,7 @@ public class MainActivity extends Activity {
     private String  url="";
     private String ip ="";
     private String IPsettings = "settings";
+    final String notavailable = "<html><title>Server name not Valid</title><body><h2>The IP Address is not Valid</h2><p>The IP Address is invalid or not entered at all</p><p>If you have not set it yet, please <b>Set the IP Address of your Raspberry Pi</b></p></body></html>";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +35,7 @@ public class MainActivity extends Activity {
         SharedPreferences settings = getSharedPreferences(getIPsettings(),MODE_PRIVATE);
         setIp(settings.getString(IPsettings,"Not Available"));
         ip = settings.getString(getIPsettings(), "Not Available");
-        final String notavailable = "<html><title>Server name not Valid</title><body><h2>The IP Address is not Valid</h2><p>The IP Address is invalid or not entered at all</p><p>If you have not set it yet, please <b>Set the IP Address of your Raspberry Pi</b></p></body></html>";
+
         setUrl("http://" + getIp() + ":2020/remote");
         WebView remote = (WebView) findViewById(R.id.remote);
 
@@ -102,7 +105,14 @@ public class MainActivity extends Activity {
 
                         setIp(settings.getString(getIPsettings(), "Not Available"));
                         setUrl("http://" + getIp() + ":2020/remote");
-                        remote.loadUrl(url);
+                        if(getIp() != "Not Available" ) {
+                            remote.loadUrl(url);
+                        }
+                        else {
+                            setIPAddress();
+                            Log.d("WebView","Not Available");
+                            remote.loadData(notavailable, "text/html", null);
+                        }
                     }
                 })
                         .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
@@ -120,6 +130,11 @@ public class MainActivity extends Activity {
             case R.id.refresh:
                 remote.loadData("<html><h1>REFRESHING</h1><p>Please wait while the page loads</p></html>","text/html",null);
                 remote.loadUrl(getUrl());
+                return true;
+            case R.id.about:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/vincent-lwt/RaspberryCast"));
+                startActivity(browserIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
