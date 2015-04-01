@@ -34,7 +34,7 @@ On any device connected to the same network as you Pi, you can visit the page:
 ```
 http://<your-Pi-ip>:2020/remote
 ```
-Note that you can "Add to homescreen" this link.
+Note that you can "Add to homescreen" this link or you can use the Android application located within the "Android" directory of this repo
 
 ## Chrome extension (computers)
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/extension.png)
@@ -89,7 +89,7 @@ cd /RaspberryCast
 sudo ./RasberryCast.sh stop
 ./RasberryCast.sh start
 ```
-
+mob
 If you want to enable autologin at boot:
 ```
 sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
