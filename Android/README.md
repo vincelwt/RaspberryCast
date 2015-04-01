@@ -11,4 +11,5 @@ About the PiCast Project here: https://github.com/vincent-lwt/RaspberryCast
 The apk file is present in the following directory:
 /Android/app/build/outputs/apk/app-debug.apk . 
 You can installing it by downloading the app-debug.apk and launching it from a filemanager.
+>Google play link to be added
 
