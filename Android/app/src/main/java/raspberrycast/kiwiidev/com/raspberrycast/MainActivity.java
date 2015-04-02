@@ -24,7 +24,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     private String  url="";
-    private String ip ="";
+    public String ip ="";
     private String IPsettings = "settings";
     final String notavailable = "<html><title>Server name not Valid</title><body><h2>The IP Address is not Valid</h2><p>The IP Address is invalid or not entered at all</p><p>If you have not set it yet, please <b>Set the IP Address of your Raspberry Pi</b></p></body></html>";
     @Override
@@ -45,7 +45,6 @@ public class MainActivity extends Activity {
         remote.getSettings().setJavaScriptEnabled(true);
 
         if(getIp() != "Not Available" ) {
-
             remote.loadUrl(getUrl());
             Log.d("WebView", "Loading Site");
             super.onCreate(savedInstanceState);
