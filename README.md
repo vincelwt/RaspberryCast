@@ -34,7 +34,8 @@ On any device connected to the same network as you Pi, you can visit the page:
 ```
 http://<your-Pi-ip>:2020/remote
 ```
-Note that you can "Add to homescreen" this link or you can use the Android application located within the "Android" directory of this repo
+Note that you can "Add to homescreen" this link 
+OR you can use the Android application located within the "Android" directory of this repo (Android app by Aditya NG)
 
 ## Chrome extension (computers)
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/extension.png)
