@@ -207,5 +207,14 @@ def getlog():
 		last_log = line
 	return last_log
 
+@app.route('/running')
+def running():
+	response.headers['Access-Control-Allow-Origin'] = '*'
+	logger.info("RUNNING: Running state as been asked.")
+	running = is_running()
+	if running == True:
+		return "1"
+	else:
+		return "0"
 		
 run(app, reloader=False, host='0.0.0.0', debug=True, quiet=True, port=2020)
