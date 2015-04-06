@@ -30,7 +30,7 @@ os.system("touch RaspberryCast.log")
 os.system("mkfifo /tmp/cmd >/dev/null 2>&1")
 
 #os.system("cat images/cast.asc | wall")
-logger.info('START: RaspberryCast web server started.')
+logger.info('START: RaspberryCast successfully started!')
 
 app = Bottle()
 
@@ -51,7 +51,7 @@ def remote():
 def stream(): 
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']	
-	logger.info('STREAM: Successfully received URL to cast: '+url)
+	logger.debug('STREAM: Successfully received URL to cast: '+url)
 	try :
 		launchvideo(url, False)
 		return "1"
@@ -67,7 +67,7 @@ def queue():
 	url = request.query['url']
 	
 	if is_running() == True :
-		logger.info('QUEUE: Video currently playing, adding URL to queue: '+url)
+		logger.info('QUEUE: Adding URL to queue: '+url)
 
 		#Writing url to queue file
 		with open('video.queue', 'a') as f:
@@ -88,26 +88,26 @@ def queue():
 @app.route('/popcorn')
 def popcorn():
 	response.headers['Access-Control-Allow-Origin'] = '*'
-	logger.info('POPCORN: Starting popcorntime function.')
+	logger.info('POPCORN: Starting PopcornTime video treatment...')
 
 	url = request.query['url']
-	logger.info('POPCORN: URL is :'+url)
+	logger.debug('POPCORN: URL is :'+url)
 
 	ip = request.environ['REMOTE_ADDR']
-	logger.info('POPCORN: IP is :'+ip)
+	logger.debug('POPCORN: IP is :'+ip)
 
 	port = url.split(":")[2]
-	logger.info('POPCORN: Port is:'+port)
+	logger.debug('POPCORN: Port is:'+port)
 
 	url = "http://"+ip+":"+port
-	logger.info('POPCORN: Final url:'+url)
+	logger.debug('POPCORN: Final url:'+url)
 
 	# Try to remove subtitle
 	os.system("rm subtitle.srt &")
 		
 	try :
 		os.system("wget http://"+ip+":9999/subtitle.srt")
-		logger.info('POPCORN: Success with Wget ! Starting with subtitles.')
+		logger.debug('POPCORN: Success with Wget ! Starting with subtitles.')
 		try :
 			launchvideo(url, True)
 		except :
@@ -133,10 +133,10 @@ def video():
 		os.system("echo -n p > /tmp/cmd &")
 		return "1"
 	elif control == "stop" :
-		logger.info('REMOTE: Command : stop')
+		logger.info('REMOTE: Command : stop video')
 		os.system("echo -n q > /tmp/cmd &")
 		#os.system("cat images/stop.asc | wall")
-		logger.info('REMOTE: Command : empty queue file')
+		logger.debug('REMOTE: Command : empty queue file')
 		#Empty queue file
 		open('video.queue', 'w').close()
 		return "1"
@@ -191,9 +191,9 @@ def shutdown():
 def settings():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	sound_output = request.query['audioout']
-	logger.info("SETTINGS: Audio setting is :"+sound_output)
+	logger.debug("SETTINGS: Audio setting is :"+sound_output)
 	mode_slow = request.query['modeslow']
-	logger.info("SETTINGS: Mode slow setting is :"+mode_slow)
+	logger.debug("SETTINGS: Mode slow setting is :"+mode_slow)
 	os.system("sed -i '/low_mode/c\low_mode = "+mode_slow+"' config.py &")
 	os.system("sed -i '/sound_output/c\sound_output = \""+sound_output+"\"' config.py &")
 	return "1"
@@ -210,7 +210,7 @@ def getlog():
 @app.route('/running')
 def running():
 	response.headers['Access-Control-Allow-Origin'] = '*'
-	logger.info("RUNNING: Running state as been asked.")
+	logger.debug("RUNNING: Running state as been asked.")
 	running = is_running()
 	if running == True:
 		return "1"

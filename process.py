@@ -14,11 +14,11 @@ def launchvideo(url, sub):
 		logger.error('CASTING: Unable to wake up screen. Giving up.')
 
 	if is_running() == True : 
-		logger.info('CASTING: OMXPlayer already running, killing previous instance.')
+		logger.debug('CASTING: OMXPlayer already running, killing previous instance.')
 		os.system("killall omxplayer.bin")
 
 	#os.system("cat images/url.asc | wall")
-	logger.info('CASTING: Trying to retrieve video URL...')
+	logger.info('CASTING: Trying to retrieve source video URL...')
 	
 
 	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub == True) :	
@@ -27,17 +27,17 @@ def launchvideo(url, sub):
 		
 	else :
 		if low_mode == True:
-			logger.info('CASTING: Fast mode enabled (360p).')
+			logger.debug('CASTING: Fast mode enabled (360p).')
 			if url[0:14] in ("https://youtu.", "http://youtu.b", "https://www.yo", "http://www.you", "http://youtub", "http://youtube") :
-				logger.info("CASTING: Youtube link detected, setting to 360p")
+				logger.debug("CASTING: Youtube link detected, setting to 360p")
 				command = "youtube-dl -f 18 -g "
 			elif url[0:12] in ("https://vime", "http://vimeo") :
-				logger.info("CASTING: Vimeo link detected, setting to 360p")
+				logger.debug("CASTING: Vimeo link detected, setting to 360p")
 				command = "youtube-dl -f h264-sd -g "
 			else :
 				command = "youtube-dl -g "
 		else:
-			logger.info('CASTING: Trying to extract full url in maximal quality.')
+			logger.debug('CASTING: Trying to extract full url in maximal quality.')
 			command = "youtube-dl -g "
 
 	
@@ -50,17 +50,17 @@ def launchvideo(url, sub):
 		
 		out = out.rstrip()
 
-	logger.info("CASTING: Full video URL is : " + out)	
+	logger.debug("CASTING: Full video URL is : " + out)	
 
 	#os.system("cat images/omx.asc | wall")
 	logger.info("CASTING: Sarting OMXPlayer now.")
 	
 	if sub == True :
-		logger.info('CASTING: Starting OMX with subtitles.')
+		logger.debug('CASTING: Starting OMX with subtitles.')
 		omx = "omxplayer -b -r -o "+sound_output+" '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
 		
 	else :
-		logger.info('CASTING: Starting OMX without subtitles.')
+		logger.debug('CASTING: Starting OMX without subtitles.')
 		omx = "omxplayer -b -r -o "+sound_output+" '"+out+"' < /tmp/cmd"
 			
 
