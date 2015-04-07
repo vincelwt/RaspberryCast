@@ -21,6 +21,7 @@ elif [ $1 = "stop" ] ; then
 	fi
 	echo "Killing RaspberryCast..."
 	killall omxplayer.bin >/dev/null 2>&1
+	killall youtube-dl >/dev/null 2>&1
 	killall python >/dev/null 2>&1
 	kill $(lsof -t -i :2020) >/dev/null 2>&1
 	rm *.srt >/dev/null 2>&1

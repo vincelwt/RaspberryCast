@@ -41,7 +41,7 @@ echo "Installing necessary dependencies... (This could take a while)"
 echo ""
 echo "============================================================"
 
-apt-get install -y lsof python-pip git wget omxplayer
+apt-get install -y lsof python-pip git wget omxplayer dialog
 echo "============================================================"
 
 if [ "$?" = "1" ]

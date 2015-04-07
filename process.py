@@ -3,6 +3,7 @@
 import subprocess, os, signal, sys, re
 from time import *
 from config import *
+from daemon_state import *
 import logging
 logger = logging.getLogger(" | RaspberryCast | ")
 
@@ -13,9 +14,12 @@ def launchvideo(url, sub):
 	except :
 		logger.error('CASTING: Unable to wake up screen. Giving up.')
 
-	if is_running() == True : 
+	if state() == "1" : 
 		logger.debug('CASTING: OMXPlayer already running, killing previous instance.')
 		os.system("killall omxplayer.bin")
+	elif state() == "2" : 
+		logger.debug('CASTING: Youtube-dl already running, killing previous instance.')
+		os.system("killall youtube-dl")
 
 	#os.system("cat images/url.asc | wall")
 	logger.info('CASTING: Trying to retrieve source video URL...')
@@ -70,11 +74,3 @@ def launchvideo(url, sub):
 		logger.error('CASTING: Unable to start OMX. Giving up.')
 
 	os.system("echo . > /tmp/cmd &")
-
-def is_running():
-        s = subprocess.Popen(["ps", "axw"],stdout=subprocess.PIPE)
-        for x in s.stdout:
-                if re.search("omxplayer.bin", x):
-                        return True
-	return False
-

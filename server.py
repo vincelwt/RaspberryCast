@@ -2,7 +2,7 @@
 
 from bottle import *
 from process import *
-from json import dumps
+from daemon_state import *
 import os
 import logging
 import sys
@@ -11,15 +11,18 @@ import sys
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
 logger = logging.getLogger(" | RaspberryCast | ")
 
-#Creating handler to print messages on stdout
-root = logging.getLogger()
-root.setLevel(logging.DEBUG)
+if new_log == False :
+	#Creating handler to print messages on stdout
+	root = logging.getLogger()
+	root.setLevel(logging.DEBUG)
 
-ch = logging.StreamHandler(sys.stdout)
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-ch.setFormatter(formatter)
-root.addHandler(ch)
+	ch = logging.StreamHandler(sys.stdout)
+	ch.setLevel(logging.DEBUG)
+	formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+	ch.setFormatter(formatter)
+	root.addHandler(ch)
+else :
+	StartDialogLog()
 
 
 #Reset log
@@ -66,7 +69,7 @@ def queue():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']
 	
-	if is_running() == True :
+	if state() != "0" :
 		logger.info('QUEUE: Adding URL to queue: '+url)
 
 		#Writing url to queue file
@@ -179,7 +182,7 @@ def shutdown():
 		try:
 			time = int(time)
 			if (time<400 and time>=0):
-				shutdown_command = "shutdown -h +" + str(time) + " now &"
+				shutdown_command = "shutdown -h +" + str(time) + " &"
 				os.system(shutdown_command)
 				logger.info("SHUTDOWN: Shutdown should be successfully programmed")
 				return "1"
@@ -208,13 +211,10 @@ def getlog():
 	return last_log
 
 @app.route('/running')
-def running():
+def webstate():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	logger.debug("RUNNING: Running state as been asked.")
-	running = is_running()
-	if running == True:
-		return "1"
-	else:
-		return "0"
+	return state()
+
 		
 run(app, reloader=False, host='0.0.0.0', debug=True, quiet=True, port=2020)
