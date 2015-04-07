@@ -2,6 +2,7 @@
 
 import subprocess, re
 from process import *
+from daemon_state import *
 from time import sleep
 import logging
 logger = logging.getLogger(" | RaspberryCast | ")
@@ -9,7 +10,7 @@ logger = logging.getLogger(" | RaspberryCast | ")
 
 while 1:
     #Playlist management
-	if is_running() == False:
+	if state() == "0":
 		with open('video.queue', 'r') as f:
 			first_line = f.readline()
 			if first_line != "" :
