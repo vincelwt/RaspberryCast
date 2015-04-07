@@ -35,7 +35,7 @@ def DialogLog() :
 			if now == "0" :
 				os.system("dialog --title RaspberryCast --infobox \"Use the Chrome extension, the web app, or the Android app to stream content.\" 5 50")
 			elif now == "1" :
-				os.system("dialog --title RaspberryCast --infobox \"Video is currently playing !\" 5 50")
+				os.system("dialog --title RaspberryCast --infobox \"Media should now be playing !\" 5 50")
 			elif now == "2" :
 				os.system("dialog --title RaspberryCast --infobox \"Processing media with youtube-dl...\n\nRetrieving source video URL before playing...\n\nCan take up to 40s with slow connections.\" 7 50")
 			begin = now
