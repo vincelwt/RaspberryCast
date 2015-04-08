@@ -13,4 +13,6 @@
     <string name="ipHint">192.168.1.x</string>
     <string name="title_activity_pause">pause</string>
     <string name="title_activity_notif">notif</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

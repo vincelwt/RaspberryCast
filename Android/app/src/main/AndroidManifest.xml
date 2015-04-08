@@ -29,10 +29,22 @@
             android:name=".pause"
             android:label="@string/title_activity_pause" >
         </activity>
+
         <service
             android:name=".notif"
-            android:label="@string/title_activity_notif" android:enabled="true" >
+            android:enabled="true"
+            android:label="@string/title_activity_notif" >
         </service>
+
+        <receiver android:name=".Remote" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/remote_info" />
+        </receiver>
     </application>
 
 </manifest>
