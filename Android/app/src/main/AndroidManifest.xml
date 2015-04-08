@@ -19,18 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Settings"
-            android:label="@string/title_activity_settings" >
-        </activity>
-        <activity
-            android:name=".Refresh"
-            android:label="@string/title_activity_refresh" >
-        </activity>
-        <activity
-            android:name=".remote"
-            android:label="@string/title_activity_remote" >
-        </activity>
 
         <service
             android:name=".remote"

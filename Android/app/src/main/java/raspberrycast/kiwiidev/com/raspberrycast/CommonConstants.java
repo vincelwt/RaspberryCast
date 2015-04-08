@@ -27,15 +27,9 @@ public final class CommonConstants {
         // don't allow the class to be instantiated
     }
 
-    // Milliseconds in the snooze duration, which translates
-    // to 20 seconds.
-    public static final int DEFAULT_TIMER_DURATION = 10000;
-    public static final String ACTION_SNOOZE = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_SNOOZE";
     public static String IP = "raspberrycast.kiwiidev.com.raspberrycast.IP";
-    public static final String ACTION_DISMISS = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_DISMISS";
     public static final String EXTRA_MESSAGE= "itech.aditya.com.understandingints.EXTRA_MESSAGE";
     public static final String ACTION_START= "itech.aditya.com.understandingints.ACTION_START";
-    public static final String EXTRA_TIMER = "itech.aditya.com.understandingints.EXTRA_TIMER";
     public static final String ACTION_PAUSE = "itech.aditya.com.understandingints.ACTION_PAUSE";
     public static final String ACTION_REVIND = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_REVIND";
     public static final String ACTION_FAST_FORWARD = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_FAST_FORWARD";

@@ -60,7 +60,7 @@ public class notif extends IntentService {
                             .setContentTitle("Remote")
 //                          .setContentText("Pause")
 //                          .setDefaults(Notification.DEFAULT_ALL)
-                            .addAction(R.drawable.revind ,
+                            .addAction(R.drawable.revind,
                                     "", piRevind)
                             .addAction(R.drawable.pause,
                                     "", pipause)
@@ -102,7 +102,7 @@ public class notif extends IntentService {
             Log.d("System.out","ACTION_PAUSE");
             target = null;
             try {
-                target = new URL("http://" + CommonConstants.IP +":2020/video?control=left");
+                target = new URL("http://" + CommonConstants.IP +":2020/video?control=pause");
                 BufferedReader in = new BufferedReader(new InputStreamReader(target.openStream()));
                 result = Integer.parseInt(in.readLine());
                 in.close();
@@ -125,56 +125,22 @@ public class notif extends IntentService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else if (action.equals(CommonConstants.ACTION_REVIND)) {
+            Log.d("System.out", "ACTION_REVIND");
+            target = null;
+            try {
+                target = new URL("http://" + CommonConstants.IP + ":2020/video?control=left");
+                BufferedReader in = new BufferedReader(new InputStreamReader(target.openStream()));
+                result = Integer.parseInt(in.readLine());
+                in.close();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-  /*  private void issueNotification(Intent intent, String msg) {
-        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Intent pauseIntent = new Intent(this, notif.class);
-        pauseIntent.setAction(CommonConstants.ACTION_PAUSE);
-        PendingIntent pipause = PendingIntent.getService(this, 0, pauseIntent, 0);
-
-        Intent FFWIntent = new Intent(this, notif.class);
-        FFWIntent.setAction(CommonConstants.ACTION_FAST_FORWARD);
-        PendingIntent piFFW = PendingIntent.getService(this, 0, FFWIntent, 0);
-
-        Intent revindIntent = new Intent(this, notif.class);
-        revindIntent.setAction(CommonConstants.ACTION_REVIND);
-        PendingIntent piRevind = PendingIntent.getService(this, 0, revindIntent, 0);
-
-        // Constructs the Builder object.
-        builder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Remote")
-                        .setContentText("Pause")
-                        .setDefaults(Notification.DEFAULT_ALL)
-                        .setStyle(new NotificationCompat.BigTextStyle()
-                                .bigText(msg))
-                        .addAction (R.mipmap.ic_launcher,
-                                "Pause", pipause)
-                        .addAction (R.mipmap.ic_launcher,
-                                "Fast-Forward", piFFW)
-                        .addAction(R.mipmap.ic_launcher, "Revind", piRevind);
-
-        Intent resultIntent = new Intent(this, MainActivity.class);
-        resultIntent.putExtra(CommonConstants.EXTRA_MESSAGE, msg);
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        // Because clicking the notification opens a new ("special") activity, there's
-        // no need to create an artificial back stack.
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        this,
-                        0,
-                        resultIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-
-        builder.setContentIntent(resultPendingIntent);
-        builder.notify();
-        //issueNotification(builder);
-    } */
 
     private void issueNotification(NotificationCompat.Builder builder) {
         mNotificationManager = (NotificationManager)
