@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="raspberrycast.kiwiidev.com.raspberrycast" >
+    package="raspberrycast.kiwiidev.com.raspberrycast"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -21,12 +27,12 @@
         </activity>
 
         <service
-            android:name=".remote"
+            android:name="raspberrycast.kiwiidev.com.raspberrycast.remote"
             android:enabled="true"
             android:exported="false" />
 
         <activity
-            android:name=".pause"
+            android:name="raspberrycast.kiwiidev.com.raspberrycast.pause"
             android:label="@string/title_activity_pause" >
         </activity>
 
