@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/Aditya/AndroidStudioProjects/Raspberrycast/app/src/main/res/values-v14/dimens.xml -->
+    <eat-comment/>
+    <dimen name="widget_margin">0dp</dimen>
+</resources>
