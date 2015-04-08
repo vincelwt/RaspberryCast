@@ -10,4 +10,9 @@
     <item android:id="@+id/about" android:title="@string/about"
         android:orderInCategory="100" android:showAsAction="never" android:icon="@mipmap/ic_launcher"
         android:menuCategory="system" />
+
+    <item android:id="@+id/notification" android:title="@string/notific"
+        android:orderInCategory="99" android:showAsAction="never"
+        android:menuCategory="system" android:checkable="true" />
+
 </menu>

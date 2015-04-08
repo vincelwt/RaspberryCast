@@ -3,6 +3,7 @@
     package="raspberrycast.kiwiidev.com.raspberrycast" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,6 +27,24 @@
             android:name=".Refresh"
             android:label="@string/title_activity_refresh" >
         </activity>
+        <activity
+            android:name=".remote"
+            android:label="@string/title_activity_remote" >
+        </activity>
+
+        <service
+            android:name=".remote"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity
+            android:name=".pause"
+            android:label="@string/title_activity_pause" >
+        </activity>
+        <service
+            android:name=".notif"
+            android:label="@string/title_activity_notif" android:enabled="true" >
+        </service>
     </application>
 
 </manifest>
