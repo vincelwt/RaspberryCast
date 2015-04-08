@@ -1,11 +1,8 @@
-package raspberrycast.kiwiidev.com.raspberrycast;
+package com.kiwiidev.raspberrycast;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,10 +18,9 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import java.net.URL;
+import raspberrycast.kiwiidev.com.raspberrycast.R;
 
 
 public class MainActivity extends Activity {
@@ -212,12 +208,12 @@ public class MainActivity extends Activity {
         Log.d("System.out","Notification initialising");
 
         mServiceIntent = new Intent(getApplicationContext(), notif.class);
-        mServiceIntent.setAction(CommonConstants.ACTION_START);
         mServiceIntent.putExtra(CommonConstants.IP,getIp());
         if(stats == true) {
-            startService(mServiceIntent);
+            mServiceIntent.setAction(CommonConstants.ACTION_START);
         } else if (stats == false){
-
+            mServiceIntent.setAction(CommonConstants.ACTION_STOP);
         }
+        startService(mServiceIntent);
     }
 }

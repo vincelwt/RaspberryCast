@@ -1,7 +1,6 @@
-package raspberrycast.kiwiidev.com.raspberrycast;
+package com.kiwiidev.raspberrycast;
 
 import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -14,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import raspberrycast.kiwiidev.com.raspberrycast.R;
 
 
 public class notif extends IntentService {
@@ -83,6 +84,9 @@ public class notif extends IntentService {
             builder.setContentIntent(resultPendingIntent);
             mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build());
 
+        }
+        else if (action.equals(CommonConstants.ACTION_STOP)){
+            nm.cancel(CommonConstants.NOTIFICATION_ID);
         }
         else if (action.equals(CommonConstants.ACTION_REVIND)){
             Log.d("System.out","ACTION_REVIND");

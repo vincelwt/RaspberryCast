@@ -12,7 +12,7 @@
  * the License.
  */
 
-package raspberrycast.kiwiidev.com.raspberrycast;
+package com.kiwiidev.raspberrycast;
 
 /**
  *
@@ -30,6 +30,7 @@ public final class CommonConstants {
     public static String IP = "raspberrycast.kiwiidev.com.raspberrycast.IP";
     public static final String EXTRA_MESSAGE= "itech.aditya.com.understandingints.EXTRA_MESSAGE";
     public static final String ACTION_START= "itech.aditya.com.understandingints.ACTION_START";
+    public static final String ACTION_STOP= "itech.aditya.com.understandingints.ACTION_STOP";
     public static final String ACTION_PAUSE = "itech.aditya.com.understandingints.ACTION_PAUSE";
     public static final String ACTION_REVIND = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_REVIND";
     public static final String ACTION_FAST_FORWARD = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_FAST_FORWARD";

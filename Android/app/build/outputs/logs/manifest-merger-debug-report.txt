@@ -27,7 +27,7 @@ ADDED from AndroidManifest.xml:7:5
 		ADDED from AndroidManifest.xml:9:9
 	android:theme
 		ADDED from AndroidManifest.xml:11:9
-activity#raspberrycast.kiwiidev.com.raspberrycast.MainActivity
+activity#com.kiwiidev.raspberrycast.MainActivity
 ADDED from AndroidManifest.xml:12:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:15:13
@@ -59,7 +59,7 @@ ADDED from AndroidManifest.xml:28:9
 		ADDED from AndroidManifest.xml:30:13
 	android:name
 		ADDED from AndroidManifest.xml:29:13
-service#raspberrycast.kiwiidev.com.raspberrycast.notif
+service#com.kiwiidev.raspberrycast.notif
 ADDED from AndroidManifest.xml:33:9
 	android:label
 		ADDED from AndroidManifest.xml:36:13
@@ -67,22 +67,6 @@ ADDED from AndroidManifest.xml:33:9
 		ADDED from AndroidManifest.xml:35:13
 	android:name
 		ADDED from AndroidManifest.xml:34:13
-receiver#raspberrycast.kiwiidev.com.raspberrycast.Remote
-ADDED from AndroidManifest.xml:39:9
-	android:name
-		ADDED from AndroidManifest.xml:39:19
-intent-filter#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from AndroidManifest.xml:40:13
-action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from AndroidManifest.xml:41:17
-	android:name
-		ADDED from AndroidManifest.xml:41:25
-meta-data#android.appwidget.provider
-ADDED from AndroidManifest.xml:44:13
-	android:resource
-		ADDED from AndroidManifest.xml:46:17
-	android:name
-		ADDED from AndroidManifest.xml:45:17
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 	android:targetSdkVersion
