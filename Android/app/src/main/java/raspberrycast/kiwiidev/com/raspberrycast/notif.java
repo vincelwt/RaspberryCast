@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -54,15 +55,16 @@ public class notif extends IntentService {
             // Constructs the Builder object.
             builder =
                     new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.drawable.notification)
+                            .setSmallIcon(R.drawable.notificon)
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.notification))
                             .setContentTitle("Remote")
-//                        .setContentText("Pause")
-                            .setDefaults(Notification.DEFAULT_ALL)
-                            .addAction (R.drawable.pause,
-                                    "", pipause)
+//                          .setContentText("Pause")
+//                          .setDefaults(Notification.DEFAULT_ALL)
                             .addAction(R.drawable.revind ,
                                     "", piRevind)
-                            .addAction (R.drawable.ffw,
+                            .addAction(R.drawable.pause,
+                                    "", pipause)
+                            .addAction(R.drawable.ffw,
                                     "", piFFW);
 
 

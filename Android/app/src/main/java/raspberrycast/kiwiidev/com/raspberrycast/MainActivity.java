@@ -214,51 +214,10 @@ public class MainActivity extends Activity {
         mServiceIntent = new Intent(getApplicationContext(), notif.class);
         mServiceIntent.setAction(CommonConstants.ACTION_START);
         mServiceIntent.putExtra(CommonConstants.IP,getIp());
+        if(stats == true) {
+            startService(mServiceIntent);
+        } else if (stats == false){
 
-        startService(mServiceIntent);
-        /*
-        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Intent pauseIntent = new Intent(this, notif.class);
-        pauseIntent.setAction(CommonConstants.ACTION_PAUSE);
-        PendingIntent pipause = PendingIntent.getService(this, 0, pauseIntent, 0);
-
-        Intent FFWIntent = new Intent(this, notif.class);
-        FFWIntent.setAction(CommonConstants.ACTION_FAST_FORWARD);
-        PendingIntent piFFW = PendingIntent.getService(this, 0, FFWIntent, 0);
-
-        Intent revindIntent = new Intent(this, notif.class);
-        revindIntent.setAction(CommonConstants.ACTION_REVIND);
-        PendingIntent piRevind = PendingIntent.getService(this, 0, revindIntent, 0);
-
-        // Constructs the Builder object.
-        builder =
-                new NotificationCompat.Builder(this)
-                      .setSmallIcon(R.drawable.notification)
-                        .setContentTitle("Remote")
-//                        .setContentText("Pause")
-                        .setDefaults(Notification.DEFAULT_ALL)
-                        .addAction (R.drawable.pause,
-                                "", pipause)
-                        .addAction(R.drawable.revind ,
-                                "", piRevind)
-                        .addAction (R.drawable.ffw,
-                                "", piFFW);
-
-
-        Intent resultIntent = new Intent(this, MainActivity.class);
-        resultIntent.putExtra(CommonConstants.EXTRA_MESSAGE, "Started");
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-        PendingIntent resultPendingIntent =
-                PendingIntent.getActivity(
-                        this,
-                        0,
-                        resultIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-
-        builder.setContentIntent(resultPendingIntent);
-        mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build()); */
-
+        }
     }
 }
