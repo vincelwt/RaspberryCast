@@ -2,13 +2,13 @@
 > Transform your Raspberry Pi into a streaming device.
 Cast YouTube/Vimeo videos from mobile devices or computers with the Chrome extension.
 
+[![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
+
 Demo video with the Chrome extension:
-[![Alt text for your video](http://img.youtube.com/vi/0wEcYPSm_f8/0.jpg)](http://www.youtube.com/watch?v=0wEcYPSm_f8)
+[![Video 1](http://img.youtube.com/vi/0wEcYPSm_f8/0.jpg)](http://www.youtube.com/watch?v=0wEcYPSm_f8)
 
 Demo video with an Android (also works on iOS):
-[![Alt text for your video](http://img.youtube.com/vi/ZafqI4ZtJkI/0.jpg)](http://www.youtube.com/watch?v=ZafqI4ZtJkI)
-
-**ANDROID APP COMING SOON!**
+[![Video 2](http://img.youtube.com/vi/ZafqI4ZtJkI/0.jpg)](http://www.youtube.com/watch?v=ZafqI4ZtJkI)
 
 ## Supported services
 Works with all youtube-dl supported websites: http://rg3.github.io/youtube-dl/supportedsites.html (YouTube, SoundCloud, Dailymotion, Vimeo, etc...) but also any direct link to mp3, mp4, avi and mkv file.
@@ -52,9 +52,8 @@ Alternatively, you can drag and drop the directory where your extension files li
 You can configure RaspberryCast settings in the extension option page.
 
 ## Todo
-- Less invasive installation script
 - Firefox extension
-- Android/iOS app for control & sharing
+- iOS app for control & sharing
 - HDMI-CEC support
 
 ## PopcornTime integration
