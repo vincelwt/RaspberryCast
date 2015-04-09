@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/strings_activity_refresh.xml -->
-    <eat-comment/>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -149,11 +121,11 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -161,10 +133,10 @@
     <item name="dialog_fixed_width_minor" type="dimen">320dp</item>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/dimens.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="widget_margin">8dp</dimen>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
@@ -192,55 +164,29 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/strings.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="about">About RPi Cast</string>
-    <string name="action_settings">Change IP Address</string>
+    <string name="about">About</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_name">RPi Cast</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="ipHint">192.168.1.x</string>
-    <string name="notific">Notification</string>
-    <string name="pause">pause</string>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/strings_activity_refresh.xml -->
-    <eat-comment/>
-    <string name="pref_default_display_name">John Smith</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-    <string name="pref_header_general">General</string>
-    <string name="pref_header_notifications">Notifications</string>
-    <string name="pref_ringtone_silent">Silent</string>
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-    <string name="pref_title_vibrate">Vibrate</string>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
+    <string name="app_name" translatable="false">RPi Cast</string>
+    <string name="cancel">Cancel</string>
+    <string name="full_app_name" translatable="false">RaspberryCast</string>
+    <string name="ipHint" translatable="false">192.168.1.x</string>
+    <string name="ip_adress">IP Address</string>
+    <string name="notific">Notification bar</string>
     <string name="refresh">Refresh</string>
     <string name="title_activity_cast">Cast now</string>
-    <string name="title_activity_notif">notif</string>
-    <string name="title_activity_pause">pause</string>
+    <string name="title_activity_notif" translatable="false">notif</string>
+    <string name="title_activity_pause" translatable="false">pause</string>
     <string name="title_activity_queue">Add to playlist</string>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/strings_activity_refresh.xml -->
-    <eat-comment/>
-    <string name="title_activity_refresh">Settings</string>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/strings.xml -->
-    <eat-comment/>
-    <string name="title_activity_remote">remote</string>
+    <string name="title_activity_remote" translatable="false">remote</string>
     <string name="title_activity_settings">Settings</string>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values/styles.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <!-- Customize your theme here. -->
     </style>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">
         <item name="android:textColor">?android:textColorPrimary</item>

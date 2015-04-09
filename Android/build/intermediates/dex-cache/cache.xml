@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/pre-dexed/debug/classes-b80d9d54966d5a41f1bbc86fa12989c028e072a7.jar" />
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/pre-dexed/debug/classes-f9b2acb2ffc59e9bc300ae4d1d4bd79e83fb13e0.jar" />
     </item>
     <item
         jar="/home/vince/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-62ce0291b588dbfadbf7deed8878a75df6f9d2e2.jar" />
+        <dex dex="/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-62ce0291b588dbfadbf7deed8878a75df6f9d2e2.jar" />
     </item>
     <item
-        jar="/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/pre-dexed/debug/classes-8e3802fdbf22cd05a2e5dac30c96578baf5cec6b.jar" />
-    </item>
-    <item
-        jar="/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-507689b47ef9346579fecde52b8be262838387c7.jar" />
+        <dex dex="/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-366d5c2ab03b539515079b04382890d1b02accc8.jar" />
+    </item>
+    <item
+        jar="/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/pre-dexed/debug/classes-171b61be91582d7bc31ab2716f76a1814906b988.jar" />
     </item>
 
 </items>

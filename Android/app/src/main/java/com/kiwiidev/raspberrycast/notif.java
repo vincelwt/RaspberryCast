@@ -58,7 +58,7 @@ public class notif extends IntentService {
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(R.drawable.notificon)
                             .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.notification))
-                            .setContentTitle("Remote")
+                            .setContentTitle("RaspberryCast remote")
 //                          .setContentText("Pause")
 //                          .setDefaults(Notification.DEFAULT_ALL)
                             .addAction(R.drawable.revind,
@@ -82,6 +82,7 @@ public class notif extends IntentService {
                     );
 
             builder.setContentIntent(resultPendingIntent);
+            builder.setOngoing(true);
             mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build());
 
         }
@@ -137,5 +138,6 @@ public class notif extends IntentService {
                 getSystemService(NOTIFICATION_SERVICE);
         // Including the notification ID allows you to update the notification later on.
         mNotificationManager.notify(CommonConstants.NOTIFICATION_ID, builder.build());
+
     }
 }

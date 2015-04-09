@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/values-v14/dimens.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/src/main/res/values-v14/dimens.xml -->
     <eat-comment/>
     <dimen name="widget_margin">0dp</dimen>
-    <!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-v14/values.xml -->
+    <!-- From: file:/home/vince/Bureau/RaspberryCast/Android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/res/values-v14/values.xml -->
     <eat-comment/>
     <style name="Base.Theme.AppCompat" parent="Base.V14.Theme.AppCompat">
         <item name="android:actionModeCutDrawable">?actionModeCutDrawable</item>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="refresh">Rafraîchir</string>
+    <string name="about">A propos</string>
+    <string name="notific">Barre notification</string>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="title_activity_cast">Lire maintenant</string>
+    <string name="title_activity_queue">Ajouter à la Playlist</string>
+    <string name="add_widget">Ajouter un widget</string>
+    <string name="cancel">Annuler</string>
+    <string name="ip_adress">Adresse IP</string>
+</resources>

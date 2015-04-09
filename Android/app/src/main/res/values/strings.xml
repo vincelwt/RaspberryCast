@@ -1,20 +1,17 @@
 <resources>
-    <string name="app_name">RPi Cast</string>
-
+    <string name="app_name" translatable="false">RPi Cast</string>
+    <string name="full_app_name" translatable="false">RaspberryCast</string>
     <string name="refresh">Refresh</string>
-    <string name="about">About RPi Cast</string>
-    <string name="pause">pause</string>
-    <string name="notific">Notification</string>
-    <string name="action_settings">Change IP Address</string>
+    <string name="about">About</string>
+    <string name="cancel">Cancel</string>
+    <string name="notific">Notification bar</string>
+    <string name="ip_adress">IP Address</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="title_activity_remote">remote</string>
-    <string name="ipHint">192.168.1.x</string>
-    <string name="title_activity_pause">pause</string>
-    <string name="title_activity_notif">notif</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="title_activity_remote" translatable="false">remote</string>
+    <string name="ipHint" translatable="false">192.168.1.x</string>
+    <string name="title_activity_pause" translatable="false">pause</string>
+    <string name="title_activity_notif" translatable="false">notif</string>
     <string name="add_widget">Add widget</string>
     <string name="title_activity_cast">Cast now</string>
     <string name="title_activity_queue">Add to playlist</string>
-
-    <string name="hello_world">Hello world!</string>
 </resources>

@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     private String  url="";
     private String ip ="";
     private String IPsettings = "settings";
-    final String notavailable = "<html><title>Server name not Valid</title><body><h2>The IP Address is not Valid</h2><p>The IP Address is invalid or not entered at all</p><p>If you have not set it yet, please <b>Set the IP Address of your Raspberry Pi</b></p></body></html>";
+    final String notavailable = "<html><title>Oops...</title><body><h2>Oops...</h2><p>I couldn't access the server.</p><p>Please make sure :<ul><li><b>The IP Address of your Raspberry Pi is correct</li><li>The RaspberryCast server is running on your Raspberry Pi</li><li>You are on the same network as your Raspberry Pi</li></b></ul></p></body></html>";
     private Intent mServiceIntent;
     NotificationCompat.Builder builder;
     private NotificationManager mNotificationManager;
@@ -102,6 +102,9 @@ public class MainActivity extends Activity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setView(promptsView);
                 final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
+
+                userInput.setText(CommonConstants.IP);
+
                 alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -120,7 +123,7 @@ public class MainActivity extends Activity {
                         }
                     }
                 })
-                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.cancel),new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
@@ -157,16 +160,25 @@ public class MainActivity extends Activity {
         //return super.onOptionsItemSelected(item);
     }
     public String getUrl() {
+
         return url;
-    }public void setUrl(String url) {
+    }
+    public void setUrl(String url) {
         this.url = url;
-    }public String getIp() {
+    }
+    public String getIp() {
+
         return ip;
-    }public void setIp(String ip) {
+    }
+    public void setIp(String ip) {
+
         this.ip = ip;
-    }public String getIPsettings() {
+    }
+    public String getIPsettings() {
         return IPsettings;
-    }public void setIPsettings(String IPsettings) {
+    }
+    public void setIPsettings(String IPsettings) {
+
         this.IPsettings = IPsettings;
     }
 
@@ -192,7 +204,7 @@ public class MainActivity extends Activity {
                 remote.loadUrl(url);
             }
         })
-                .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.cancel),new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
