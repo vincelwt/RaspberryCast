@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import raspberrycast.kiwiidev.com.raspberrycast.R;
+import com.kiwiidev.raspberrycast.R;
 
 
 public class notif extends IntentService {
@@ -25,7 +25,7 @@ public class notif extends IntentService {
     public notif() {
         // The super call is required. The background thread that IntentService
         // starts is labeled with the string argument you pass.
-        super("raspberrycast.kiwiidev.com.raspberrycast");
+        super("com.kiwiidev.raspberrycast");
     }
 
     @Override
@@ -87,20 +87,6 @@ public class notif extends IntentService {
         }
         else if (action.equals(CommonConstants.ACTION_STOP)){
             nm.cancel(CommonConstants.NOTIFICATION_ID);
-        }
-        else if (action.equals(CommonConstants.ACTION_REVIND)){
-            Log.d("System.out","ACTION_REVIND");
-            target = null;
-            try {
-                target = new URL("http://" + CommonConstants.IP +":2020/video?control=pause");
-                BufferedReader in = new BufferedReader(new InputStreamReader(target.openStream()));
-                result = Integer.parseInt(in.readLine());
-                in.close();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         else if(action.equals(CommonConstants.ACTION_PAUSE)) {
             Log.d("System.out","ACTION_PAUSE");

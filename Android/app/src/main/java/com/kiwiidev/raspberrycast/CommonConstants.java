@@ -27,12 +27,12 @@ public final class CommonConstants {
         // don't allow the class to be instantiated
     }
 
-    public static String IP = "raspberrycast.kiwiidev.com.raspberrycast.IP";
-    public static final String EXTRA_MESSAGE= "itech.aditya.com.understandingints.EXTRA_MESSAGE";
-    public static final String ACTION_START= "itech.aditya.com.understandingints.ACTION_START";
-    public static final String ACTION_STOP= "itech.aditya.com.understandingints.ACTION_STOP";
-    public static final String ACTION_PAUSE = "itech.aditya.com.understandingints.ACTION_PAUSE";
-    public static final String ACTION_REVIND = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_REVIND";
-    public static final String ACTION_FAST_FORWARD = "raspberrycast.kiwiidev.com.raspberrycast.ACTION_FAST_FORWARD";
+    public static String IP = "com.kiwiidev.raspberrycast.IP";
+    public static final String EXTRA_MESSAGE= "com.kiwiidev.raspberrycast.EXTRA_MESSAGE";
+    public static final String ACTION_START= "com.kiwiidev.raspberrycast.ACTION_START";
+    public static final String ACTION_STOP= "com.kiwiidev.raspberrycast.ACTION_STOP";
+    public static final String ACTION_PAUSE = "com.kiwiidev.raspberrycast.ACTION_PAUSE";
+    public static final String ACTION_REVIND = "com.kiwiidev.raspberrycast.ACTION_REVIND";
+    public static final String ACTION_FAST_FORWARD = "com.kiwiidev.raspberrycast.ACTION_FAST_FORWARD";
     public static final int NOTIFICATION_ID = 001;
 }

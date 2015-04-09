@@ -1,74 +1,120 @@
 -- Merging decision tree log ---
 manifest
 ADDED from AndroidManifest.xml:2:1
-	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
 	package
 		ADDED from AndroidManifest.xml:3:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 	android:versionName
+		ADDED from AndroidManifest.xml:5:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
 	android:versionCode
+		ADDED from AndroidManifest.xml:4:5
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
+	xmlns:android
+		ADDED from AndroidManifest.xml:2:11
 uses-permission#android.permission.INTERNET
-ADDED from AndroidManifest.xml:5:5
-	android:name
-		ADDED from AndroidManifest.xml:5:22
-application
 ADDED from AndroidManifest.xml:7:5
+	android:name
+		ADDED from AndroidManifest.xml:7:22
+application
+ADDED from AndroidManifest.xml:9:5
+MERGED from com.android.support:appcompat-v7:21.0.3:16:5
+MERGED from com.android.support:support-v4:21.0.3:16:5
 	android:label
-		ADDED from AndroidManifest.xml:10:9
+		ADDED from AndroidManifest.xml:12:9
 	android:allowBackup
-		ADDED from AndroidManifest.xml:8:9
+		ADDED from AndroidManifest.xml:10:9
 	android:icon
-		ADDED from AndroidManifest.xml:9:9
-	android:theme
 		ADDED from AndroidManifest.xml:11:9
+	android:theme
+		ADDED from AndroidManifest.xml:13:9
 activity#com.kiwiidev.raspberrycast.MainActivity
-ADDED from AndroidManifest.xml:12:9
+ADDED from AndroidManifest.xml:14:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:18:13
+	android:label
+		ADDED from AndroidManifest.xml:16:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:17:13
+	android:name
 		ADDED from AndroidManifest.xml:15:13
-	android:label
-		ADDED from AndroidManifest.xml:14:13
-	android:name
-		ADDED from AndroidManifest.xml:13:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:16:13
+ADDED from AndroidManifest.xml:19:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:17:17
+ADDED from AndroidManifest.xml:20:17
 	android:name
-		ADDED from AndroidManifest.xml:17:25
+		ADDED from AndroidManifest.xml:20:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:19:17
+ADDED from AndroidManifest.xml:22:17
 	android:name
-		ADDED from AndroidManifest.xml:19:27
-service#raspberrycast.kiwiidev.com.raspberrycast.remote
-ADDED from AndroidManifest.xml:23:9
+		ADDED from AndroidManifest.xml:22:27
+service#com.kiwiidev.raspberrycast.remote
+ADDED from AndroidManifest.xml:26:9
+	android:enabled
+		ADDED from AndroidManifest.xml:28:13
 	android:exported
-		ADDED from AndroidManifest.xml:26:13
-	android:enabled
-		ADDED from AndroidManifest.xml:25:13
-	android:name
-		ADDED from AndroidManifest.xml:24:13
-activity#raspberrycast.kiwiidev.com.raspberrycast.pause
-ADDED from AndroidManifest.xml:28:9
-	android:label
-		ADDED from AndroidManifest.xml:30:13
-	android:name
 		ADDED from AndroidManifest.xml:29:13
-service#com.kiwiidev.raspberrycast.notif
-ADDED from AndroidManifest.xml:33:9
-	android:label
-		ADDED from AndroidManifest.xml:36:13
-	android:enabled
-		ADDED from AndroidManifest.xml:35:13
 	android:name
-		ADDED from AndroidManifest.xml:34:13
+		ADDED from AndroidManifest.xml:27:13
+activity#com.kiwiidev.raspberrycast.pause
+ADDED from AndroidManifest.xml:31:9
+	android:label
+		ADDED from AndroidManifest.xml:33:13
+	android:name
+		ADDED from AndroidManifest.xml:32:13
+service#com.kiwiidev.raspberrycast.notif
+ADDED from AndroidManifest.xml:36:9
+	android:enabled
+		ADDED from AndroidManifest.xml:38:13
+	android:label
+		ADDED from AndroidManifest.xml:39:13
+	android:name
+		ADDED from AndroidManifest.xml:37:13
+activity#com.kiwiidev.raspberrycast.Cast
+ADDED from AndroidManifest.xml:42:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:46:13
+	android:label
+		ADDED from AndroidManifest.xml:45:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:44:13
+	android:theme
+		ADDED from AndroidManifest.xml:47:13
+	android:name
+		ADDED from AndroidManifest.xml:43:13
+intent-filter#android.intent.action.SEND+android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:48:13
+action#android.intent.action.SEND
+ADDED from AndroidManifest.xml:49:17
+	android:name
+		ADDED from AndroidManifest.xml:49:25
+category#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:51:17
+	android:name
+		ADDED from AndroidManifest.xml:51:27
+data
+ADDED from AndroidManifest.xml:53:17
+	android:mimeType
+		ADDED from AndroidManifest.xml:53:23
+activity#com.kiwiidev.raspberrycast.Queue
+ADDED from AndroidManifest.xml:56:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:60:13
+	android:label
+		ADDED from AndroidManifest.xml:59:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:58:13
+	android:theme
+		ADDED from AndroidManifest.xml:61:13
+	android:name
+		ADDED from AndroidManifest.xml:57:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
+MERGED from com.android.support:appcompat-v7:21.0.3:15:5
+MERGED from com.android.support:support-v4:21.0.3:15:5
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0

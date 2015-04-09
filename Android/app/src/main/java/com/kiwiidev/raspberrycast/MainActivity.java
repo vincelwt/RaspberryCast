@@ -20,7 +20,7 @@ import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import raspberrycast.kiwiidev.com.raspberrycast.R;
+import com.kiwiidev.raspberrycast.R;
 
 
 public class MainActivity extends Activity {

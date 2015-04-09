@@ -24,4 +24,4 @@
         android:layout_alignParentLeft="true"
         android:hint="@string/ipHint" />
 </RelativeLayout>
-<!-- From: file:/Users/Aditya/AndroidStudioProjects/Raspberrycast/app/src/main/res/layout/activity_remote.xml -->
+<!-- From: file:/home/vince/Bureau/RaspberryCast_android/app/src/main/res/layout/activity_remote.xml -->
