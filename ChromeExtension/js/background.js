@@ -57,11 +57,11 @@ chrome.contextMenus.onClicked.addListener(function(info) {
 
 chrome.runtime.onInstalled.addListener(function() {
 	chrome.tabs.create({url: "../options.html"});
-	chrome.contextMenus.create({
-		id: "Castnow",
-		title: "Send to Rpi",
-		contexts: ["link"]
-	});
 });
 
+chrome.contextMenus.create({
+	id: "Castnow",
+	title: "Send to Rpi",
+	contexts: ["link"]
+});
 
