@@ -3,7 +3,7 @@
 Cast YouTube/Vimeo videos from mobile devices or computers with the Chrome extension.
 
 [![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
-[![Extension in Chrome web store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
+[![Extension in Chrome web store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
 
 
 Demo video with the Chrome extension:
