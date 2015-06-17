@@ -23,8 +23,7 @@ wget https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/setup.sh
 That's it.
 
 The installation script will:
-- Install the necessary dependencies
-- Install RaspberryCast
+- Install RaspberryCast & the necessary dependencies
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
 - Reboot (necessary to print logs on first use)
 You can review the [install script](https://github.com/vincent-lwt/RaspberryCast/blob/master/setup.sh).
@@ -36,8 +35,9 @@ On any device connected to the same network as you Pi, you can visit the page:
 ```
 http://<your-Pi-ip>:2020/remote
 ```
-Note that you can "Add to homescreen" this link 
-OR you can use the Android application located within the "Android" directory of this repo (Android app by Aditya NG)
+Note that you can "Add to homescreen" this link
+ 
+OR you can use the Android application (link to Playstore at the top of the page)
 
 ## Chrome extension (computers)
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/extension.png)
@@ -47,6 +47,10 @@ OR you can use the Android application located within the "Android" directory of
 You can configure RaspberryCast settings in the extension option page.
 
 ## Todo
+- Playlist support
+- Subtitles support
+- Live stream supports
+- Torrent by magnet
 - Firefox extension
 - iOS app for control & sharing
 - HDMI-CEC support
@@ -84,8 +88,9 @@ cd /RaspberryCast
 sudo ./RasberryCast.sh stop
 ./RasberryCast.sh start
 ```
-mob
-If you want to enable autologin at boot:
+
+**If you want to enable autologin at boot:**
+
 ```
 sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
 ```
