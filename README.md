@@ -13,7 +13,7 @@ Demo video with an Android (also works on iOS):
 [![Video 2](http://img.youtube.com/vi/ZafqI4ZtJkI/0.jpg)](http://www.youtube.com/watch?v=ZafqI4ZtJkI)
 
 ## Supported services
-Works with all youtube-dl supported websites: http://rg3.github.io/youtube-dl/supportedsites.html (YouTube, SoundCloud, Dailymotion, Vimeo, etc...) but also any direct link to mp3, mp4, avi and mkv file.
+Works with all youtube-dl supported websites: http://rg3.github.io/youtube-dl/supportedsites.html (YouTube, SoundCloud, Dailymotion, Vimeo, etc...) and also any direct link to mp3, mp4, avi and mkv file.
 
 ## How to install (RaspberryPi side)
 
@@ -23,7 +23,7 @@ wget https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/setup.sh
 That's it.
 
 The installation script will:
-- Install RaspberryCast & the necessary dependencies
+- Install RaspberryCast and the necessary dependencies
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
 - Reboot (necessary to print logs on first use)
 You can review the [install script](https://github.com/vincent-lwt/RaspberryCast/blob/master/setup.sh).
@@ -37,7 +37,7 @@ http://<your-Pi-ip>:2020/remote
 ```
 Note that you can "Add to homescreen" this link
  
-OR you can use the Android application (link to Playstore at the top of the page)
+You can also use the Android application (link to Playstore at the top of the page)
 
 ## Chrome extension (computers)
 ![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/extension.png)
