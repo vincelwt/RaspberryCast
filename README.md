@@ -7,9 +7,11 @@ Cast YouTube/Vimeo videos from mobile devices or computers with the Chrome exten
 
 
 Demo video with the Chrome extension:
+
 [![Video 1](http://img.youtube.com/vi/0wEcYPSm_f8/0.jpg)](http://www.youtube.com/watch?v=0wEcYPSm_f8)
 
 Demo video with an Android (also works on iOS):
+
 [![Video 2](http://img.youtube.com/vi/ZafqI4ZtJkI/0.jpg)](http://www.youtube.com/watch?v=ZafqI4ZtJkI)
 
 ## Supported services
