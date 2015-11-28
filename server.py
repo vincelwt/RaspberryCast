@@ -201,20 +201,10 @@ def settings():
 	os.system("sed -i '/sound_output/c\sound_output = \""+sound_output+"\"' config.py &")
 	return "1"
 
-@app.route('/status')
-def getlog():
-	response.headers['Access-Control-Allow-Origin'] = '*'
-	f = open('RaspberryCast.log', 'r')
-	line = f.readline()[-1]
-	if line:
-		last_log = line
-	return last_log
-
 @app.route('/running')
 def webstate():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	logger.debug("RUNNING: Running state as been asked.")
 	return state()
-
 		
 run(app, reloader=False, host='0.0.0.0', debug=True, quiet=True, port=2020)
