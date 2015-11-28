@@ -16,7 +16,7 @@ def serve(path, a):
     def static(filename):
         fileN = os.path.splitext(filename)[0]
         extension = os.path.splitext(filename)[1]
-        return static_file(base64.b64decode(fileN)+extension, root=os.path.split(path)[0])
+        return static_file(base64.b32decode(fileN)+extension, root=os.path.split(path)[0])
 
     run(host='0.0.0.0', port=8080, debug=True)
 
@@ -52,10 +52,13 @@ def on_drag_data_received(widget, context, x, y, selection, target_type, timesta
                 #print data
             thread.start_new_thread( serve, (path, 1) )
             filename = os.path.splitext(os.path.split(path)[1])[0]
-            extension = os.path.splitext(os.path.split(path)[1])[1]
-            encoded_string = urllib.quote_plus("http://"+localip+":8080/"+base64.b64encode(filename)+extension)
+            extension = os.path.splitext(path)[1]
+            encoded_string = urllib.quote_plus("http://"+localip+":8080/"+base64.b32encode(filename)+extension)
             full_url = "http://"+w.entry.get_text()+":2020/stream?url="
-            urllib2.urlopen(full_url+encoded_string).read()
+            if os.path.isfile(os.path.splitext(path)[0]+".srt"):
+                urllib2.urlopen(full_url+encoded_string+"&subtitles="+urllib.quote_plus("http://"+localip+":8080/"+base64.b32encode(os.path.splitext(os.path.split(path)[1])[0]))+".srt").read()
+            else: 
+                urllib2.urlopen(full_url+encoded_string).read()
 
 w = Gtk.Window(title="RaspberryCast", border_width=10)
 
