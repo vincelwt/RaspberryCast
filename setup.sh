@@ -50,7 +50,7 @@ then
   exit 0
 fi
 
-pip install youtube-dl
+pip install youtube-dl bottle
 
 if [ "$?" = "1" ]
 then
