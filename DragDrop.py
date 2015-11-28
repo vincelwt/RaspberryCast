@@ -5,23 +5,24 @@ import urllib, urllib2, os, thread, socket, base64
 from bottle import route, run, static_file
 
 TARGET_TYPE_URI_LIST = 80
-path =""
 
-# Get local IP adress
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("gmail.com",80))
 localip = s.getsockname()[0]
 s.close()
 
-rasberrypi_url = "EnterYourRaspberryPiIP"
-full_url = "http://"+rasberrypi_url+":2020/stream?url="
-
 def serve(path, a):
     @route('/<filename>')
     def static(filename):
-        return static_file(base64.b64decode(filename), root=os.path.split(path)[0])
+        fileN = os.path.splitext(filename)[0]
+        extension = os.path.splitext(filename)[1]
+        return static_file(base64.b64decode(fileN)+extension, root=os.path.split(path)[0])
 
     run(host='0.0.0.0', port=8080, debug=True)
+
+def entryChange(widget):
+    with open('.raspberrycastIP', 'w+') as f:
+        f.write(widget.get_text())
 
 def get_file_path_from_dnd_dropped_uri(uri):
     # get the path to file
@@ -50,12 +51,30 @@ def on_drag_data_received(widget, context, x, y, selection, target_type, timesta
                 data = file(path).read()
                 #print data
             thread.start_new_thread( serve, (path, 1) )
-            encoded_string = urllib.quote_plus("http://"+localip+":8080/"+base64.b64encode(os.path.split(path)[1]))
+            filename = os.path.splitext(os.path.split(path)[1])[0]
+            extension = os.path.splitext(os.path.split(path)[1])[1]
+            encoded_string = urllib.quote_plus("http://"+localip+":8080/"+base64.b64encode(filename)+extension)
+            full_url = "http://"+w.entry.get_text()+":2020/stream?url="
             urllib2.urlopen(full_url+encoded_string).read()
 
 w = Gtk.Window(title="RaspberryCast", border_width=10)
+
+vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+w.add(vbox)
+
 w.text = Gtk.Label("Drag and drop a media file\n\nKeep this window open while \nthe media is playing", justify=Gtk.Justification.CENTER)
-w.add(w.text)
+w.entry = Gtk.Entry()
+
+try:
+    with open('.raspberrycastIP', 'r') as f:
+        w.entry.set_text(f.read())
+except:
+    w.entry.set_text("192.168.0.0")
+
+w.entry.connect("changed", entryChange)
+vbox.add(w.text)
+vbox.add(w.entry)
+
 w.connect('drag_data_received', on_drag_data_received)
 w.connect("destroy", Gtk.main_quit, "WM destroy")
 
