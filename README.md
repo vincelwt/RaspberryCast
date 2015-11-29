@@ -20,7 +20,7 @@ Works with all youtube-dl supported websites: http://rg3.github.io/youtube-dl/su
 ## How to install (RaspberryPi side)
 
 ```
-wget https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/setup.sh && sudo sh setup.sh
+wget https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/setup.sh && sudo sh setup.sh
 ```
 That's it.
 
@@ -28,10 +28,10 @@ The installation script will:
 - Install RaspberryCast and the necessary dependencies
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
 - Reboot (necessary to print logs on first use)
-You can review the [install script](https://github.com/vincent-lwt/RaspberryCast/blob/master/setup.sh).
+You can review the [install script](https://github.com/vincelwt/RaspberryCast/blob/master/setup.sh).
 
 # Remote control (mobile devices)
-![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/android.png)
+![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/android.png)
 
 On any device connected to the same network as you Pi, you can visit the page:
 ```
@@ -42,11 +42,25 @@ Note that you can "Add to homescreen" this link
 You can also use the Android application (link to Playstore at the top of the page)
 
 ## Chrome extension (computers)
-![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/extension.png)
+![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/extension.png)
 
-![alt tag](https://raw.githubusercontent.com/vincent-lwt/RaspberryCast/master/images/rightclick.png)
+![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/rightclick.png)
 
 You can configure RaspberryCast settings in the extension option page.
+
+## Drag and drop videos from computer
+
+![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/draganddrop.png)
+
+To download the drag and drop client:
+```
+sudo pip install bottle
+wget https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/DragDrop.py
+```
+Start it with
+```
+./DragDrop.py
+```
 
 ## Todo
 - Playlist support
@@ -56,11 +70,11 @@ You can configure RaspberryCast settings in the extension option page.
 - iOS app for control & sharing
 - HDMI-CEC support
 
-##Uninstall
+## Uninstall
 Remove reference to RaspberryPi.sh in /etc/rc.local
 Delete the /home/pi/RaspberryCast/ folder.
 
-##Tips
+## Tips
 
 **Update:**
 
@@ -85,7 +99,7 @@ sudo ./RasberryCast.sh stop
 sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
 ```
 
-##License
+## License
 Code released under the MIT license. 
 
 You are welcome to contribute to the project.
