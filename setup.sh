@@ -65,7 +65,7 @@ echo "Cloning project from GitHub.."
 echo ""
 echo "============================================================"
 
-su - pi -c "git clone https://github.com/vincent-lwt/RaspberryCast.git"
+su - pi -c "git clone https://github.com/vincelwt/RaspberryCast.git"
 chmod +x ./RaspberryCast/RaspberryCast.sh
 
 echo ""

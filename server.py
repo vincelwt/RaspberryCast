@@ -6,6 +6,7 @@ from daemon_state import *
 import os
 import logging
 import sys
+import urllib
 
 #Setting log
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
@@ -49,19 +50,24 @@ def remote():
 	logger.debug('REMOTE: Template requested.')
 	return template('remote')
 
-
 @app.route('/stream')	
 def stream(): 
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']	
 	logger.debug('STREAM: Successfully received URL to cast: '+url)
 	try :
-		launchvideo(url, False)
+		if 'subtitles' in request.query:
+        	        subtitles = request.query['subtitles']
+	                logger.debug('STREAM: Subtitles link is '+subtitles)
+	                urllib.urlretrieve(subtitles, "subtitle.srt")
+			launchvideo(url, True)
+		else:
+			logger.debug('STREAM: No subtitles for this stream')
+			launchvideo(url, False)
 		return "1"
 	except Exception, e:
-		logger.error('STREAM: Error in launchvideo function.')
+		logger.error('STREAM: Error in launchvideo function or during downlading the subtitles')
 		logger.exception(e)
-		#os.system("cat images/error.asc | wall")
 		return "0"
 
 @app.route('/queue')
@@ -86,46 +92,6 @@ def queue():
 			logger.exception(e)
 			#os.system("cat images/error.asc | wall")
 			return "0"
-	
-
-@app.route('/popcorn')
-def popcorn():
-	response.headers['Access-Control-Allow-Origin'] = '*'
-	logger.info('POPCORN: Starting PopcornTime video treatment...')
-
-	url = request.query['url']
-	logger.debug('POPCORN: URL is :'+url)
-
-	ip = request.environ['REMOTE_ADDR']
-	logger.debug('POPCORN: IP is :'+ip)
-
-	port = url.split(":")[2]
-	logger.debug('POPCORN: Port is:'+port)
-
-	url = "http://"+ip+":"+port
-	logger.debug('POPCORN: Final url:'+url)
-
-	# Try to remove subtitle
-	os.system("rm subtitle.srt &")
-		
-	try :
-		os.system("wget http://"+ip+":9999/subtitle.srt")
-		logger.debug('POPCORN: Success with Wget ! Starting with subtitles.')
-		try :
-			launchvideo(url, True)
-		except :
-			logger.error('POPCORN: Error in launchvideo function (with subtitles).')
-			#os.system("cat images/error.asc | wall")
-	except :
-		logger.info('POPCORN: Error with Wget, starting without subtitles.')
-	
-		try :
-			launchvideo(url, False)
-		except :
-			logger.error('POPCORN: Error in launchvideo function (without subtitles).')
-			#os.system("cat images/error.asc | wall")
-	
-	return "1"
 
 @app.route('/video')
 def video():

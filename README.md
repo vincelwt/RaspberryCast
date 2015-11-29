@@ -52,21 +52,9 @@ You can configure RaspberryCast settings in the extension option page.
 - Playlist support
 - Subtitles support
 - Live stream supports
-- Torrent by magnet
 - Firefox extension
 - iOS app for control & sharing
 - HDMI-CEC support
-
-## PopcornTime integration
-On your computer, use the following version: https://popcorntime.io/
-
-You need to enable the PopcornTime support in the extension options.
-
-1. On computer, when the selected movie/show is playing press "u" (keyboard).
-2. Open your browser, click on the extension and paste the URL in the textbox (ctrl-v).
-3. Press enter, and wait a few seconds.
-
-Keep Popcorntime running during play.
 
 ##Uninstall
 Remove reference to RaspberryPi.sh in /etc/rc.local
