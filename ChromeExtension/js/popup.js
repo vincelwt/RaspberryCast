@@ -1,14 +1,4 @@
 function handlers() {
-	$("#mediastream_form").submit(function() {
-		url = $("#mediastream_url").val();
-		var url_encoded = encodeURIComponent(url);
-		if (url.includes("http://127.0.0.1")) {
-			chrome.extension.getBackgroundPage().mkrequest("/popcorn?url=" + url_encoded, 1);
-		} else {
-			chrome.extension.getBackgroundPage().mkrequest("/stream?url=" + url_encoded, 1);
-		}
-		chrome.extension.getBackgroundPage().mkrequest("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow, 0);
-	});
 
 	$( "#castbtn" ).click(function() {
 		
@@ -57,12 +47,11 @@ function handlers() {
 function remote(toggle) {
 	if (toggle == "show") {
 		$("#remote").show();
-		$("#whole").css("height","240px");
+		$("#whole").css("height","215px");
 	} else {
 		$("#remote").hide();
-		$("#whole").css("height", "125px");
+		$("#whole").css("height", "100px");
 	}
-	$("#mediastream_url").focus();
 	handlers();
 }
 
