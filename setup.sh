@@ -7,22 +7,6 @@ then
   exit 0
 fi
 
-cat /etc/debian_version | grep 7. > /dev/null
-if [ "$?" = "1" ]
-then
-  echo "This script was designed to run on Rasbian or a similar Debian 7.x distro!"
-  echo "Do you wish to continue anyway?"
-  while true; do
-    read -p "" yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit 0;;
-        * ) echo "Please answer with Yes or No [y|n].";;
-    esac
-  done
-  echo ""
-fi
-
 echo "This script will install RaspberryCast"
 echo "Do you wish to continue? (y/n)"
 
