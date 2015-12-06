@@ -11,7 +11,7 @@ from daemon_state import *
 import logging
 logger = logging.getLogger(" | RaspberryCast | ")
 
-def launchvideo(url, sub):
+def launchvideo(url, sub, slow):
 	#Waking up screen
 	os.system("echo -ne '\033[9;0]' >/dev/tty1")
 
@@ -24,7 +24,7 @@ def launchvideo(url, sub):
 
 	logger.info('CASTING: Trying to retrieve source video URL...')	
 
-	out = return_full_url(url, sub)
+	out = return_full_url(url, sub, slow)
 
 	#logger.debug("CASTING: Full video URL fetched.")
 	logger.debug("CASTING: Full video URL is : " + out)	
@@ -33,11 +33,11 @@ def launchvideo(url, sub):
 	
 	if sub == True :
 		logger.debug('CASTING: Starting OMX with subtitles.')
-		omx = "omxplayer -b -r -o "+sound_output+" '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
+		omx = "omxplayer -b -r -o both '"+out+"' --subtitles subtitle.srt < /tmp/cmd"
 		
 	else :
 		logger.debug('CASTING: Starting OMX without subtitles.')
-		omx = "omxplayer -b -r -o "+sound_output+" '"+out+"' < /tmp/cmd"
+		omx = "omxplayer -b -r -o both '"+out+"' < /tmp/cmd"
 			
 	try :
 		os.system(omx+" &")
@@ -46,12 +46,12 @@ def launchvideo(url, sub):
 
 	os.system("echo . > /tmp/cmd &")
 
-def return_full_url(url, sub):
+def return_full_url(url, sub, slow):
 	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub == True):	
 		logger.info('CASTING: Direct video URL, no need to use youtube-dl.')
 		return url
 
-	if ("youtu" in url) and (low_mode == False):
+	if ("youtu" in url) and (slow == False):
 		logger.debug('CASTING: Youtube link detected, extracting url in maximal quality.')
 		return YoutubeFullUrl.get_flux_url(url) #A lot faster than youtube-dl
 
@@ -67,12 +67,12 @@ def return_full_url(url, sub):
 	    video = result # Just a video
 
 	if "youtu" in url == True:
-			for i in video['formats']:
-				if i['format_id'] == "18":
-					logger.debug("CASTING: Youtube link detected, extracting url in 360p")
-					return i['url']
+		for i in video['formats']:
+			if i['format_id'] == "18":
+				logger.debug("CASTING: Youtube link detected, extracting url in 360p")
+				return i['url']
 	elif "vimeo" in url:
-		if low_mode == True:
+		if slow == True:
 			for i in video['formats']:
 				if i['format_id'] == "http-360p":
 					logger.debug("CASTING: Vimeo link detected, extracting url in 360p")
