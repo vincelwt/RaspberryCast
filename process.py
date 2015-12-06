@@ -51,9 +51,10 @@ def return_full_url(url, sub, slow):
 		logger.info('CASTING: Direct video URL, no need to use youtube-dl.')
 		return url
 
+	"""
 	if ("youtu" in url) and (slow == False):
 		logger.debug('CASTING: Youtube link detected, extracting url in maximal quality.')
-		return YoutubeFullUrl.get_flux_url(url) #A lot faster than youtube-dl
+		return YoutubeFullUrl.get_flux_url(url) #A lot faster than youtube-dl """
 
 	with ydl: #Downloading youtub-dl infos
 	    result = ydl.extract_info(
@@ -67,10 +68,14 @@ def return_full_url(url, sub, slow):
 	    video = result # Just a video
 
 	if "youtu" in url == True:
-		for i in video['formats']:
-			if i['format_id'] == "18":
-				logger.debug("CASTING: Youtube link detected, extracting url in 360p")
-				return i['url']
+		if slow == True:
+			for i in video['formats']:
+				if i['format_id'] == "18":
+					logger.debug("CASTING: Youtube link detected, extracting url in 360p")
+					return i['url']
+		else:
+			logger.debug('CASTING: Youtube link detected, extracting url in maximal quality.')
+			return video['url']
 	elif "vimeo" in url:
 		if slow == True:
 			for i in video['formats']:
