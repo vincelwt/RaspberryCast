@@ -8,6 +8,7 @@ if [ $1 = "start" ]; then
 		exit 0
 	fi
 	echo "Starting RaspBerryCast server."
+	mkfifo /tmp/cmd >/dev/null 2>&1
     	./server.py &
 	./daemon_queue.py &
 	echo "Done."

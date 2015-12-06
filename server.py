@@ -30,9 +30,6 @@ else :
 os.system("rm RaspberryCast.log >/dev/null 2>&1")
 os.system("touch RaspberryCast.log")
 
-#Trying to create the FIFO if it is the 1st time
-os.system("mkfifo /tmp/cmd >/dev/null 2>&1")
-
 #os.system("cat images/cast.asc | wall")
 logger.info('START: RaspberryCast successfully started!')
 
