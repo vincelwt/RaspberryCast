@@ -28,6 +28,7 @@ The installation script will:
 - Install RaspberryCast and the necessary dependencies
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
 - Reboot (necessary to print logs on first use)
+- 
 You can review the [install script](https://github.com/vincelwt/RaspberryCast/blob/master/setup.sh).
 
 # Remote control (mobile devices)
@@ -81,23 +82,18 @@ Delete the /home/pi/RaspberryCast/ folder.
 ```
 cd /RaspberryCast
 git pull
-sudo ./RasberryCast.sh stop
-./RasberryCast.sh start
+sudo ./RaspberryCast.sh stop
+./RaspberryCast.sh start
 ```
 
 **Restart RaspberryCast (i.e. adress already in use):**
 
 ```
 cd /RaspberryCast
-sudo ./RasberryCast.sh stop
-./RasberryCast.sh start
+sudo ./RaspberryCast.sh stop
+./RaspberryCast.sh start
 ```
 
-**If you want to enable autologin at boot:**
-
-```
-sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
-```
 
 ## License
 Code released under the MIT license. 
