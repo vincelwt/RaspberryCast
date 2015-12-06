@@ -25,7 +25,7 @@ echo "Installing necessary dependencies... (This could take a while)"
 echo ""
 echo "============================================================"
 
-apt-get install -y lsof python-pip git wget omxplayer dialog
+apt-get install -y lsof python-pip git wget omxplayer dialog libnss-mdns
 echo "============================================================"
 
 if [ "$?" = "1" ]

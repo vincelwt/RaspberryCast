@@ -30,10 +30,6 @@ else :
 os.system("rm RaspberryCast.log >/dev/null 2>&1")
 os.system("touch RaspberryCast.log")
 
-#Trying to create the FIFO if it is the 1st time
-os.system("mkfifo /tmp/cmd >/dev/null 2>&1")
-
-#os.system("cat images/cast.asc | wall")
 logger.info('START: RaspberryCast successfully started!')
 
 app = Bottle()
@@ -55,16 +51,22 @@ def stream():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']	
 	logger.debug('STREAM: Successfully received URL to cast: '+url)
+
 	try :
 		if 'subtitles' in request.query:
-        	        subtitles = request.query['subtitles']
-	                logger.debug('STREAM: Subtitles link is '+subtitles)
-	                urllib.urlretrieve(subtitles, "subtitle.srt")
-			launchvideo(url, True)
+			subtitles = request.query['subtitles']
+			logger.debug('STREAM: Subtitles link is '+subtitles)
+			urllib.urlretrieve(subtitles, "subtitle.srt")
+			launchvideo(url, True, False)
 		else:
 			logger.debug('STREAM: No subtitles for this stream')
-			launchvideo(url, False)
-		return "1"
+			if 'slow' in request.query:
+				if request.query['slow'] == "True":
+					launchvideo(url, False, True)
+					return "1"
+			
+			launchvideo(url, False, False)
+			return "1"
 	except Exception, e:
 		logger.error('STREAM: Error in launchvideo function or during downlading the subtitles')
 		logger.exception(e)
@@ -85,7 +87,7 @@ def queue():
 	else :
 		logger.info('QUEUE: No video currently playing, casting URL: '+url)
 		try :
-			launchvideo(url, False)
+			launchvideo(url, False, True)
 			return "1"
 		except Exception, e:
 			logger.error('QUEUE: Error in launchvideo function.')
@@ -155,18 +157,7 @@ def shutdown():
 		except:
 			logger.error("SHUTDOWN: Error in shutdown command parameter")
 			return "0"
-
-@app.route('/settings')
-def settings():
-	response.headers['Access-Control-Allow-Origin'] = '*'
-	sound_output = request.query['audioout']
-	logger.debug("SETTINGS: Audio setting is :"+sound_output)
-	mode_slow = request.query['modeslow']
-	logger.debug("SETTINGS: Mode slow setting is :"+mode_slow)
-	os.system("sed -i '/low_mode/c\low_mode = "+mode_slow+"' config.py &")
-	os.system("sed -i '/sound_output/c\sound_output = \""+sound_output+"\"' config.py &")
-	return "1"
-
+			
 @app.route('/running')
 def webstate():
 	response.headers['Access-Control-Allow-Origin'] = '*'
