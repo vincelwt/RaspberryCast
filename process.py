@@ -3,6 +3,7 @@
 import subprocess, os, signal, sys, re
 from time import *
 from config import *
+from YoutubeFullUrl import *
 from daemon_state import *
 import logging
 logger = logging.getLogger(" | RaspberryCast | ")
@@ -40,19 +41,17 @@ def launchvideo(url, sub):
 				command = "youtube-dl -f h264-sd -g "
 			else :
 				command = "youtube-dl -g "
+
+			try :
+                        	proc = subprocess.Popen(command+url, stdout=subprocess.PIPE, shell=True)
+	                        (out, err) = proc.communicate()
+				out = out.rstrip()
+        	        except :
+                	        logger.error('CASTING: Error with youtube-dl. Giving up.')	
+
 		else:
 			logger.debug('CASTING: Trying to extract full url in maximal quality.')
-			command = "youtube-dl -g "
-
-	
-		try :
-			proc = subprocess.Popen(command+url, stdout=subprocess.PIPE, shell=True)
-
-			(out, err) = proc.communicate()
-		except :
-			logger.error('CASTING: Error with youtube-dl. Giving up.')
-		
-		out = out.rstrip()
+			out = get_flux_url(url)
 
 	logger.debug("CASTING: Full video URL is : " + out)	
 
