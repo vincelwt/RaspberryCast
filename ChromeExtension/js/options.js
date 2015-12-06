@@ -17,23 +17,17 @@ function saveSettings() {
 	    }
 	}
 
-	var radios = document.getElementsByName('audio_out');
-	for (var i = 0, length = radios.length; i < length; i++) {
-	    if (radios[i].checked) {
-		localStorage.audioout = radios[i].value;
-		break;
-	    }
-	}
-
 	alert("Settings were successfully saved !");
 }
 
 document.addEventListener("DOMContentLoaded", function() {
 	if (localStorage.raspip != undefined) {
 		document.getElementById("raspip").value = localStorage.raspip;
-		
+	} else {
+		document.getElementById("raspip").value = "raspberrypi.local";
+		localStorage.raspip = 'raspberrypi.local';
 	}
-
+localStorage.raspip
 	if (localStorage.cmFunction == undefined) {
 		localStorage.cmFunction = "stream";
 		document.getElementById("cmFstream").checked = true;
@@ -53,18 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			document.getElementById("high_qual").checked = true;
 		} else {
 			document.getElementById("bad_qual").checked = true;
-		}
-	}
-	
-	if (localStorage.audioout == undefined) {
-		document.getElementById("audio_both").checked = true;
-	} else {
-		if (localStorage.audioout == "both") {
-			document.getElementById("audio_both").checked = true;
-		} else if (localStorage.audioout == "hdmi") {
-			document.getElementById("audio_hdmi").checked = true;
-		} else {
-			document.getElementById("audio_local").checked = true;
 		}
 	}
 

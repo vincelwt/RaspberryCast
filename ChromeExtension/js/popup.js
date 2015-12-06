@@ -1,11 +1,9 @@
 function handlers() {
 
 	$( "#castbtn" ).click(function() {
-		
 		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 			var url_encoded = encodeURIComponent(tabs[0].url);
-			chrome.extension.getBackgroundPage().mkrequest("/stream?url=" + url_encoded, 1);
-			chrome.extension.getBackgroundPage().mkrequest("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow, 0);
+			chrome.extension.getBackgroundPage().mkrequest("/stream?url=" + url_encoded + "&slow="+localStorage.modeslow, 1);
 		});
 			
 	});
@@ -13,8 +11,7 @@ function handlers() {
 	$( "#addqueue" ).click(function() {
 		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 			var url_encoded = encodeURIComponent(tabs[0].url);
-			chrome.extension.getBackgroundPage().mkrequest("/queue?url="+url_encoded, 1);
-			chrome.extension.getBackgroundPage().mkrequest("/settings?audioout="+localStorage.audioout+"&modeslow="+localStorage.modeslow, 0);
+			chrome.extension.getBackgroundPage().mkrequest("/queue?url="+url_encoded + "&slow="+localStorage.modeslow, 1);
 		});
 			
 	});	

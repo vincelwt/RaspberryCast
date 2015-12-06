@@ -20,7 +20,7 @@ function mkrequest(url, response) {
 	try {
 		var newURL = "http://"+localStorage.getItem('raspip')+":2020"+url;
 		if (response == 1) {
-			notif("Trying to get video stream URL. Please wait ~ 10-30 seconds.");
+			notif("Trying to get video stream URL. Please wait ~ 10 seconds.");
 		}
 		var req = new XMLHttpRequest();
 		req.open('GET', newURL, true);
@@ -51,7 +51,7 @@ function mkrequest(url, response) {
 
 chrome.contextMenus.onClicked.addListener(function(info) {
 	var url_encoded_url = encodeURIComponent(info.linkUrl);	
-	var url = "/"+localStorage.cmFunction+"?url="+url_encoded_url;
+	var url = "/"+localStorage.cmFunction+"?url="+url_encoded_url+"&slow="+localStorage.modeslow;
 	mkrequest(url, 1);
 });
 

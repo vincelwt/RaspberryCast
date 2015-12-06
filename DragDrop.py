@@ -72,7 +72,7 @@ try:
     with open('.raspberrycastIP', 'r') as f:
         w.entry.set_text(f.read())
 except:
-    w.entry.set_text("192.168.0.0")
+    w.entry.set_text("raspberrypi.local")
 
 w.entry.connect("changed", entryChange)
 vbox.add(w.text)
