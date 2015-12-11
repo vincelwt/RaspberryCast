@@ -67,7 +67,7 @@ def return_full_url(url, sub, slow):
 	else:
 	    video = result # Just a video
 
-	if "youtu" in url == True:
+	if "youtu" in url:
 		if slow == True:
 			for i in video['formats']:
 				if i['format_id'] == "18":
@@ -86,4 +86,5 @@ def return_full_url(url, sub, slow):
 			logger.debug('CASTING: Vimeo link detected, extracting url in maximal quality.')
 			return video['url']
 	else :
+		logger.debug('CASTING: Video not from Youtube or Vimeo. Extracting url in maximal quality.')
 		return video['url']
