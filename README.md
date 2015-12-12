@@ -29,7 +29,7 @@ The installation script will:
 - Install RaspberryCast and the necessary dependencies
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
 - Reboot (necessary to print logs on first use)
-- 
+
 You can review the [install script](https://github.com/vincelwt/RaspberryCast/blob/master/setup.sh).
 
 # Remote control (mobile devices)
