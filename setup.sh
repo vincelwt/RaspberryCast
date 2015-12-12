@@ -34,7 +34,7 @@ then
   exit 0
 fi
 
-pip install youtube-dl bottle
+pip install youtube-dl bottle livestreamer
 
 if [ "$?" = "1" ]
 then
