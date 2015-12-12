@@ -1,0 +1,32 @@
+#whole {
+	width: 130px ;
+	margin: auto; 
+	text-align: center; 
+}
+
+#popalert {
+	width: 200px;
+	height: 70px;
+	margin: auto; 
+	padding: 10px;
+}
+
+#popup {
+	position: fixed;
+	top: 30px;
+	right: 5px;
+}
+
+.fifty {
+	width: 45px;
+	margin: 10px 5px;
+}
+
+.ninety {
+	width: 105px;
+	margin: 10px;
+}
+
+.form-control {
+	max-width: 105px;
+}

@@ -42,7 +42,7 @@ Note that you can "Add to homescreen" this link
  
 You can also use the Android application (link to Playstore at the top of the page)
 
-## Chrome extension (computers)
+## Chrome & Firefox extension
 ![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/extension.png)
 
 ![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/rightclick.png)
@@ -67,7 +67,6 @@ Start it with
 - Playlist support
 - Subtitles support
 - Live stream supports
-- Firefox extension
 - iOS app for control & sharing
 - HDMI-CEC support
 

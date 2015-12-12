@@ -61,7 +61,7 @@ def stream():
 		else:
 			logger.debug('STREAM: No subtitles for this stream')
 			if 'slow' in request.query:
-				if request.query['slow'] == "True":
+				if request.query['slow'] in ["True", "true"]:
 					launchvideo(url, False, True)
 					return "1"
 			
