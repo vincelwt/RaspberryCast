@@ -1,6 +1,6 @@
 # RaspberryCast 0.2
 > Transform your Raspberry Pi into a streaming device.
-Cast YouTube/Vimeo videos from mobile devices or computers with the Chrome extension.
+Cast videos from mobile devices or computers with the browser extension.
 
 [![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
 [![Extension in Chrome web store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
@@ -37,7 +37,7 @@ You can review the [install script](https://github.com/vincelwt/RaspberryCast/bl
 
 On any device connected to the same network as you Pi, you can visit the page:
 ```
-http://<your-Pi-ip>:2020/remote
+http://raspberrypi.local:2020/remote
 ```
 Note that you can "Add to homescreen" this link
  
@@ -64,36 +64,9 @@ Start it with
 ./DragDrop.py
 ```
 
-## Todo
-- Playlist support
-- Subtitles support
-- Live stream supports
-- iOS app for control & sharing
-- HDMI-CEC support
-
 ## Uninstall
 Remove reference to RaspberryPi.sh in /etc/rc.local
 Delete the /home/pi/RaspberryCast/ folder.
-
-## Tips
-
-**Update:**
-
-```
-cd /RaspberryCast
-git pull
-sudo ./RaspberryCast.sh stop
-./RaspberryCast.sh start
-```
-
-**Restart RaspberryCast (i.e. adress already in use):**
-
-```
-cd /RaspberryCast
-sudo ./RaspberryCast.sh stop
-./RaspberryCast.sh start
-```
-
 
 ## License
 Code released under the MIT license. 
