@@ -1,36 +1,31 @@
 #!/usr/bin/env python
 
-from bottle import *
-from process import *
-from daemon_state import *
-import os
-import logging
-import sys
-import urllib
+from config import *
+import logging, os, sys
 
 #Setting log
 logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
 logger = logging.getLogger(" | RaspberryCast | ")
 
-if new_log == False :
-	#Creating handler to print messages on stdout
-	root = logging.getLogger()
-	root.setLevel(logging.DEBUG)
+#Creating handler to print messages on stdout
+root = logging.getLogger()
+root.setLevel(logging.DEBUG)
 
-	ch = logging.StreamHandler(sys.stdout)
-	ch.setLevel(logging.DEBUG)
-	formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-	ch.setFormatter(formatter)
-	root.addHandler(ch)
-else :
-	StartDialogLog()
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
+root.addHandler(ch)
 
+if new_log == True:
+    os.system("sudo fbi -T 1 --noverbose -a  images/ready.jpg &")
 
-#Reset log
-os.system("rm RaspberryCast.log >/dev/null 2>&1")
-os.system("touch RaspberryCast.log")
+from bottle import *
+from process import *
+import urllib
 
-logger.info('START: RaspberryCast successfully started!')
+setState("0")
+logger.info('START: RaspberryCast server successfully started!')
 
 app = Bottle()
 
@@ -92,7 +87,6 @@ def queue():
 		except Exception, e:
 			logger.error('QUEUE: Error in launchvideo function.')
 			logger.exception(e)
-			#os.system("cat images/error.asc | wall")
 			return "0"
 
 @app.route('/video')
@@ -106,10 +100,6 @@ def video():
 	elif control == "stop" :
 		logger.info('REMOTE: Command : stop video')
 		os.system("echo -n q > /tmp/cmd &")
-		#os.system("cat images/stop.asc | wall")
-		logger.debug('REMOTE: Command : empty queue file')
-		#Empty queue file
-		open('video.queue', 'w').close()
 		return "1"
 	elif control == "right" :
 		logger.info('REMOTE: Command : forward')
@@ -161,7 +151,9 @@ def shutdown():
 @app.route('/running')
 def webstate():
 	response.headers['Access-Control-Allow-Origin'] = '*'
-	logger.debug("RUNNING: Running state as been asked.")
-	return state()
+	with open('state.tmp', 'r') as f:
+		currentState = f.read().replace('\n', '')
+	logger.debug("RUNNING: Running state as been asked : "+currentState)
+	return currentState
 		
 run(app, reloader=False, host='0.0.0.0', debug=True, quiet=True, port=2020)
