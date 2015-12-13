@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ $1 = "start" ]; then
 	if [ `id -u` -eq 0 ]
@@ -11,8 +11,7 @@ if [ $1 = "start" ]; then
 	git pull
 	echo "Starting RaspberryCast server."
 	mkfifo /tmp/cmd >/dev/null 2>&1
-    	./server.py &
-	./daemon_queue.py &
+	./server.py &
 	echo "Done."
 	exit
 elif [ $1 = "stop" ] ; then
@@ -24,7 +23,6 @@ elif [ $1 = "stop" ] ; then
 	fi
 	echo "Killing RaspberryCast..."
 	killall omxplayer.bin >/dev/null 2>&1
-	killall youtube-dl >/dev/null 2>&1
 	killall python >/dev/null 2>&1
 	kill $(lsof -t -i :2020) >/dev/null 2>&1
 	rm *.srt >/dev/null 2>&1
