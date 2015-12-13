@@ -89,19 +89,21 @@ cm.Item({
 });
 
 function mkrequest(url) {
-	if (url.indexOf("/stream") > -1  || url.indexOf("/queue") > -1 ) {
+	if (url.indexOf("/stream") > -1) {
 		notifications.notify({ title: "Processing media", text: "Please wait ~10 seconds." });
 	}
 
 	Request({
 	  url: "http://"+prefs.raspIp+":2020" + url,
 	  onComplete: function (response) {
-	  	if (url.indexOf("/stream") > -1  || url.indexOf("/queue") > -1 ) {
-		  	if (response.text == "1") {
-		  		notifications.notify({ title: "Success !", text: "Video should start playing." });
-		  	} else {
-		  		notifications.notify({ title: "RaspberryCast", text: "An error occured during the treatment of the link. Please make sure the link is compatible." });
-		  	}
+		if (response.text == "1") {
+			if (url.indexOf("/stream") > -1) {
+				notifications.notify({ title: "Success !", text: "Video should start playing." });
+			} else if (url.indexOf("/queue") > -1) {
+				notifications.notify({ title: "Success !", text: "Video has been added to queue." });
+			}
+		} else {
+			notifications.notify({ title: "RaspberryCast", text: "An error occured during the request." });
 		}
 	  }
 	}).get();
