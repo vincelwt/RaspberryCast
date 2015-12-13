@@ -25,12 +25,12 @@ echo "Installing necessary dependencies... (This could take a while)"
 echo ""
 echo "============================================================"
 
-apt-get install -y lsof python-pip git wget omxplayer dialog libnss-mdns
+apt-get install -y lsof python-pip git wget omxplayer libnss-mdns fbi
 echo "============================================================"
 
 if [ "$?" = "1" ]
 then
-  echo "An unexpected error occured!"
+  echo "An unexpected error occured during apt-get!"
   exit 0
 fi
 
@@ -38,7 +38,7 @@ pip install youtube-dl bottle livestreamer
 
 if [ "$?" = "1" ]
 then
-  echo "An unexpected error occured!"
+  echo "An unexpected error occured durin pip install!"
   exit 0
 fi
 
@@ -62,9 +62,6 @@ echo "============================================================"
 #Gives right to all user to get out of screen standby
 chmod 666 /dev/tty1
 
-#Autologin option (no need for user to enter its password to open session)
-#sed -i '/1:23/c\1:2345:respawn:/bin/login -f pi tty1 </dev/tty1 >/dev/tty1 2>&1' /etc/inittab
-
 #Add to rc.local startup
 sed -i '$ d' /etc/rc.local
 echo "su - pi -c \"cd ./RaspberryCast/ && ./RaspberryCast.sh start\"" >> /etc/rc.local
@@ -72,6 +69,9 @@ echo "exit 0" >> /etc/rc.local
 
 #Adding right to current pi user to shutdown
 chmod +s /sbin/shutdown
+
+#Adding right to sudo fbi without password
+echo "pi ALL = (root) NOPASSWD: /usr/bin/fbi" >> /etc/sudoers
 
 rm setup.sh
 
