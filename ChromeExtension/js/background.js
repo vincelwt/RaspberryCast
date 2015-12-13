@@ -50,9 +50,13 @@ function mkrequest(url, response) {
 
 
 chrome.contextMenus.onClicked.addListener(function(info) {
-	var url_encoded_url = encodeURIComponent(info.linkUrl);	
-	var url = "/"+localStorage.cmFunction+"?url="+url_encoded_url+"&slow="+localStorage.modeslow;
-	mkrequest(url, 1);
+	var url_encoded_url = encodeURIComponent(info.linkUrl);
+	if (localStorage.cmFunction == "stream") {
+		mkrequest("/stream?url="+url_encoded_url+"&slow="+localStorage.modeslow, 1);
+	} else {
+		mkrequest("/queue?url="+url_encoded_url+"&slow="+localStorage.modeslow, 0);
+	}
+	
 });
 
 chrome.runtime.onInstalled.addListener(function() {
