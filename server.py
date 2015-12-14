@@ -4,16 +4,16 @@ from config import *
 import logging, os, sys
 
 #Setting log
-logging.basicConfig(filename='RaspberryCast.log',level=logging.DEBUG)
-logger = logging.getLogger(" | RaspberryCast | ")
+logging.basicConfig(filename='RaspberryCast.log', format="%(asctime)s - %(levelname)s - %(message)s", datefmt='%m-%d %H:%M:%S', level=logging.DEBUG)
+logger = logging.getLogger("RaspberryCast")
 
 #Creating handler to print messages on stdout
 root = logging.getLogger()
 root.setLevel(logging.DEBUG)
 
 ch = logging.StreamHandler(sys.stdout)
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setLevel(logging.INFO)
+formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 root.addHandler(ch)
 
@@ -25,7 +25,7 @@ from process import *
 import urllib
 
 setState("0")
-logger.info('START: RaspberryCast server successfully started!')
+logger.info('Server successfully started!')
 
 app = Bottle()
 
@@ -38,23 +38,23 @@ def server_static(filename):
 @app.route('/')	
 @app.route('/remote')
 def remote():
-	logger.debug('REMOTE: Template requested.')
+	logger.debug('Remote page requested.')
 	return template('remote')
 
 @app.route('/stream')	
 def stream(): 
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']	
-	logger.debug('STREAM: Successfully received URL to cast: '+url)
+	logger.debug('Received URL to cast: '+url)
 
 	try :
 		if 'subtitles' in request.query:
 			subtitles = request.query['subtitles']
-			logger.debug('STREAM: Subtitles link is '+subtitles)
+			logger.debug('Subtitles link is '+subtitles)
 			urllib.urlretrieve(subtitles, "subtitle.srt")
 			launchvideo(url, True, False)
 		else:
-			logger.debug('STREAM: No subtitles for this stream')
+			logger.debug('No subtitles for this stream')
 			if 'slow' in request.query:
 				if request.query['slow'] in ["True", "true"]:
 					launchvideo(url, False, True)
@@ -63,7 +63,7 @@ def stream():
 			launchvideo(url, False, False)
 			return "1"
 	except Exception, e:
-		logger.error('STREAM: Error in launchvideo function or during downlading the subtitles')
+		logger.error('Error in launchvideo function or during downlading the subtitles')
 		logger.exception(e)
 		return "0"
 
@@ -71,21 +71,22 @@ def stream():
 def queue():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']
-	
-	if state() != "0" :
-		logger.info('QUEUE: Adding URL to queue: '+url)
 
-		#Writing url to queue file
+	with open('state.tmp', 'r') as f:
+		currentState = f.read().replace('\n', '')
+	
+	if currentState != "0" :
+		logger.info('Adding URL to queue: '+url)
 		with open('video.queue', 'a') as f:
 			f.write(url+'\n')
 			return "1"
 	else :
-		logger.info('QUEUE: No video currently playing, casting URL: '+url)
+		logger.info('No video currently playing, playing url : '+url)
 		try :
 			launchvideo(url, False, True)
 			return "1"
 		except Exception, e:
-			logger.error('QUEUE: Error in launchvideo function.')
+			logger.error('Error in launchvideo function !')
 			logger.exception(e)
 			return "0"
 
@@ -94,32 +95,26 @@ def video():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	control = request.query['control']
 	if control == "pause" :
-		logger.info('REMOTE: Command : pause')
+		logger.info('Command : pause')
 		os.system("echo -n p > /tmp/cmd &")
 		return "1"
-	elif control == "stop" :
-		logger.info('REMOTE: Command : stop video')
+	elif control in ["stop", "next"] :
+		logger.info('Command : stop video')
 		os.system("echo -n q > /tmp/cmd &")
 		return "1"
 	elif control == "right" :
-		logger.info('REMOTE: Command : forward')
+		logger.info('Command : forward')
 		os.system("echo -n $'\x1b\x5b\x43' > /tmp/cmd &")
 		return "1"
 	elif control == "left" :
-		logger.info('REMOTE: Command : backward')
+		logger.info('Command : backward')
 		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd &")
-		return "1"
-	elif control == "next" :
-		logger.info('REMOTE: Command : next video in queue')
-		os.system("echo -n q > /tmp/cmd &")
 		return "1"
 
 @app.route('/sound')
 def sound():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	vol = request.query['vol']
-	logger.info("REMOTE: Change requested: " + vol)
-	
 	if vol == "more" :
 		logger.info('REMOTE: Command : Sound ++')
 		os.system("echo -n + > /tmp/cmd &")
