@@ -72,23 +72,25 @@ def queue():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']
 
-	with open('state.tmp', 'r') as f:
-		currentState = f.read().replace('\n', '')
+	if 'slow' in request.query:
+		if request.query['slow'] in ["True", "true"]:
+			slow = True
+		else:
+			slow = False
 	
-	if currentState != "0" :
-		logger.info('Adding URL to queue: '+url)
-		with open('video.queue', 'a') as f:
-			f.write(url+'\n')
+	try :
+		if getState() != "0" :
+			logger.info('Adding URL to queue: '+url)
+			queuevideo(url, slow)
+			return "2"
+		else :
+			logger.info('No video currently playing, playing url : '+url)
+			launchvideo(url, False, slow)
 			return "1"
-	else :
-		logger.info('No video currently playing, playing url : '+url)
-		try :
-			launchvideo(url, False, True)
-			return "1"
-		except Exception, e:
-			logger.error('Error in launchvideo function !')
-			logger.exception(e)
-			return "0"
+	except Exception, e:
+		logger.error('Error in launchvideo or queuevideo function !')
+		logger.exception(e)
+		return "0"
 
 @app.route('/video')
 def video():
@@ -146,8 +148,7 @@ def shutdown():
 @app.route('/running')
 def webstate():
 	response.headers['Access-Control-Allow-Origin'] = '*'
-	with open('state.tmp', 'r') as f:
-		currentState = f.read().replace('\n', '')
+	currentState = getState()
 	logger.debug("RUNNING: Running state as been asked : "+currentState)
 	return currentState
 		

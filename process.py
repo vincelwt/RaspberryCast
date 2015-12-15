@@ -17,13 +17,27 @@ def launchvideo(url, sub, slow):
 
 	out = return_full_url(url, sub, slow)
 
-	logger.info("Full video URL fetched. Sarting OMXPlayer now.")
+	logger.info("Full video URL fetched.")
 	
 	thread = threading.Thread(target=playWithOMX, args=(out, sub,))
 	thread.start()
 	
-	#Start signal for OMXplayer
-	os.system("echo . > /tmp/cmd")
+	os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
+
+def queuevideo(url, slow):
+	logger.info('Extracting source video URL, before adding to queue...')	
+
+	out = return_full_url(url, False, slow)
+
+	logger.info("Full video URL fetched.")
+
+	if getState() == 0:
+		logger.info('No video currently playing, playing video instead of adding to queue.')
+		thread = threading.Thread(target=playWithOMX, args=(out, False,))
+		thread.start()
+	else:
+		with open('video.queue', 'a') as f:
+			f.write(out+'\n')
 
 def return_full_url(url, sub, slow):
 	logger.debug("Parsing source url for "+url+" with subs :"+str(sub)+" and slow mode :"+str(slow))
@@ -33,10 +47,7 @@ def return_full_url(url, sub, slow):
 		return url
 
 	with ydl: #Downloading youtub-dl infos
-	    result = ydl.extract_info(
-	        url,
-	        download=False # We just want to extract the info
-	    )
+	    result = ydl.extract_info(url, download=False)# We just want to extract the info
 
 	if 'entries' in result: # Can be a playlist or a list of videos
 	    video = result['entries'][0]
@@ -66,6 +77,8 @@ def return_full_url(url, sub, slow):
 		return video['url']
 
 def playWithOMX(url, sub):
+	logger.info("Sarting OMXPlayer now.")
+
 	setState("1")
 	if sub == True:
 		os.system("omxplayer -b -r -o both '" + url + "' --subtitles subtitle.srt < /tmp/cmd")
@@ -73,16 +86,18 @@ def playWithOMX(url, sub):
 	else :
 		os.system("omxplayer -b -r -o both '" + url + "' < /tmp/cmd")
 	setState("0")
-	#Check if playlist is empty or not	
-	with open('video.queue', 'r') as f:
-		first_line = f.readline()
+	
+	with open('video.queue', 'r') as f: #Check if there is videos in queue
+		first_line = f.readline().replace('\n', '')
 		if first_line != "":
 			logger.info("Starting next video in playlist.")
 			with open('video.queue', 'r') as fin:
 				data = fin.read().splitlines(True)
 			with open('video.queue', 'w') as fout:
 				fout.writelines(data[1:])
-			launchvideo(first_line, False, False)
+			thread = threading.Thread(target=playWithOMX, args=(first_line, False,))
+			thread.start()
+			os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 		else:
 			logger.debug("No links in video.queue, skipping.")
 			if new_log == True:
@@ -90,3 +105,7 @@ def playWithOMX(url, sub):
 
 def setState(state):
 	os.system("echo "+state+" > state.tmp") #Write to file so it can be accessed from everywhere
+
+def getState():
+	with open('state.tmp', 'r') as f:
+		return f.read().replace('\n', '')
