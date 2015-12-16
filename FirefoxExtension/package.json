@@ -1,7 +1,7 @@
 {
   "title": "RaspberryCast",
   "name": "raspberrycast",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "Firefox add-on for RaspberryCast",
   "main": "index.js",
   "author": "VinceLwt",
