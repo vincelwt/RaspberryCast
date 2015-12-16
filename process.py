@@ -9,15 +9,13 @@ logger = logging.getLogger("RaspberryCast")
 
 def launchvideo(url, sub, slow):
 	setState("2")
-
+	os.system("echo -n q > /tmp/cmd &")
 	if new_log == True:
 		os.system("sudo fbi -T 1 -a --noverbose images/processing.jpg &")
 
 	logger.info('Extracting source video URL...')	
-
 	out = return_full_url(url, sub, slow)
-
-	logger.info("Full video URL fetched.")
+	logger.debug("Full video URL fetched.")
 	
 	thread = threading.Thread(target=playWithOMX, args=(out, sub,))
 	thread.start()
@@ -85,23 +83,24 @@ def playWithOMX(url, sub):
 		os.remove("subtitle.srt")
 	else :
 		os.system("omxplayer -b -r -o both '" + url + "' < /tmp/cmd")
-	setState("0")
 	
-	with open('video.queue', 'r') as f: #Check if there is videos in queue
-		first_line = f.readline().replace('\n', '')
-		if first_line != "":
-			logger.info("Starting next video in playlist.")
-			with open('video.queue', 'r') as fin:
-				data = fin.read().splitlines(True)
-			with open('video.queue', 'w') as fout:
-				fout.writelines(data[1:])
-			thread = threading.Thread(target=playWithOMX, args=(first_line, False,))
-			thread.start()
-			os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
-		else:
-			logger.debug("No links in video.queue, skipping.")
-			if new_log == True:
-				os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg &")
+	if getState() != "2": # In case we are again in the launchvideo function
+		setState("0")
+		with open('video.queue', 'r') as f: #Check if there is videos in queue
+			first_line = f.readline().replace('\n', '')
+			if first_line != "":
+				logger.info("Starting next video in playlist.")
+				with open('video.queue', 'r') as fin:
+					data = fin.read().splitlines(True)
+				with open('video.queue', 'w') as fout:
+					fout.writelines(data[1:])
+				thread = threading.Thread(target=playWithOMX, args=(first_line, False,))
+				thread.start()
+				os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
+			else:
+				logger.debug("No links in video.queue, skipping.")
+				if new_log == True:
+					os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg &")
 
 def setState(state):
 	os.system("echo "+state+" > state.tmp") #Write to file so it can be accessed from everywhere
