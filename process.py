@@ -1,15 +1,16 @@
-import youtube_dl, os, threading, logging
-from config import *
+import youtube_dl, os, threading, logging, json
+with open('raspberrycast.conf') as f:    
+    config = json.load(f)
 logger = logging.getLogger("RaspberryCast")
 
-def launchvideo(url, sub=False, slow=False):
+def launchvideo(url, sub=False):
 	setState("2")
 	os.system("echo -n q > /tmp/cmd &")
-	if new_log == True:
+	if config["new_log"] == True:
 		os.system("sudo fbi -T 1 -a --noverbose images/processing.jpg &")
 
 	logger.info('Extracting source video URL...')	
-	out = return_full_url(url, sub, slow)
+	out = return_full_url(url, sub)
 	logger.debug("Full video URL fetched.")
 	
 	thread = threading.Thread(target=playWithOMX, args=(out, sub,))
@@ -17,10 +18,10 @@ def launchvideo(url, sub=False, slow=False):
 	
 	os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 
-def queuevideo(url, slow=False, onlyqueue=False):
+def queuevideo(url, onlyqueue=False):
 	logger.info('Extracting source video URL, before adding to queue...')	
 
-	out = return_full_url(url, False, slow)
+	out = return_full_url(url, False)
 
 	logger.info("Full video URL fetched.")
 
@@ -33,8 +34,8 @@ def queuevideo(url, slow=False, onlyqueue=False):
 		with open('video.queue', 'a') as f:
 			f.write(out+'\n')
 
-def return_full_url(url, sub=False, slow=False):
-	logger.debug("Parsing source url for "+url+" with subs :"+str(sub)+" and slow mode :"+str(slow))
+def return_full_url(url, sub=False):
+	logger.debug("Parsing source url for "+url+" with subs :"+str(sub))
 
 	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub == True):	
 		logger.debug('Direct video URL, no need to use youtube-dl.')
@@ -48,6 +49,8 @@ def return_full_url(url, sub=False, slow=False):
 	    video = result['entries'][0]
 	else:
 	    video = result #Just a video
+
+	slow = config["slow_mode"]
 
 	if "youtu" in url:
 		if slow == True:
@@ -72,16 +75,16 @@ def return_full_url(url, sub=False, slow=False):
 		return video['url']
 
 
-def playlist(url, cast, slow=False):
+def playlist(url, cast):
 	logger.info("Processing playlist.")
 
 	if cast == True:
 		logger.info("Playing first video of playlist")
-		launchvideo(url, False, slow) #Launch first vdeo
+		launchvideo(url, False) #Launch first vdeo
 	else:
-		queuevideo(url, slow)
+		queuevideo(url)
 
-	thread = threading.Thread(target=playlistToQueue, args=(url, slow,))
+	thread = threading.Thread(target=playlistToQueue, args=(url,))
 	thread.start()
 	
 def playlistToQueue(url, slow=False):
@@ -118,7 +121,7 @@ def playWithOMX(url, sub):
 				os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 			else:
 				logger.debug("No links in video.queue, skipping.")
-				if new_log == True:
+				if config["new_log"] == True:
 					os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg &")
 
 def setState(state):

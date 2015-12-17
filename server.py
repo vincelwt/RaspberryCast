@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-from config import *
-import logging, os, sys
+import logging, os, sys, json
+with open('raspberrycast.conf') as f:    
+    config = json.load(f)
 
 #Setting log
 logging.basicConfig(filename='RaspberryCast.log', format="%(asctime)s - %(levelname)s - %(message)s", datefmt='%m-%d %H:%M:%S', level=logging.DEBUG)
@@ -17,7 +18,7 @@ formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 root.addHandler(ch)
 
-if new_log == True:
+if config["new_log"] == True:
     os.system("sudo fbi -T 1 --noverbose -a  images/ready.jpg &")
 
 from bottle import *
@@ -48,22 +49,27 @@ def stream():
 	url = request.query['url']	
 	logger.debug('Received URL to cast: '+url)
 
+	if 'slow' in request.query:
+		if request.query['slow'] in ["True", "true"]:
+			config["slow_mode"] = True
+		else:
+			config["slow_mode"] = False
+		with open('raspberrycast.conf', 'w') as f:
+			json.dump(config, f)
+
 	try :
 		if 'subtitles' in request.query:
 			subtitles = request.query['subtitles']
 			logger.debug('Subtitles link is '+subtitles)
 			urllib.urlretrieve(subtitles, "subtitle.srt")
-			launchvideo(url, True, False)
+			launchvideo(url, True)
 		else:
 			logger.debug('No subtitles for this stream')
-			slow = False
-			if 'slow' in request.query:
-				if request.query['slow'] in ["True", "true"]:
-					slow = True
+
 			if ("youtu" in url and "list=" in url) or ("soundcloud" in url and "/sets/" in url):
-				playlist(url, True, slow)
+				playlist(url, True)
 			else:
-				launchvideo(url, False, slow)
+				launchvideo(url, False)
 			return "1"
 	except Exception, e:
 		logger.error('Error in launchvideo function or during downlading the subtitles')
@@ -75,25 +81,28 @@ def queue():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']
 
-	slow = False
 	if 'slow' in request.query:
 		if request.query['slow'] in ["True", "true"]:
-			slow = True
+			config["slow_mode"] = True
+		else:
+			config["slow_mode"] = False
+		with open('raspberrycast.conf', 'w') as f:
+			json.dump(config, f)
 	
 	try :
 		if getState() != "0" :
 			logger.info('Adding URL to queue: '+url)
 			if ("youtu" in url and "list=" in url) or ("soundcloud" in url and "/sets/" in url):
-				playlist(url, False, slow)
+				playlist(url, False)
 			else:
-				queuevideo(url, slow)
+				queuevideo(url)
 			return "2"
 		else :
 			logger.info('No video currently playing, playing url : '+url)
 			if ("youtu" in url and "list=" in url) or ("soundcloud" in url and "/sets/" in url):
-				playlist(url, True, slow)
+				playlist(url, True)
 			else:
-				launchvideo(url, False, slow)
+				launchvideo(url, False)
 			return "1"
 	except Exception, e:
 		logger.error('Error in launchvideo or queuevideo function !')
