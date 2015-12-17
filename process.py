@@ -1,13 +1,8 @@
-import youtube_dl
-ydl = youtube_dl.YoutubeDL({'outtmpl': '%(id)s%(ext)s'})
-
-import os, threading
+import youtube_dl, os, threading, logging
 from config import *
-#import YoutubeFullUrl
-import logging
 logger = logging.getLogger("RaspberryCast")
 
-def launchvideo(url, sub, slow):
+def launchvideo(url, sub=False, slow=False):
 	setState("2")
 	os.system("echo -n q > /tmp/cmd &")
 	if new_log == True:
@@ -22,35 +17,37 @@ def launchvideo(url, sub, slow):
 	
 	os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 
-def queuevideo(url, slow):
+def queuevideo(url, slow=False, onlyqueue=False):
 	logger.info('Extracting source video URL, before adding to queue...')	
 
 	out = return_full_url(url, False, slow)
 
 	logger.info("Full video URL fetched.")
 
-	if getState() == 0:
+	if getState() == 0 and onlyqueue == False:
 		logger.info('No video currently playing, playing video instead of adding to queue.')
 		thread = threading.Thread(target=playWithOMX, args=(out, False,))
 		thread.start()
+		os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 	else:
 		with open('video.queue', 'a') as f:
 			f.write(out+'\n')
 
-def return_full_url(url, sub, slow):
+def return_full_url(url, sub=False, slow=False):
 	logger.debug("Parsing source url for "+url+" with subs :"+str(sub)+" and slow mode :"+str(slow))
 
 	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub == True):	
 		logger.debug('Direct video URL, no need to use youtube-dl.')
 		return url
 
+	ydl = youtube_dl.YoutubeDL({'logger': logger, 'noplaylist': True, 'ignoreerrors': True}) # Ignore errors in case of error in long playlists
 	with ydl: #Downloading youtub-dl infos
-	    result = ydl.extract_info(url, download=False)# We just want to extract the info
+	    result = ydl.extract_info(url, download=False) #We just want to extract the info
 
-	if 'entries' in result: # Can be a playlist or a list of videos
+	if 'entries' in result: #Can be a playlist or a list of videos
 	    video = result['entries'][0]
 	else:
-	    video = result # Just a video
+	    video = result #Just a video
 
 	if "youtu" in url:
 		if slow == True:
@@ -73,6 +70,28 @@ def return_full_url(url, sub, slow):
 	else :
 		logger.debug('Video not from Youtube or Vimeo. Extracting url in maximal quality.')
 		return video['url']
+
+
+def playlist(url, cast, slow=False):
+	logger.info("Processing playlist.")
+
+	if cast == True:
+		logger.info("Playing first video of playlist")
+		launchvideo(url, False, slow) #Launch first vdeo
+	else:
+		queuevideo(url, slow)
+
+	thread = threading.Thread(target=playlistToQueue, args=(url, slow,))
+	thread.start()
+	
+def playlistToQueue(url, slow=False):
+	logger.info("Adding every videos from playlist to queue.")
+	ydl = youtube_dl.YoutubeDL({'logger': logger, 'extract_flat': 'in_playlist'}) 
+	with ydl: #Downloading youtub-dl infos
+		result = ydl.extract_info(url, download=False)
+		for i in result['entries']:
+			if i != result['entries'][0]:
+				queuevideo(i['url'], slow, True)
 
 def playWithOMX(url, sub):
 	logger.info("Sarting OMXPlayer now.")

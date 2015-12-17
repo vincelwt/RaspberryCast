@@ -25,6 +25,7 @@ from process import *
 import urllib
 
 setState("0")
+open('video.queue', 'w').close() #Reset queue
 logger.info('Server successfully started!')
 
 app = Bottle()
@@ -55,12 +56,14 @@ def stream():
 			launchvideo(url, True, False)
 		else:
 			logger.debug('No subtitles for this stream')
+			slow = False
 			if 'slow' in request.query:
 				if request.query['slow'] in ["True", "true"]:
-					launchvideo(url, False, True)
-					return "1"
-			
-			launchvideo(url, False, False)
+					slow = True
+			if ("youtu" in url and "list=" in url) or ("soundcloud" in url and "/sets/" in url):
+				playlist(url, True, slow)
+			else:
+				launchvideo(url, False, slow)
 			return "1"
 	except Exception, e:
 		logger.error('Error in launchvideo function or during downlading the subtitles')
@@ -72,20 +75,25 @@ def queue():
 	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']
 
+	slow = False
 	if 'slow' in request.query:
 		if request.query['slow'] in ["True", "true"]:
 			slow = True
-		else:
-			slow = False
 	
 	try :
 		if getState() != "0" :
 			logger.info('Adding URL to queue: '+url)
-			queuevideo(url, slow)
+			if ("youtu" in url and "list=" in url) or ("soundcloud" in url and "/sets/" in url):
+				playlist(url, False, slow)
+			else:
+				queuevideo(url, slow)
 			return "2"
 		else :
 			logger.info('No video currently playing, playing url : '+url)
-			launchvideo(url, False, slow)
+			if ("youtu" in url and "list=" in url) or ("soundcloud" in url and "/sets/" in url):
+				playlist(url, True, slow)
+			else:
+				launchvideo(url, False, slow)
 			return "1"
 	except Exception, e:
 		logger.error('Error in launchvideo or queuevideo function !')
