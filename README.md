@@ -1,6 +1,6 @@
-# RaspberryCast 0.2
+# RaspberryCast 3.0
 > Transform your Raspberry Pi into a streaming device.
-Cast videos from mobile devices or computers with the browser extension.
+Cast videos from mobile devices or computers to your TV.
 
 [![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
 [![Extension for Chrome](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
@@ -17,6 +17,8 @@ Demo video with an Android (also works on iOS):
 
 ## Supported services
 Works with all youtube-dl supported websites: http://rg3.github.io/youtube-dl/supportedsites.html (YouTube, SoundCloud, Dailymotion, Vimeo, etc...) and also any direct link to mp3, mp4, avi and mkv file.
+
+You can also cast playlists from Youtube or Soundcloud.
 
 ## How to install (RaspberryPi side)
 
@@ -54,6 +56,7 @@ You can configure RaspberryCast settings in the extension option page.
 
 ![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/draganddrop.png)
 
+
 To download the drag and drop client:
 ```
 sudo pip install bottle
@@ -63,6 +66,8 @@ Start it with
 ```
 ./DragDrop.py
 ```
+
+If subtitles corresponding to the video you are casting are found, they will be automatically loaded.
 
 ## Uninstall
 Remove reference to RaspberryPi.sh in /etc/rc.local
