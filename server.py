@@ -18,8 +18,8 @@ formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 root.addHandler(ch)
 
-if config["new_log"] == True:
-    os.system("sudo fbi -T 1 --noverbose -a  images/ready.jpg &")
+if config["new_log"]:
+    os.system("sudo fbi -T 1 --noverbose -a  images/ready.jpg")
 
 from bottle import *
 from process import *
@@ -33,6 +33,10 @@ app = Bottle()
 
 SimpleTemplate.defaults["get_url"] = app.get_url
 
+@app.hook('after_request')
+def enable_cors():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+
 @app.route('/static/<filename>', name='static')
 def server_static(filename):
 	return static_file(filename, root='static')
@@ -45,7 +49,6 @@ def remote():
 
 @app.route('/stream')	
 def stream(): 
-	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']	
 	logger.debug('Received URL to cast: '+url)
 
@@ -78,7 +81,6 @@ def stream():
 
 @app.route('/queue')
 def queue():
-	response.headers['Access-Control-Allow-Origin'] = '*'
 	url = request.query['url']
 
 	if 'slow' in request.query:
@@ -111,7 +113,6 @@ def queue():
 
 @app.route('/video')
 def video():
-	response.headers['Access-Control-Allow-Origin'] = '*'
 	control = request.query['control']
 	if control == "pause" :
 		logger.info('Command : pause')
@@ -132,7 +133,6 @@ def video():
 
 @app.route('/sound')
 def sound():
-	response.headers['Access-Control-Allow-Origin'] = '*'
 	vol = request.query['vol']
 	if vol == "more" :
 		logger.info('REMOTE: Command : Sound ++')
@@ -144,7 +144,6 @@ def sound():
 
 @app.route('/shutdown')
 def shutdown():
-	response.headers['Access-Control-Allow-Origin'] = '*'
 	time = request.query['time']
 	if time == "cancel":
 		os.system("shutdown -c")
@@ -164,7 +163,6 @@ def shutdown():
 			
 @app.route('/running')
 def webstate():
-	response.headers['Access-Control-Allow-Origin'] = '*'
 	currentState = getState()
 	logger.debug("RUNNING: Running state as been asked : "+currentState)
 	return currentState

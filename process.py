@@ -6,8 +6,8 @@ logger = logging.getLogger("RaspberryCast")
 def launchvideo(url, sub=False):
 	setState("2")
 	os.system("echo -n q > /tmp/cmd &")
-	if config["new_log"] == True:
-		os.system("sudo fbi -T 1 -a --noverbose images/processing.jpg &")
+	if config["new_log"]:
+		os.system("sudo fbi -T 1 -a --noverbose images/processing.jpg")
 
 	logger.info('Extracting source video URL...')	
 	out = return_full_url(url, sub)
@@ -37,7 +37,7 @@ def queuevideo(url, onlyqueue=False):
 def return_full_url(url, sub=False):
 	logger.debug("Parsing source url for "+url+" with subs :"+str(sub))
 
-	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub == True):	
+	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub):	
 		logger.debug('Direct video URL, no need to use youtube-dl.')
 		return url
 
@@ -53,7 +53,7 @@ def return_full_url(url, sub=False):
 	slow = config["slow_mode"]
 
 	if "youtu" in url:
-		if slow == True:
+		if slow:
 			for i in video['formats']:
 				if i['format_id'] == "18":
 					logger.debug("Youtube link detected, extracting url in 360p")
@@ -62,7 +62,7 @@ def return_full_url(url, sub=False):
 			logger.debug('CASTING: Youtube link detected, extracting url in maximal quality.')
 			return video['url']
 	elif "vimeo" in url:
-		if slow == True:
+		if slow:
 			for i in video['formats']:
 				if i['format_id'] == "http-360p":
 					logger.debug("Vimeo link detected, extracting url in 360p")
@@ -78,7 +78,7 @@ def return_full_url(url, sub=False):
 def playlist(url, cast):
 	logger.info("Processing playlist.")
 
-	if cast == True:
+	if cast:
 		logger.info("Playing first video of playlist")
 		launchvideo(url, False) #Launch first vdeo
 	else:
@@ -100,7 +100,7 @@ def playWithOMX(url, sub):
 	logger.info("Sarting OMXPlayer now.")
 
 	setState("1")
-	if sub == True:
+	if sub:
 		os.system("omxplayer -b -r -o both '" + url + "' --subtitles subtitle.srt < /tmp/cmd")
 		os.remove("subtitle.srt")
 	else :
@@ -121,8 +121,8 @@ def playWithOMX(url, sub):
 				os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 			else:
 				logger.debug("No links in video.queue, skipping.")
-				if config["new_log"] == True:
-					os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg &")
+				if config["new_log"]:
+					os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg")
 
 def setState(state):
 	os.system("echo "+state+" > state.tmp") #Write to file so it can be accessed from everywhere
