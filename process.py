@@ -94,7 +94,7 @@ def playlistToQueue(url, slow=False):
 		result = ydl.extract_info(url, download=False)
 		for i in result['entries']:
 			if i != result['entries'][0]:
-				queuevideo(i['url'], slow, True)
+				queuevideo(i['url'], slow)
 
 def playWithOMX(url, sub):
 	logger.info("Sarting OMXPlayer now.")
