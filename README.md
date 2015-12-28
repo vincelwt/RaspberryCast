@@ -71,6 +71,7 @@ If subtitles corresponding to the video you are casting are found, they will be 
 
 ## Uninstall
 Remove reference to RaspberryPi.sh in /etc/rc.local
+
 Delete the /home/pi/RaspberryCast/ folder.
 
 ## License
