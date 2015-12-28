@@ -28,9 +28,9 @@ wget https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/setup.sh &&
 That's it.
 
 The installation script will:
-- Install RaspberryCast and the necessary dependencies
+- Download RaspberryCast and install the necessary dependencies
 - Autostart RaspberryCast at boot (added to /etc/rc.local)
-- Reboot (necessary to print logs on first use)
+- Reboot
 
 You can review the [install script](https://github.com/vincelwt/RaspberryCast/blob/master/setup.sh).
 
@@ -56,10 +56,10 @@ You can configure RaspberryCast settings in the extension option page.
 
 ![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/draganddrop.png)
 
+**Python & GTK3 needed - tested on Ubuntu & OSX**
 
 To download the drag and drop client:
 ```
-sudo pip install bottle
 wget https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/DragDrop.py
 ```
 Start it with
