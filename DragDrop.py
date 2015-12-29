@@ -2122,11 +2122,6 @@ ext = _ImportRedirect('bottle.ext' if __name__ == '__main__' else
 
 TARGET_TYPE_URI_LIST = 80
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # Obtaining local ip
-s.connect(("gmail.com",80))
-localip = s.getsockname()[0]
-s.close()
-
 def serve(path, a):
     @route('/<filename>')
     def static(filename):
@@ -2166,10 +2161,10 @@ def on_drag_data_received(widget, context, x, y, selection, target_type, timesta
             thread.start_new_thread( serve, (path, 1) )
             filename = os.path.splitext(os.path.split(path)[1])[0]
             extension = os.path.splitext(path)[1]
-            encoded_string = urllib.quote_plus("http://"+localip+":8080/"+base64.b32encode(filename)+extension)
+            encoded_string = urllib.quote_plus("http://localhost:8080/"+base64.b32encode(filename)+extension)
             full_url = "http://"+w.entry.get_text()+":2020/stream?url="
             if os.path.isfile(os.path.splitext(path)[0]+".srt"):
-                urllib2.urlopen(full_url+encoded_string+"&subtitles="+urllib.quote_plus("http://"+localip+":8080/"+base64.b32encode(os.path.splitext(os.path.split(path)[1])[0]))+".srt").read()
+                urllib2.urlopen(full_url+encoded_string+"&subtitles="+urllib.quote_plus("http://localhost:8080/"+base64.b32encode(os.path.splitext(os.path.split(path)[1])[0]))+".srt").read()
             else: 
                 print "calling "+full_url+encoded_string
                 urllib2.urlopen(full_url+encoded_string).read()
