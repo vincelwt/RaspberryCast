@@ -1716,7 +1716,7 @@ def load_app(target):
         default_app.remove(tmp)
         NORUN = nr_old
 _debug = debug
-def run(app=None, server='wsgiref', host='127.0.0.1', port=8080, interval=1, reloader=False, quiet=False, plugins=None, debug=None, config=None, **kargs):
+def run(app=None, server='wsgiref', host='0.0.0.0', port=8080, interval=1, reloader=False, quiet=False, plugins=None, debug=True, config=None, **kargs):
     if NORUN: return
     if reloader and not os.environ.get('BOTTLE_CHILD'):
         import subprocess
@@ -2123,13 +2123,13 @@ ext = _ImportRedirect('bottle.ext' if __name__ == '__main__' else
 TARGET_TYPE_URI_LIST = 80
 
 def serve(path, a):
+    print "thread started"
     @route('/<filename>')
     def static(filename):
         fileN = os.path.splitext(filename)[0]
         extension = os.path.splitext(filename)[1]
         return static_file(base64.b32decode(fileN)+extension, root=os.path.split(path)[0])
-    run(host='0.0.0.0', port=8080, debug=True)
-
+    
 def entryChange(widget):
     with open('.raspberrycastIP', 'w+') as f:
         f.write(widget.get_text())
@@ -2148,9 +2148,10 @@ def get_file_path_from_dnd_dropped_uri(uri):
     return path
 
 def on_drag_data_received(widget, context, x, y, selection, target_type, timestamp):
+    print "data received !"
     if target_type == TARGET_TYPE_URI_LIST:
         uri = selection.get_data().strip('\r\n\x00')
-        #print 'uri', uri
+        print 'uri', uri
         uri_splitted = uri.split() # we may have more than one file dropped
         for uri in uri_splitted:
             path = get_file_path_from_dnd_dropped_uri(uri)
@@ -2158,16 +2159,14 @@ def on_drag_data_received(widget, context, x, y, selection, target_type, timesta
             if os.path.isfile(path): # is it file?
                 data = file(path).read()
                 #print data
+            print "starting thread"
             thread.start_new_thread( serve, (path, 1) )
             filename = os.path.splitext(os.path.split(path)[1])[0]
             extension = os.path.splitext(path)[1]
             encoded_string = urllib.quote_plus("http://localhost:8080/"+base64.b32encode(filename)+extension)
             full_url = "http://"+w.entry.get_text()+":2020/stream?url="
-            if os.path.isfile(os.path.splitext(path)[0]+".srt"):
-                urllib2.urlopen(full_url+encoded_string+"&subtitles="+urllib.quote_plus("http://localhost:8080/"+base64.b32encode(os.path.splitext(os.path.split(path)[1])[0]))+".srt").read()
-            else: 
-                print "calling "+full_url+encoded_string
-                urllib2.urlopen(full_url+encoded_string).read()
+            print "calling "+full_url+encoded_string
+            urllib2.urlopen(full_url+encoded_string).read()
 
 w = Gtk.Window(title="RaspberryCast", border_width=10)
 
@@ -2196,3 +2195,5 @@ w.drag_dest_set( Gtk.DestDefaults.MOTION|
 
 w.show_all()
 Gtk.main()
+thread.start_new_thread( run )
+#run(host='0.0.0.0', port=8080)
