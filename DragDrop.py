@@ -1662,7 +1662,7 @@ uninstall = make_default_app_wrapper('uninstall')
 url       = make_default_app_wrapper('get_url')
 class ServerAdapter(object):
     quiet = False
-    def __init__(self, host='127.0.0.1', port=8080, **options):
+    def __init__(self, host='0.0.0.0', port=8080, **options):
         self.options = options
         self.host = host
         self.port = int(port)
@@ -2194,6 +2194,5 @@ w.drag_dest_set( Gtk.DestDefaults.MOTION|
                   [Gtk.TargetEntry.new("text/uri-list", 0, 80)], Gdk.DragAction.COPY)
 
 w.show_all()
+thread.start_new_thread(run, () )
 Gtk.main()
-thread.start_new_thread( run )
-#run(host='0.0.0.0', port=8080)
