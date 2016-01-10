@@ -60,10 +60,10 @@ Download for [Windows](http://vincelwt.github.io/RaspberryCast/dist/DragDrop-lin
 
 **To execute it on Linux :**
 
-'''
+```
 chmod +x DragDrop-linux
 ./DragDrop-linux
-'''
+```
 
 If subtitles corresponding to the video you are casting are found, they will be automatically loaded.
 
