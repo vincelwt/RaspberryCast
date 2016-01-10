@@ -2,9 +2,9 @@
 > Transform your Raspberry Pi into a streaming device.
 Cast videos from mobile devices or computers to your TV.
 
-[![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
-[![Extension for Chrome](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
-[![Extension for Firefox](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/firefox.png)](https://addons.mozilla.org/firefox/addon/raspberrycast/)
+[![Android app on Google Play](http://vincelwt.github.io/RaspberryCast/images/android_banner.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
+[![Extension for Chrome](http://vincelwt.github.io/RaspberryCast/images/chrome_banner.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
+[![Extension for Firefox](http://vincelwt.github.io/RaspberryCast/images/firefox_banner.png)](https://addons.mozilla.org/firefox/addon/raspberrycast/)
 
 
 Demo video with the Chrome extension:
@@ -20,7 +20,7 @@ Works with all youtube-dl supported websites: http://rg3.github.io/youtube-dl/su
 
 You can also cast playlists from Youtube or Soundcloud.
 
-## How to install (RaspberryPi side)
+## How to install (Raspberry Pi side)
 
 ```
 wget https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/setup.sh && sudo sh setup.sh
@@ -35,7 +35,7 @@ The installation script will:
 You can review the [install script](https://github.com/vincelwt/RaspberryCast/blob/master/setup.sh).
 
 # Remote control (mobile devices)
-![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/android.png)
+![The remote on Android](http://vincelwt.github.io/RaspberryCast/images/android.png)
 
 On any device connected to the same network as you Pi, you can visit the page:
 ```
@@ -46,31 +46,29 @@ Note that you can "Add to homescreen" this link
 You can also use the Android application (link to Playstore at the top of the page)
 
 ## Chrome & Firefox extension
-![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/extension.png)
+![alt tag](http://vincelwt.github.io/RaspberryCast/images/extension.png)
 
-![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/rightclick.png)
+![alt tag](http://vincelwt.github.io/RaspberryCast/images/rightclick.png)
 
 You can configure RaspberryCast settings in the extension option page.
 
 ## Drag and drop videos from computer
 
-![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/draganddrop.png)
+![alt tag](http://vincelwt.github.io/RaspberryCast/images/draganddrop.png)
 
-**Python & GTK3 needed - tested on Ubuntu & OSX**
+Download for [Windows](http://vincelwt.github.io/RaspberryCast/dist/DragDrop-linux), [Windows](http://vincelwt.github.io/RaspberryCast/dist/DragDrop-windows.exe), OSX (coming really soon)
 
-To download the drag and drop client:
-```
-wget https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/DragDrop.py
-```
-Start it with
-```
-./DragDrop.py
-```
+**To execute it on Linux :**
+
+'''
+chmod +x DragDrop-linux
+./DragDrop-linux
+'''
 
 If subtitles corresponding to the video you are casting are found, they will be automatically loaded.
 
 ## Uninstall
-Remove reference to RaspberryPi.sh in /etc/rc.local
+Remove reference to RaspberryCast.sh in /etc/rc.local
 
 Delete the /home/pi/RaspberryCast/ folder.
 
