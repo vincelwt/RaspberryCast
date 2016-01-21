@@ -56,7 +56,7 @@ You can configure RaspberryCast settings in the extension option page.
 
 ![alt tag](http://vincelwt.github.io/RaspberryCast/images/draganddrop.png)
 
-Download for [Windows](http://vincelwt.github.io/RaspberryCast/dist/DragDrop-linux), [Windows](http://vincelwt.github.io/RaspberryCast/dist/DragDrop-windows.exe), OSX (coming really soon)
+Download for [Linux](http://vincelwt.github.io/RaspberryCast/dist/DragDrop-linux), Windows (coming soon), OSX (coming soon)
 
 **To execute it on Linux :**
 
