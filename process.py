@@ -11,6 +11,7 @@ def launchvideo(url, sub=False):
 
 	logger.info('Extracting source video URL...')	
 	out = return_full_url(url, sub)
+
 	logger.debug("Full video URL fetched.")
 	
 	thread = threading.Thread(target=playWithOMX, args=(out, sub,))
@@ -31,8 +32,9 @@ def queuevideo(url, onlyqueue=False):
 		thread.start()
 		os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 	else:
-		with open('video.queue', 'a') as f:
-			f.write(out+'\n')
+		if out is not None:
+			with open('video.queue', 'a') as f:
+				f.write(out+'\n')
 
 def return_full_url(url, sub=False):
 	logger.debug("Parsing source url for "+url+" with subs :"+str(sub))
@@ -44,6 +46,10 @@ def return_full_url(url, sub=False):
 	ydl = youtube_dl.YoutubeDL({'logger': logger, 'noplaylist': True, 'ignoreerrors': True}) # Ignore errors in case of error in long playlists
 	with ydl: #Downloading youtub-dl infos
 	    result = ydl.extract_info(url, download=False) #We just want to extract the info
+
+	if result is None:
+		logger.error("Result is none, returning none. Cancelling following function.")
+		return None
 
 	if 'entries' in result: #Can be a playlist or a list of videos
 	    video = result['entries'][0]
@@ -102,7 +108,8 @@ def playWithOMX(url, sub):
 	setState("1")
 	if sub:
 		os.system("omxplayer -b -r -o both '" + url + "' --subtitles subtitle.srt < /tmp/cmd")
-		os.remove("subtitle.srt")
+	elif url is None:
+		pass
 	else :
 		os.system("omxplayer -b -r -o both '" + url + "' < /tmp/cmd")
 	
@@ -120,7 +127,7 @@ def playWithOMX(url, sub):
 				thread.start()
 				os.system("echo . > /tmp/cmd") #Start signal for OMXplayer
 			else:
-				logger.debug("No links in video.queue, skipping.")
+				logger.debug("Playlist empty, skipping.")
 				if config["new_log"]:
 					os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg")
 
