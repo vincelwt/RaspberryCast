@@ -103,7 +103,7 @@ def playlistToQueue(url, slow=False):
 				queuevideo(i['url'], slow)
 
 def playWithOMX(url, sub):
-	logger.info("Sarting OMXPlayer now.")
+	logger.info("Starting OMXPlayer now.")
 
 	setState("1")
 	if sub:
