@@ -72,6 +72,12 @@ Remove reference to RaspberryCast.sh in /etc/rc.local
 
 Delete the /home/pi/RaspberryCast/ folder.
 
+## Contribute
+
+If you enjoyed using RaspberryCast, and/or would like to support the development, please consider making a donation.
+
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XLQTUNFTN9FU8)
+
 ## License
 Code released under the MIT license. 
 
