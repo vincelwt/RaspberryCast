@@ -41,7 +41,7 @@ def queuevideo(url, onlyqueue=False):
 def return_full_url(url, sub=False):
 	logger.debug("Parsing source url for "+url+" with subs :"+str(sub))
 
-	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub):	
+	if (url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or (sub) or (".googlevideo.com/" in url):	
 		logger.debug('Direct video URL, no need to use youtube-dl.')
 		return url
 
