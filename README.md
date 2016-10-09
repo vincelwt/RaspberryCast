@@ -52,20 +52,23 @@ You can also use the Android application (link to Playstore at the top of the pa
 
 You can configure RaspberryCast settings in the extension option page.
 
-## Drag and drop videos from computer
+## Cast videos from computer
 
-![alt tag](http://vincelwt.github.io/RaspberryCast/images/draganddrop.png)
+Works on Linux, Mac OS, and Windows (Python needed)
 
-Download for [Linux](http://vincelwt.github.io/RaspberryCast/dist/DragDrop-linux), Windows (coming soon), OSX (coming soon)
-
-**To execute it on Linux :**
+**Download it**
 
 ```
-chmod +x DragDrop-linux
-./DragDrop-linux
+wget https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/rcast.py
 ```
 
-If subtitles corresponding to the video you are casting are found, they will be automatically loaded.
+**Use it**
+
+```
+python rcast.py video.mkv
+```
+
+If subtitles with the same name as the video are found, they will be automatically loaded.
 
 ## Uninstall
 Remove reference to RaspberryCast.sh in /etc/rc.local
