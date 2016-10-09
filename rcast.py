@@ -24,6 +24,12 @@ print "Do not close this program while playing the file"
 print "Press Ctrl+C to stop"
 print "-----------------------------"
 
+path = os.path.split(tocast)[0]
+
+os.chdir(path)
+
+filename = os.path.split(tocast)[1]
+
 PORT = 8080
 
 class MyTCPServer(SocketServer.TCPServer):
@@ -36,7 +42,7 @@ httpd = MyTCPServer(("", PORT), Handler)
 
 thread.start_new_thread( httpd.serve_forever, ())
 
-filename = os.path.split(tocast)[1]
+
 
 encoded_string = urllib.quote_plus("http://localhost:8080/"+filename)
 
