@@ -2,9 +2,10 @@
 > Transform your Raspberry Pi into a streaming device.
 Cast videos from mobile devices or computers to your TV.
 
-[![Android app on Google Play](http://vincelwt.github.io/RaspberryCast/images/android_banner.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
-[![Extension for Chrome](http://vincelwt.github.io/RaspberryCast/images/chrome_banner.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
-[![Extension for Firefox](http://vincelwt.github.io/RaspberryCast/images/firefox_banner.png)](https://addons.mozilla.org/firefox/addon/raspberrycast/)
+
+[![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
+[![Extension for Chrome](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
+[![Extension for Firefox](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/firefox.png)](https://addons.mozilla.org/firefox/addon/raspberrycast/)
 
 
 Demo video with the Chrome extension:
@@ -35,7 +36,7 @@ The installation script will:
 You can review the [install script](https://github.com/vincelwt/RaspberryCast/blob/master/setup.sh).
 
 # Remote control (mobile devices)
-![The remote on Android](http://vincelwt.github.io/RaspberryCast/images/android.png)
+![The remote on Android](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/android.png)
 
 On any device connected to the same network as you Pi, you can visit the page:
 ```
@@ -46,9 +47,9 @@ Note that you can "Add to homescreen" this link
 You can also use the Android application (link to Playstore at the top of the page)
 
 ## Chrome & Firefox extension
-![alt tag](http://vincelwt.github.io/RaspberryCast/images/extension.png)
+![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/extension.png)
 
-![alt tag](http://vincelwt.github.io/RaspberryCast/images/rightclick.png)
+![alt tag](https://raw.githubusercontent.com/vincelwt/RaspberryCast/master/images/rightclick.png)
 
 You can configure RaspberryCast settings in the extension option page.
 
