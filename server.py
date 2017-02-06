@@ -144,6 +144,7 @@ def sound():
 	elif vol == "less" :
 		logger.info('REMOTE: Command : Sound --')
 		os.system("echo -n - > /tmp/cmd &")
+	setVolume(vol)
 	return "1"
 
 @app.route('/shutdown')
