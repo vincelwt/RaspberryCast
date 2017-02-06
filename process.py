@@ -110,11 +110,11 @@ def playWithOMX(url, sub):
 
 	setState("1")
 	if sub:
-		os.system("omxplayer --vol " + volume + " -b -r -o both '" + url + "' --vol " + str(volume) + " --subtitles subtitle.srt < /tmp/cmd")
+		os.system("omxplayer -b -r -o both '" + url + "' --vol " + str(volume) + " --subtitles subtitle.srt < /tmp/cmd")
 	elif url is None:
 		pass
 	else :
-		os.system("omxplayer --vol " + volume + " -b -r -o both '" + url + "' --vol " + str(volume) + " < /tmp/cmd")
+		os.system("omxplayer -b -r -o both '" + url + "' --vol " + str(volume) + " < /tmp/cmd")
 	
 	if getState() != "2": # In case we are again in the launchvideo function
 		setState("0")
