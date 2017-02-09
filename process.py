@@ -2,6 +2,7 @@ import youtube_dl, os, threading, logging, json
 with open('raspberrycast.conf') as f:    
     config = json.load(f)
 logger = logging.getLogger("RaspberryCast")
+volume = 0
 
 def launchvideo(url, sub=False):
 	setState("2")
@@ -109,11 +110,11 @@ def playWithOMX(url, sub):
 
 	setState("1")
 	if sub:
-		os.system("omxplayer -b -r -o both '" + url + "' --subtitles subtitle.srt < /tmp/cmd")
+		os.system("omxplayer -b -r -o both '" + url + "' --vol " + str(volume) + " --subtitles subtitle.srt < /tmp/cmd")
 	elif url is None:
 		pass
 	else :
-		os.system("omxplayer -b -r -o both '" + url + "' < /tmp/cmd")
+		os.system("omxplayer -b -r -o both '" + url + "' --vol " + str(volume) + " < /tmp/cmd")
 	
 	if getState() != "2": # In case we are again in the launchvideo function
 		setState("0")
@@ -139,3 +140,11 @@ def setState(state):
 def getState():
 	with open('state.tmp', 'r') as f:
 		return f.read().replace('\n', '')
+
+def setVolume(vol):
+	global volume
+	if vol == "more":
+		volume += 300
+	if vol == "less":
+		volume -= 300
+
