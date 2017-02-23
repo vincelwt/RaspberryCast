@@ -69,7 +69,12 @@ def return_full_url(url, sub=False):
 					return i['url']
 		else:
 			logger.debug('CASTING: Youtube link detected, extracting url in maximal quality.')
-			return video['url']
+			video_quality = ['1080p', '720p', '480p', '360p', '240p', '144p']
+			for q in video_quality:
+				for i in video['formats']:
+					if i['format_note'] == q
+						logger.debug('CASTING: Playing highest video quality ' + q + '.')
+						return i['url']
 	elif "vimeo" in url:
 		if slow:
 			for i in video['formats']:
