@@ -68,6 +68,12 @@ def stream():
 
 		if 'subtitles' in request.query:
 			subtitles = request.query['subtitles']
+
+			if ('localhost' in subtitles) or ('127.0.0.1' in subtitles):
+				ip = request.environ['REMOTE_ADDR']
+                logger.debug('Subtitle path contains localhost adress. Replacing with remote IP.')
+       			subtitles = subtitles.replace('localhost', ip).replace('127.0.0.1', ip)
+
 			logger.debug('Subtitles link is '+subtitles)
 			urllib.urlretrieve(subtitles, "subtitle.srt")
 			launchvideo(url, True)
