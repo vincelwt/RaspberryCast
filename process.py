@@ -112,13 +112,21 @@ def playlistToQueue(url):
 def playWithOMX(url, sub):
 	logger.info("Starting OMXPlayer now.")
 
+	logger.info("Reading resolution from configuration file.")
+
+	if config["width"]:
+		width = config["width"]
+
+	if config["height"]:
+		height = config["height"]
+
 	setState("1")
 	if sub:
-		os.system("omxplayer -b -r -o both '" + url + "' --vol " + str(volume) + " --subtitles subtitle.srt < /tmp/cmd")
+		os.system("omxplayer -b -r -o both '" + url + "' --win '0 0 " + width +"' '" + width +"' --vol " + str(volume) + " --subtitles subtitle.srt < /tmp/cmd")
 	elif url is None:
 		pass
 	else :
-		os.system("omxplayer -b -r -o both '" + url + "' --vol " + str(volume) + " < /tmp/cmd")
+		os.system("omxplayer -b -r -o both '" + url + "' --win '0 0 " + width +"' '" + width +"' --vol " + str(volume) + " < /tmp/cmd")
 	
 	if getState() != "2": # In case we are again in the launchvideo function
 		setState("0")
