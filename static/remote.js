@@ -17,6 +17,8 @@ function advanced() {
 	$( "#advanced" ).toggle("fast");
 }
 
+
+
 function mkrequest(url, response) {
 	try {
 		var newURL = document.location.origin+url;
@@ -80,6 +82,19 @@ $(function() {
 			message("You must enter a link !", 2)
 		}		
 	});
+
+	$("#clear_search").click(function(){
+    	$("#media_url").val('');
+	});
+
+	$("#media_url").keyup(function(){
+    if($(this).val()) {
+        $("#clear_search").show();
+    } else {
+        $("#clear_search").hide();
+    }
+        
+});
 
 	$( "#shutbtn" ).click(function() {
 		if ( $( "#time_shut" ).val() !== "" ) {

@@ -8,6 +8,7 @@ then
 fi
 
 echo "This script will install RaspberryCast"
+echo "Your system will be rebooted on completion"
 echo "Do you wish to continue? (y/n)"
 
 while true; do
