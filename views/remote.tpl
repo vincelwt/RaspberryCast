@@ -17,7 +17,7 @@
 				<form id="stream_form" class="form-inline">
 					<div class="form-group">
 						<div class="input-group">
-							<input type="text" class="form-control input-lg" id="media_url" placeholder="Media's URL">
+							<input type="search" class="form-control input-lg" id="media_url" placeholder="Media's URL">
 							<div class="input-group-btn"><button id="addqueue" title="Add current video to queue" class="btn btn-lg btn-info form_button" type="button"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></button><button id="castbtn" class="btn btn-lg btn-danger form_button" title="Cast now" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></button></div>
 						</div>
 					</div>
