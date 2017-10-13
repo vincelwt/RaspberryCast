@@ -15,17 +15,16 @@
 				<div id="message"></div>			
 				
 				<form id="stream_form" class="form-inline">
-					<div class="form-group">
 						<div class="input-group">
 							<input type="search" class="form-control input-lg" id="media_url" placeholder="Media's URL" aria-hidden="true">
 							<span id="clear_search" class="glyphicon glyphicon-remove-circle"></span>
 						</div>
 						<br>
+						<br>
 						<div>
 							<button id="castbtn" class="btn btn-lg btn-danger fifty" title="Cast now" type="button">Cast<span class="glyphicon glyphicon-send pull-right" aria-hidden="true"></button>
 							<button id="addqueue" title="Add current video to queue" class="btn btn-lg btn-info fifty" type="button">Queue<span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true" ></button>
 						</div>
-					</div>
 				</form>
 				<div>
 					<button id="pause" type="button" title="Play/pause" class="fifty btn btn-info">

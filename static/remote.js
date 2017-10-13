@@ -85,6 +85,7 @@ $(function() {
 
 	$("#clear_search").click(function(){
     	$("#media_url").val('');
+    	$("#clear_search").hide();
 	});
 
 	$("#media_url").keyup(function(){

@@ -47,9 +47,9 @@ span.tb {
     right: 5px;
     top: 0;
     bottom: 0;
-    height: 14px;
+    height: 20px;
     margin: auto;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     z-index: 2;
     display: none
