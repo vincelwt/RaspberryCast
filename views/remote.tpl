@@ -71,14 +71,14 @@
 						</button>
 					</div>
 					<div>
-						<button id="longbackward" type="button" title="Long skip backwards" class="fifty btn btn-primary">
+						<button id="long-backward" type="button" title="Long skip backwards" class="fifty btn btn-primary">
 							<span class="tb">
 								<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
 								<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
 								-600 seconds
 							</span>
 						</button>
-						<button id="longforward" type="button" title="Cancel shutdown" class="fifty btn btn-danger">
+						<button id="long-forward" type="button" title="Cancel shutdown" class="fifty btn btn-danger">
 							<span class="tb">+600 seconds
 								<span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
 								<span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
