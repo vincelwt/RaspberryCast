@@ -140,6 +140,14 @@ def video():
 		logger.info('Command : backward')
 		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd &")
 		return "1"
+	elif control == "longright" :
+		logger.info('Command : long forward')
+		os.system("echo -n $'\x1b\x5b\x41' > /tmp/cmd &")
+		return "1"
+	elif control == "longleft" :
+		logger.info('Command : long backward')
+		os.system("echo -n $'\x1b\x5b\x42' > /tmp/cmd &")
+		return "1"
 
 @app.route('/sound')
 def sound():

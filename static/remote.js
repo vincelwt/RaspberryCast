@@ -130,6 +130,14 @@ $(function() {
 	$( "#forward" ).click(function() {
 		mkrequest("/video?control=right", 0);
 	});
+
+	$( "#long-backward" ).click(function() {
+		mkrequest("/video?control=longleft", 0);
+	});
+	
+	$( "#long-forward" ).click(function() {
+		mkrequest("/video?control=longright", 0);
+	});
 	
 	$( "#vol_down" ).click(function() {
 		mkrequest("/sound?vol=less", 0);
