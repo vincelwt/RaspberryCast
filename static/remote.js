@@ -15,6 +15,14 @@ function message(msg, importance) {
 
 function advanced() {
 	$( "#advanced" ).toggle("fast");
+
+	console.log("link-val is " + $("#link-text").html())
+
+	if($("#link-text").html() === "More options ▾") {
+		$("#link-text").html("More options ▴");
+	} else {
+		$("#link-text").html("More options ▾");
+	}
 }
 
 
