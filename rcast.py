@@ -9,6 +9,7 @@ def signal_handler(signal, frame):
 # No need for advanced logging options since rcast.py is to be run manually
 def log(output):
 
+	# If file exist, open it and append to file. If file does not exist, create it.
 	try:
 		file = open(sys.path[0] + "/rcast.log","a")
 	except IOError:
@@ -26,27 +27,35 @@ if(len(sys.argv) > 3 or len(sys.argv) < 2):
 	log("Incorrect number of arguments given. Program expects 1-2 arguments.\nA playable video file, and an optional subtitle file.")
 	sys.exit(0)
 
-# Attempt to load and configuration file
+# Attempt to load and read configuration file. If no file is found, use default values.
 try:
-
-	print(sys.path[0])
-
 	with open(sys.path[0] + "/raspberrycast.conf") as f:    
 		config = json.load(f)
-		ip = "" + config["pi_ip"] + ":2020"
 
+		# Read configuration file. If no values exists (or if it's empty), use default values.
+		if config["pi_hostname"] and config["pi_hostname"] is not "":
+			ip = config["pi_hostname"] + ".local" + ":2020"
+		else:
+			ip = ip = "raspberrypi.local:2020"
+		
+		if config["subtitle_search"] and config["subtitle_search"] is not "":	
+			search_for_subtitles = config["subtitle_search"]
+		else:
+			search_for_subtitles = False
+
+# If an IOException is caught, the file could not be found. We then use the default values for the hostname and sub_search
 except IOError as e:
-	log("ERROR: Configuration file 'raspberrycast.conf' not found.\nPlease create or download a configuration file.")
-	sys.exit(0)
+	log("INFO: Configuration file 'raspberrycast.conf' not found.\nUsing default values.")
+	ip = "raspberrypi.local:2020"
+	search_for_subtitles = false
 
 ### MAIN PROGRAM START ###
 
 tocast = sys.argv[1]
 subtitle_path = ""	
 
-
 log("-----------------------------" )
-log("Attempting to cast "+tocast )
+log("Attempting to cast " + tocast )
 log("-----------------------------" )
 
 if not os.path.isfile(tocast):
@@ -59,12 +68,13 @@ if(len(sys.argv) == 3):
 	# If two arguments are given, but in the wrong order, sort them out.
 	if not subtitle_path.endswith(".srt"):
 		subtitle_path = sys.argv[1]
-		tocst = sys.argv[2]
+		tocast = sys.argv[2]
 
 	log("Subtitle path is " + subtitle_path)
 
+
 # Assuming user wants to search for subtitles, but no specific file was given
-if config["subtitle_search"] and len(sys.argv) == 2:
+if search_for_subtitles and len(sys.argv) == 2:
 
 	file_path = sys.argv[1]
 
@@ -82,18 +92,14 @@ if config["subtitle_search"] and len(sys.argv) == 2:
 			subtitle_path = default_subtitle
 
 
-log("-----------------------------" )
-log("Do not close this program while playing the file" )
-log("Press Ctrl+C to stop" )
-log("-----------------------------" )
-
-# Handle case where rcast is 
+# Handle case where rcast is run from another directory
 path = os.path.split(tocast)[0]
 
 if(path is not ""):
 	os.chdir(path)
 
 filename = os.path.split(tocast)[1]
+subtitle_path = os.path.split(subtitle_path)[1]
 
 PORT = 8080
 
@@ -118,11 +124,12 @@ if subtitle_path is not "":
 	sub_string = urllib.quote_plus("http://localhost:8080/"+ subtitle_path)
 	full_url += "&subtitles=" + sub_string 
 
+
 log("-----------------------------" )
-log("Full URL at time of call is: " + full_url )
+log("Do not close this program while playing the file" )
+log("Press Ctrl+C to stop" )
 log("-----------------------------" )
 
 urllib2.urlopen(full_url).read()
-
 # We don't want to quit directly, pause until Ctrl+C
 signal.pause()
