@@ -116,7 +116,7 @@ def playWithOMX(url, sub):
 
 	resolution = ""
 
-	if config["width"] and config["height"]:
+	if config["width"] is not "" and config["height"] is not "":
 		resolution = " --win '0 0 " + config["width"] + " " + config["height"] + "'" 
 
 	setState("1")
