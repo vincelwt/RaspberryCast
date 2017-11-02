@@ -15,7 +15,15 @@ function message(msg, importance) {
 
 function advanced() {
 	$( "#advanced" ).toggle("fast");
+
+	if($("#link-text").html() === "More options ▾") {
+		$("#link-text").html("More options ▴");
+	} else {
+		$("#link-text").html("More options ▾");
+	}
 }
+
+
 
 function mkrequest(url, response) {
 	try {
@@ -81,6 +89,20 @@ $(function() {
 		}		
 	});
 
+	$("#clear_search").click(function(){
+    	$("#media_url").val('');
+    	$("#clear_search").hide();
+	});
+
+	$("#media_url").keyup(function(){
+    if($(this).val()) {
+        $("#clear_search").show();
+    } else {
+        $("#clear_search").hide();
+    }
+        
+});
+
 	$( "#shutbtn" ).click(function() {
 		if ( $( "#time_shut" ).val() !== "" ) {
 			var time = $( "#time_shut" ).val();
@@ -113,6 +135,14 @@ $(function() {
 	
 	$( "#forward" ).click(function() {
 		mkrequest("/video?control=right", 0);
+	});
+
+	$( "#long-backward" ).click(function() {
+		mkrequest("/video?control=longleft", 0);
+	});
+	
+	$( "#long-forward" ).click(function() {
+		mkrequest("/video?control=longright", 0);
 	});
 	
 	$( "#vol_down" ).click(function() {

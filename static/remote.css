@@ -41,3 +41,16 @@ span.tb {
 	top: -20px;
 	font-size: 1.2em;
 }
+
+#clear_search {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    height: 20px;
+    margin: auto;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 2;
+    display: none
+}

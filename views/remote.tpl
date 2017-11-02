@@ -15,15 +15,20 @@
 				<div id="message"></div>			
 				
 				<form id="stream_form" class="form-inline">
-					<div class="form-group">
 						<div class="input-group">
-							<input type="text" class="form-control input-lg" id="media_url" placeholder="Media's URL">
-							<div class="input-group-btn"><button id="addqueue" title="Add current video to queue" class="btn btn-lg btn-info form_button" type="button"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></button><button id="castbtn" class="btn btn-lg btn-danger form_button" title="Cast now" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></button></div>
+							<input type="search" class="form-control input-lg" id="media_url" placeholder="Media's URL" aria-hidden="true">
+							<span id="clear_search" class="glyphicon glyphicon-remove-circle"></span>
 						</div>
-					</div>
+						<br>
+						<br>
+						<div>
+							<button id="castbtn" class="btn btn-lg btn-success fifty" title="Cast now" type="button">Cast<span class="glyphicon glyphicon-send pull-right" aria-hidden="true"></button>
+							<button id="addqueue" title="Add current video to queue" class="btn btn-lg btn-info fifty" type="button">Queue<span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true" ></button>
+						</div>
 				</form>
 				<div>
 					<button id="pause" type="button" title="Play/pause" class="fifty btn btn-info">
+						<span class="glyphicon glyphicon-play" aria-hidden="true"></span>
 						<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
 					</button>
 					<button id="stop" type="button" title="Stop video/Next queue video" class="fifty btn btn-danger">
@@ -47,7 +52,7 @@
 					</button>
 				</div>
 				<br>
-				<a onClick="advanced()">More</a>
+				<a id="link-text" onClick="advanced()">More options ▾</a>
 				<div id="advanced" style="display:none">
 					<form id="shut_form" class="form-inline">
 						<div class="form-group">
@@ -58,11 +63,24 @@
 						</div>
 					</form>
 					<div>
-						<button id="nextqueue" type="button" title="Next video in playlist" class="fifty btn btn-primary">
-							<span class="tb">Next video </span><span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-						</button>
 						<button id="cancelshut" type="button" title="Cancel shutdown" class="fifty btn btn-danger">
-							<span class="tb">Cancel <br>shutdown </span><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+							<span class="tb">Cancel shutdown </span><span class="glyphicon glyphicon-remove-circle pull-left" aria-hidden="true"></span>
+						</button>
+						<button id="nextqueue" type="button" title="Next video in playlist" class="fifty btn btn-primary">
+							<span class="tb">Next video </span><span class="glyphicon glyphicon-step-forward pull-right" aria-hidden="true"></span>
+						</button>
+					</div>
+					<div>
+						<button id="long-backward" type="button" title="Long skip backwards" class="fifty btn btn-info">
+							<span class="tb">
+								<span class="glyphicon glyphicon-backward  pull-left" aria-hidden="true"></span>
+								-10 minutes
+							</span>
+						</button>
+						<button id="long-forward" type="button" title="Long skip backwards" class="fifty btn btn-info">
+							<span class="tb">+10 minutes
+								<span class="glyphicon glyphicon-forward pull-right" aria-hidden="true"></span>
+							</span>
 						</button>
 					</div>
 				</div>

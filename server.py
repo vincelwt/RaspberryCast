@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import logging, os, sys, json
-with open('raspberrycast.conf') as f:    
+with open('raspberrycast.conf') as f:
     config = json.load(f)
 
 #Setting log
@@ -41,15 +41,15 @@ def enable_cors():
 def server_static(filename):
 	return static_file(filename, root='static')
 
-@app.route('/')	
+@app.route('/')
 @app.route('/remote')
 def remote():
 	logger.debug('Remote page requested.')
 	return template('remote')
 
-@app.route('/stream')	
-def stream(): 
-	url = request.query['url']	
+@app.route('/stream')
+def stream():
+	url = request.query['url']
 	logger.debug('Received URL to cast: '+url)
 
 	if 'slow' in request.query:
@@ -68,6 +68,12 @@ def stream():
 
 		if 'subtitles' in request.query:
 			subtitles = request.query['subtitles']
+
+			if ('localhost' in subtitles) or ('127.0.0.1' in subtitles):
+                            ip = request.environ['REMOTE_ADDR']
+                            logger.debug('Subtitle path contains localhost adress. Replacing with remote IP.')
+                            subtitles = subtitles.replace('localhost', ip).replace('127.0.0.1', ip)
+
 			logger.debug('Subtitles link is '+subtitles)
 			urllib.urlretrieve(subtitles, "subtitle.srt")
 			launchvideo(url, True)
@@ -94,7 +100,7 @@ def queue():
 			config["slow_mode"] = False
 		with open('raspberrycast.conf', 'w') as f:
 			json.dump(config, f)
-	
+
 	try :
 		if getState() != "0" :
 			logger.info('Adding URL to queue: '+url)
@@ -134,6 +140,14 @@ def video():
 		logger.info('Command : backward')
 		os.system("echo -n $'\x1b\x5b\x44' > /tmp/cmd &")
 		return "1"
+	elif control == "longright" :
+		logger.info('Command : long forward')
+		os.system("echo -n $'\x1b\x5b\x41' > /tmp/cmd &")
+		return "1"
+	elif control == "longleft" :
+		logger.info('Command : long backward')
+		os.system("echo -n $'\x1b\x5b\x42' > /tmp/cmd &")
+		return "1"
 
 @app.route('/sound')
 def sound():
@@ -154,7 +168,7 @@ def shutdown():
 		os.system("shutdown -c")
 		logger.info("Shutdown canceled.")
 		return "1"
-	else:	
+	else:
 		try:
 			time = int(time)
 			if (time<400 and time>=0):
@@ -165,11 +179,11 @@ def shutdown():
 		except:
 			logger.error("Error in shutdown command parameter")
 			return "0"
-			
+
 @app.route('/running')
 def webstate():
 	currentState = getState()
 	logger.debug("Running state as been asked : "+currentState)
 	return currentState
-		
+
 run(app, reloader=False, host='0.0.0.0', debug=True, quiet=True, port=2020)
