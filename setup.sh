@@ -8,6 +8,19 @@ then
 fi
 
 echo "This script will install RaspberryCast"
+
+read -p "Which user do you want to install RaspberryCast as? (Leave blank to set to default): " USER
+
+if ! [ -n "$USER" ]; then
+    echo "Setting user to default value 'pi'."
+    USER="pi"
+fi
+
+if ! getent passwd $USER > /dev/null 2>&1; then
+    echo "User $USER does not exist. Exiting."
+    exit
+fi
+
 echo "Your system will be rebooted on completion"
 echo "Do you wish to continue? (y/n)"
 
@@ -50,7 +63,7 @@ echo "Cloning project from GitHub.."
 echo ""
 echo "============================================================"
 
-su - pi -c "git clone https://github.com/vincelwt/RaspberryCast.git"
+su - $USER -c "git clone https://github.com/vincelwt/RaspberryCast.git"
 chmod +x ./RaspberryCast/RaspberryCast.sh
 
 echo ""
@@ -65,14 +78,14 @@ chmod 666 /dev/tty1
 
 #Add to rc.local startup
 sed -i '$ d' /etc/rc.local
-echo "su - pi -c \"cd ./RaspberryCast/ && ./RaspberryCast.sh start\"" >> /etc/rc.local
+echo "su - $USER -c \"cd ./RaspberryCast/ && ./RaspberryCast.sh start\"" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 
 #Adding right to current pi user to shutdown
 chmod +s /sbin/shutdown
 
 #Adding right to sudo fbi without password
-echo "pi ALL = (root) NOPASSWD: /usr/bin/fbi" >> /etc/sudoers
+echo "$USER ALL = (root) NOPASSWD: /usr/bin/fbi" >> /etc/sudoers
 
 rm setup.sh
 
