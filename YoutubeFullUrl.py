@@ -3,25 +3,26 @@ import urllib2
 import sys
 from urlparse import parse_qs, urlparse
 
+
 class VideoInfo(object):
     """
-    VideoInfo Class hold all information retrieved from www.youtube.com/get_video_info?video_id=
-    [VIDEO_ID]
+    VideoInfo Class hold all information retrieved from
+    www.youtube.com/get_video_info?video_id=[VIDEO_ID]
     """
     def __init__(self, video_url):
-	
         request_url = 'http://www.youtube.com/get_video_info?video_id='
-	video_id = extract_video_id(video_url)
-        if video_id != None:
+        video_id = extract_video_id(video_url)
+        if video_id is not None:
             request_url += video_id
-        else :
+        else:
             sys.exit('Error : Invalid Youtube URL Passing %s' % video_url)
         request = urllib2.Request(request_url)
         try:
             self.video_info = parse_qs(urllib2.urlopen(request).read())
-        except urllib2.URLError :
-	    print "urllib error"
+        except urllib2.URLError:
+            print("urllib error")
             sys.exit('Error : Invalid Youtube URL Passing %s' % video_url)
+
 
 def extract_video_id(value):
     query = urlparse(value)
@@ -38,17 +39,21 @@ def extract_video_id(value):
     # fail?
     return None
 
+
 def video_file_urls(videoinfo):
     """
     extract video file's url from VideoInfo object and return them
     """
     if not isinstance(videoinfo, VideoInfo):
         sys.exit('Error : method(video_file_urls) invalid argument passing')
-    url_encoded_fmt_stream_map = videoinfo.video_info['url_encoded_fmt_stream_map'][0].split(',')
+    url_encoded_fmt_stream_map = videoinfo.video_info[
+        'url_encoded_fmt_stream_map'][0].split(',')
     entrys = [parse_qs(entry) for entry in url_encoded_fmt_stream_map]
-    url_maps = [dict(url=entry['url'][0], type=entry['type']) for entry in entrys]
+    url_maps = [dict(url=entry['url'][0], type=entry['type'])
+                for entry in entrys]
     return url_maps
-  
+
+
 def get_flux_url(url_str):
     type = 'video/mp4'
 
@@ -63,7 +68,7 @@ def get_flux_url(url_str):
             url = entry['url']
             break
 
-    if url == '' :
+    if url == '':
         sys.exit('Error : Can not find video file\'s url')
-    
+
     return url
