@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ $# -ne 1 ]; then
+        echo "Error: This script takes exactly one argument."
+        echo "The argument should be either 'start' or 'stop'."
+        exit
+fi
+
 if [ $1 = "start" ]; then
 	if [ `id -u` -eq 0 ]
 	then
@@ -29,6 +35,6 @@ elif [ $1 = "stop" ] ; then
 	echo "Done."
 	exit
 else
-	echo "Error, wrong argument. Try with 'stop', 'start'."
+	echo "Error, illegal argument. Possible values are: 'stop', 'start'."
 	exit
 fi
