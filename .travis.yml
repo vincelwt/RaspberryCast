@@ -10,7 +10,7 @@ install:
 
 script:
       - coverage run process.py
-      - coverage run server.py
+      - coverage run server.py --dry-run
 
 after_success:
       - codecov
