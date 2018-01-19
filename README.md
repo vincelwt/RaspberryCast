@@ -76,13 +76,13 @@ Demo video with an Android (also works on iOS):
 
 ## Configuration
 All options below are specified in `raspberrycast.conf`
- - slow_mode - Limit the video casted to 360p. Default is **false**.
- - show_splashscreen - Show the RaspberryCast overlay. . Default is **true**.
- - show_processing - Show the processing screen when attempting to cast a video. . Default is **true**.
- - pi_hostname - Specify your custom Raspberry Pi hostname. Default is **raspberrypi**.
- - width - Set a custom casting width. Default is **""** (full screen).
- - height - Set a custom casting height. Default is **""** (full screen). 
- - subtitle_search - Attempt to automatically find suitable subtitle for local video file. Default is **false**.
+ - **slow_mode** - Limit the video casted to 360p. Default is **false**.
+ - **show_splashscreen** - Show the RaspberryCast overlay. Default is **true**.
+ - **show_processing** - Show the processing screen when attempting to cast a video. . Default is **true**.
+ - **pi_hostname** - Specify your custom Raspberry Pi hostname. Default is **raspberrypi**.
+ - **width** - Set a custom casting width. Default is **""** (full screen).
+ - **height** - Set a custom casting height. Default is **""** (full screen). 
+ - **subtitle_search** - Attempt to automatically find suitable subtitle for local video file. Default is **false**.
 
 ## Uninstall
 Remove reference to RaspberryCast.sh in /etc/rc.local
