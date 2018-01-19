@@ -2,6 +2,8 @@
 > Transform your Raspberry Pi into a streaming device.
 Cast videos from mobile devices or computers to your TV.
 
+[![Build Status](https://travis-ci.org/mheine/RaspberryCast.svg?branch=travis)](https://travis-ci.org/mheine/RaspberryCast)
+
 
 [![Android app on Google Play](https://developer.android.com/images/brand/en_app_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.kiwiidev.raspberrycast)
 [![Extension for Chrome](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/raspberrycast/aikmhmnmlebhcjjdbjilohbpfljioeak)
