@@ -33,7 +33,7 @@ formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 root.addHandler(ch)
 
-if config["new_log"]:
+if config["show_splashscreen"]:
     os.system("sudo fbi -T 1 --noverbose -a  images/ready.jpg")
 
 setState("0")
