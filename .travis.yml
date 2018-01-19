@@ -10,6 +10,8 @@ install:
 
 script:
       - coverage run process.py
+      - coverage run rcast.py
+      - coverage run YoutubeFullUrl.py
       - coverage run server.py --dry-run
 
 after_success:
