@@ -1,4 +1,4 @@
-# RaspberryCast 3.0 [![Build Status](https://travis-ci.org/mheine/RaspberryCast.svg?branch=travis)](https://travis-ci.org/mheine/RaspberryCast)
+# RaspberryCast 3.0 [![Build Status](https://travis-ci.org/vincelwt/RaspberryCast.svg?branch=travis)](https://travis-ci.org/vincelwt/RaspberryCast)
 > Transform your Raspberry Pi into a streaming device.
 Cast videos from mobile devices or computers to your TV.
 
