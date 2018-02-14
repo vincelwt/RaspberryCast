@@ -3,8 +3,10 @@ import os
 import threading
 import logging
 import json
+
 with open('raspberrycast.conf') as f:
     config = json.load(f)
+    
 logger = logging.getLogger("RaspberryCast")
 volume = 0
 
@@ -14,7 +16,7 @@ def launchvideo(url, sub=False):
 
     os.system("echo -n q > /tmp/cmd &")  # Kill previous instance of OMX
 
-    if config["new_log"]:
+    if config["show_processing"]:
         os.system("sudo fbi -T 1 -a --noverbose images/processing.jpg")
 
     logger.info('Extracting source video URL...')
@@ -185,7 +187,7 @@ def playWithOMX(url, sub):
                 os.system("echo . > /tmp/cmd &")  # Start signal for OMXplayer
             else:
                 logger.info("Playlist empty, skipping.")
-                if config["new_log"]:
+                if config["show_splashscreen"]:
                     os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg")
 
 

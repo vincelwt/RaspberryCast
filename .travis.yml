@@ -1,0 +1,18 @@
+sudo: required
+
+language: python
+
+python:
+      - 2.7
+
+install:
+      - pip install codecov youtube-dl bottle livestreamer
+
+script:
+      - coverage run process.py
+      - coverage run rcast.py
+      - coverage run YoutubeFullUrl.py
+      - coverage run server.py --dry-run
+
+after_success:
+      - codecov

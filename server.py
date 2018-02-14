@@ -33,7 +33,7 @@ formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 root.addHandler(ch)
 
-if config["new_log"]:
+if config["show_splashscreen"]:
     os.system("sudo fbi -T 1 --noverbose -a  images/ready.jpg")
 
 setState("0")
@@ -217,5 +217,9 @@ def webstate():
     currentState = getState()
     logger.debug("Running state as been asked : "+currentState)
     return currentState
+    
+if len(sys.argv) > 1 and sys.argv[1] == "--dry-run":
+    print "Succesful dry run. Not starting Bottle application."
+    sys.exit(0)
 
 run(app, reloader=False, host='0.0.0.0', debug=True, quiet=True, port=2020)
