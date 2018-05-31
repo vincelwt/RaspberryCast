@@ -78,7 +78,7 @@ chmod 666 /dev/tty1
 
 #Add to rc.local startup
 sed -i '$ d' /etc/rc.local
-echo "su - $USER -c \"cd ./RaspberryCast/ && ./server.py &\"" >> /etc/rc.local
+echo "su - $USER -c \"cd ./RaspberryCast/ && ./RaspberryCast.sh start\"" >> /etc/rc.local
 echo "exit 0" >> /etc/rc.local
 
 #Adding right to current pi user to shutdown
