@@ -33,6 +33,13 @@ formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
 ch.setFormatter(formatter)
 root.addHandler(ch)
 
+try:
+    os.mkfifo("/tmp/cmd")
+except OSError as e:
+    # 17 means the file already exists.
+    if e.errno != 17:
+        raise
+
 if config["new_log"]:
     os.system("sudo fbi -T 1 --noverbose -a  images/ready.jpg")
 
