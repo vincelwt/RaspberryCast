@@ -16,7 +16,6 @@ if [ $1 = "start" ]; then
 	echo "Checking for updates."
 	git pull
 	echo "Starting RaspberryCast server."
-	mkfifo /tmp/cmd >/dev/null 2>&1
 	./server.py &
 	echo "Done."
 	exit
