@@ -119,11 +119,11 @@ def playlist(url, cast_now, config):
     else:
         queuevideo(url, config)
 
-    thread = threading.Thread(target=playlistToQueue, args=(url,))
+    thread = threading.Thread(target=playlistToQueue, args=(url, config))
     thread.start()
 
 
-def playlistToQueue(url):
+def playlistToQueue(url, config):
     logger.info("Adding every videos from playlist to queue.")
     ydl = youtube_dl.YoutubeDL(
         {
