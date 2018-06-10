@@ -10,9 +10,12 @@ from bottle import Bottle, SimpleTemplate, request, response, \
 from process import launchvideo, queuevideo, playlist, \
                     setState, getState, setVolume
 
-
-with open('raspberrycast.conf') as f:
-    config = json.load(f)
+if len(sys.argv) > 1:
+    config_file = sys.argv[1]
+else:
+    config_file = 'raspberrycast.conf'
+with open(config_file) as f:
+      config = json.load(f)
 
 # Setting log
 logging.basicConfig(
@@ -79,7 +82,8 @@ def stream():
             config["slow_mode"] = True
         else:
             config["slow_mode"] = False
-        with open('raspberrycast.conf', 'w') as f:
+        # TODO: Do we really want to write this to disk?
+        with open(config_file, 'w') as f:
             json.dump(config, f)
 
     try:
