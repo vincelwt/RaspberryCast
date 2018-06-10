@@ -103,15 +103,15 @@ Replacing with remote IP.''')
 
             logger.debug('Subtitles link is '+subtitles)
             urllib.urlretrieve(subtitles, "subtitle.srt")
-            launchvideo(url, True)
+            launchvideo(url, config, sub=True)
         else:
             logger.debug('No subtitles for this stream')
             if (
                     ("youtu" in url and "list=" in url) or
                     ("soundcloud" in url and "/sets/" in url)):
-                playlist(url, True)
+                playlist(url, True, config)
             else:
-                launchvideo(url, False)
+                launchvideo(url, config, sub=False)
             return "1"
     except Exception, e:
         logger.error(
@@ -138,18 +138,18 @@ def queue():
             if (
                     ("youtu" in url and "list=" in url) or
                     ("soundcloud" in url and "/sets/" in url)):
-                playlist(url, False)
+                playlist(url, False, config)
             else:
-                queuevideo(url)
+                queuevideo(url, config)
             return "2"
         else:
             logger.info('No video currently playing, playing url : '+url)
             if (
                     ("youtu" in url and "list=" in url) or
                     ("soundcloud" in url and "/sets/" in url)):
-                playlist(url, True)
+                playlist(url, True, config)
             else:
-                launchvideo(url, False)
+                launchvideo(url, config, sub=False)
             return "1"
     except Exception, e:
         logger.error('Error in launchvideo or queuevideo function !')
