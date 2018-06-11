@@ -10,9 +10,12 @@ from bottle import Bottle, SimpleTemplate, request, response, \
 from process import launchvideo, queuevideo, playlist, \
                     setState, getState, setVolume
 
-
-with open('raspberrycast.conf') as f:
-    config = json.load(f)
+if len(sys.argv) > 1:
+    config_file = sys.argv[1]
+else:
+    config_file = 'raspberrycast.conf'
+with open(config_file) as f:
+      config = json.load(f)
 
 # Setting log
 logging.basicConfig(
@@ -79,7 +82,8 @@ def stream():
             config["slow_mode"] = True
         else:
             config["slow_mode"] = False
-        with open('raspberrycast.conf', 'w') as f:
+        # TODO: Do we really want to write this to disk?
+        with open(config_file, 'w') as f:
             json.dump(config, f)
 
     try:
@@ -103,15 +107,15 @@ Replacing with remote IP.''')
 
             logger.debug('Subtitles link is '+subtitles)
             urllib.urlretrieve(subtitles, "subtitle.srt")
-            launchvideo(url, True)
+            launchvideo(url, config, sub=True)
         else:
             logger.debug('No subtitles for this stream')
             if (
                     ("youtu" in url and "list=" in url) or
                     ("soundcloud" in url and "/sets/" in url)):
-                playlist(url, True)
+                playlist(url, True, config)
             else:
-                launchvideo(url, False)
+                launchvideo(url, config, sub=False)
             return "1"
     except Exception, e:
         logger.error(
@@ -138,18 +142,18 @@ def queue():
             if (
                     ("youtu" in url and "list=" in url) or
                     ("soundcloud" in url and "/sets/" in url)):
-                playlist(url, False)
+                playlist(url, False, config)
             else:
-                queuevideo(url)
+                queuevideo(url, config)
             return "2"
         else:
             logger.info('No video currently playing, playing url : '+url)
             if (
                     ("youtu" in url and "list=" in url) or
                     ("soundcloud" in url and "/sets/" in url)):
-                playlist(url, True)
+                playlist(url, True, config)
             else:
-                launchvideo(url, False)
+                launchvideo(url, config, sub=False)
             return "1"
     except Exception, e:
         logger.error('Error in launchvideo or queuevideo function !')

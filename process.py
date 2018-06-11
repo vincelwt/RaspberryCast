@@ -3,13 +3,11 @@ import os
 import threading
 import logging
 import json
-with open('raspberrycast.conf') as f:
-    config = json.load(f)
 logger = logging.getLogger("RaspberryCast")
 volume = 0
 
 
-def launchvideo(url, sub=False):
+def launchvideo(url, config, sub=False):
     setState("2")
 
     os.system("echo -n q > /tmp/cmd &")  # Kill previous instance of OMX
@@ -18,27 +16,31 @@ def launchvideo(url, sub=False):
         os.system("sudo fbi -T 1 -a --noverbose images/processing.jpg")
 
     logger.info('Extracting source video URL...')
-    out = return_full_url(url, sub)
+    out = return_full_url(url, sub=sub, slow_mode=config["slow_mode"])
 
     logger.debug("Full video URL fetched.")
 
-    thread = threading.Thread(target=playWithOMX, args=(out, sub,))
+    thread = threading.Thread(target=playWithOMX, args=(out, sub,),
+            kwargs=dict(width=config["width"], height=config["height"],
+                        new_log=config["new_log"]))
     thread.start()
 
     os.system("echo . > /tmp/cmd &")  # Start signal for OMXplayer
 
 
-def queuevideo(url, onlyqueue=False):
+def queuevideo(url, config, onlyqueue=False):
     logger.info('Extracting source video URL, before adding to queue...')
 
-    out = return_full_url(url, False)
+    out = return_full_url(url, sub=False, slow_mode=config["slow_mode"])
 
     logger.info("Full video URL fetched.")
 
     if getState() == "0" and not onlyqueue:
         logger.info('No video currently playing, playing video instead of \
 adding to queue.')
-        thread = threading.Thread(target=playWithOMX, args=(out, False,))
+        thread = threading.Thread(target=playWithOMX, args=(out, False,),
+            kwargs=dict(width=config["width"], height=config["height"],
+                        new_log=config["new_log"]))
         thread.start()
         os.system("echo . > /tmp/cmd &")  # Start signal for OMXplayer
     else:
@@ -47,7 +49,7 @@ adding to queue.')
                 f.write(out+'\n')
 
 
-def return_full_url(url, sub=False):
+def return_full_url(url, sub=False, slow_mode=False):
     logger.debug("Parsing source url for "+url+" with subs :"+str(sub))
 
     if ((url[-4:] in (".avi", ".mkv", ".mp4", ".mp3")) or
@@ -74,10 +76,8 @@ def return_full_url(url, sub=False):
     else:
         video = result  # Just a video
 
-    slow = config["slow_mode"]
-
     if "youtu" in url:
-        if slow:
+        if slow_mode:
             for i in video['formats']:
                 if i['format_id'] == "18":
                     logger.debug(
@@ -95,7 +95,7 @@ Extracting url in maximal quality.''')
                         )
                         return i['url']
     elif "vimeo" in url:
-        if slow:
+        if slow_mode:
             for i in video['formats']:
                 if i['format_id'] == "http-360p":
                     logger.debug("Vimeo link detected, extracting url in 360p")
@@ -110,20 +110,20 @@ Extracting url in maximal quality.''')
         return video['url']
 
 
-def playlist(url, cast_now):
+def playlist(url, cast_now, config):
     logger.info("Processing playlist.")
 
     if cast_now:
         logger.info("Playing first video of playlist")
-        launchvideo(url)  # Launch first vdeo
+        launchvideo(url, config)  # Launch first video
     else:
-        queuevideo(url)
+        queuevideo(url, config)
 
-    thread = threading.Thread(target=playlistToQueue, args=(url,))
+    thread = threading.Thread(target=playlistToQueue, args=(url, config))
     thread.start()
 
 
-def playlistToQueue(url):
+def playlistToQueue(url, config):
     logger.info("Adding every videos from playlist to queue.")
     ydl = youtube_dl.YoutubeDL(
         {
@@ -136,21 +136,18 @@ def playlistToQueue(url):
         for i in result['entries']:
             logger.info("queuing video")
             if i != result['entries'][0]:
-                queuevideo(i['url'])
+                queuevideo(i['url'], config)
 
 
-def playWithOMX(url, sub):
+def playWithOMX(url, sub, width="", height="", new_log=False):
     logger.info("Starting OMXPlayer now.")
 
     logger.info("Attempting to read resolution from configuration file.")
 
     resolution = ""
 
-    if config["width"] is not "" and config["height"] is not "":
-        resolution = " --win '0 0 {0} {1}'".format(
-            str(config["width"]),
-            str(config["height"])
-        )
+    if width or height:
+        resolution = " --win '0 0 {0} {1}'".format(width, height)
 
     setState("1")
     if sub:
@@ -179,13 +176,15 @@ def playWithOMX(url, sub):
                 with open('video.queue', 'w') as fout:
                     fout.writelines(data[1:])
                 thread = threading.Thread(
-                    target=playWithOMX, args=(first_line, False,)
+                    target=playWithOMX, args=(first_line, False,),
+                        kwargs=dict(width=width, height=height,
+                                    new_log=new_log),
                 )
                 thread.start()
                 os.system("echo . > /tmp/cmd &")  # Start signal for OMXplayer
             else:
                 logger.info("Playlist empty, skipping.")
-                if config["new_log"]:
+                if new_log:
                     os.system("sudo fbi -T 1 -a --noverbose images/ready.jpg")
 
 
