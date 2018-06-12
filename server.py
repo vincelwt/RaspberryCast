@@ -4,7 +4,12 @@ import logging
 import os
 import sys
 import json
-import urllib
+try:
+    # this works in Python3
+    from urllib.request import urlretrieve
+except ImportError:
+    # this works in Python2
+    from urllib import urlretrieve
 from bottle import Bottle, SimpleTemplate, request, response, \
                    template, run, static_file
 from process import launchvideo, queuevideo, playlist, \
@@ -106,7 +111,7 @@ Replacing with remote IP.''')
                                 .replace('127.0.0.1', ip)
 
             logger.debug('Subtitles link is '+subtitles)
-            urllib.urlretrieve(subtitles, "subtitle.srt")
+            urlretrieve(subtitles, "subtitle.srt")
             launchvideo(url, config, sub=True)
         else:
             logger.debug('No subtitles for this stream')
@@ -117,7 +122,7 @@ Replacing with remote IP.''')
             else:
                 launchvideo(url, config, sub=False)
             return "1"
-    except Exception, e:
+    except Exception as e:
         logger.error(
             'Error in launchvideo function or during downlading the subtitles')
         logger.exception(e)
@@ -155,7 +160,7 @@ def queue():
             else:
                 launchvideo(url, config, sub=False)
             return "1"
-    except Exception, e:
+    except Exception as e:
         logger.error('Error in launchvideo or queuevideo function !')
         logger.exception(e)
         return "0"
