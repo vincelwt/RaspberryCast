@@ -84,7 +84,7 @@
 						</button>
 					</div>
 					<!-- History and playlist management -->
-					<div>
+					<div id="last-div">
 						<button id="history-button" onClick="showHistory()" type="button" title="History" class="ninety btn btn-warning">
 							<span class="tb">
 								<span class="glyphicon glyphicon-list-alt  pull-left" aria-hidden="true"></span>
@@ -93,14 +93,6 @@
 						</button>
 					</div>
 					<div id="history-div" style="display:none">
-					</div>
-					<div id="last-div">
-						<button id="playlist-button" type="button" title="Playlist management" class="ninety btn btn-primary">
-							<span class="tb">
-								<span class="glyphicon glyphicon-edit pull-left" aria-hidden="true"></span>
-								Manage playlists
-							</span>
-						</button>
 					</div>
 				</div>
 			
