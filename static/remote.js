@@ -24,12 +24,19 @@ function advanced() {
 }
 
 
+function showHistory() {
+	//Only update history when div is being toggled ON
+	if (!$( "#history-div" ).is(":visible"))
+		updateHistoryDiv();
+
+	$( "#history-div" ).toggle("fast");
+}
 
 function mkrequest(url, response) {
 	try {
 		var newURL = document.location.origin+url;
 		if (response == 1 ) {
-			message("Trying to get video stream URL. Please wait ~ 10-30 seconds.", 0);
+			message("Trying to get video stream URL. Please wait ~10 seconds.", 0);
 		} else if (response == 2 ) {
 			message("Trying to add video to queue. ", 0);
 		} else if (response == 3 ) {
@@ -43,13 +50,13 @@ function mkrequest(url, response) {
 				if (req.status == 200) {
 					if (req.responseText == "1") {
 						if (response == 1) {
-							message("Success ! Video should now be playing.", 1);	
+							message("Success! Video should now be playing.", 1);	
 						} else if (response == 2) {
-							message("Success ! Video has been added to queue.", 1);	
+							message("Success! Video has been added to queue.", 1);	
 						} else if (response == 3) {
-							message("Success ! Shutdown has been successfully programmed.", 1);	
+							message("Success! Shutdown has been successfully scheduled.", 1);	
 						} else if (response == 4) {
-							message("Success ! Shutdown has been cancelled.", 1);	
+							message("Success! Shutdown has been cancelled.", 1);	
 						}
 						
 					} else {
@@ -63,7 +70,7 @@ function mkrequest(url, response) {
 		req.send(null);
 	} 
 	catch(err) {
-		message("Error ! Make sure the ip/port are corrects, and the server is running.")
+		message("Error! Make sure the IP and port is correct, and that the server is running.")
 	}
 }
 
@@ -73,7 +80,8 @@ $(function() {
 		if ( $( "#media_url" ).val() !== "" ) {
 			var url = $( "#media_url" ).val();
 			var url_encoded_url = encodeURIComponent(url);
-			mkrequest("/stream?url=" + url_encoded_url, 1)
+			addToHistory(url);
+			mkrequest("/stream?url=" + url_encoded_url, 1);
 		} else {
 			message("You must enter a link !", 2)
 		}	
@@ -90,18 +98,18 @@ $(function() {
 	});
 
 	$("#clear_search").click(function(){
-    	$("#media_url").val('');
-    	$("#clear_search").hide();
+		$("#media_url").val('');
+		$("#clear_search").hide();
 	});
 
 	$("#media_url").keyup(function(){
-    if($(this).val()) {
-        $("#clear_search").show();
-    } else {
-        $("#clear_search").hide();
-    }
-        
-});
+		if($(this).val()) {
+			$("#clear_search").show();
+		} else {
+			$("#clear_search").hide();
+		}
+
+	});
 
 	$( "#shutbtn" ).click(function() {
 		if ( $( "#time_shut" ).val() !== "" ) {

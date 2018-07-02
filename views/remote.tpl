@@ -83,6 +83,17 @@
 							</span>
 						</button>
 					</div>
+					<!-- History and playlist management -->
+					<div id="last-div">
+						<button id="history-button" onClick="showHistory()" type="button" title="History" class="ninety btn btn-warning">
+							<span class="tb">
+								<span class="glyphicon glyphicon-list-alt  pull-left" aria-hidden="true"></span>
+								History
+							</span>
+						</button>
+					</div>
+					<div id="history-div" style="display:none">
+					</div>
 				</div>
 			
 		</div>
@@ -92,6 +103,7 @@
 		<!-- script references -->
 		
 		<script src="{{get_url('static', filename='jquery-2.1.3.min.js') }}"></script>
+		<script src="{{get_url('static', filename='history.js') }}"></script>
 		<script src="{{get_url('static', filename='remote.js') }}"></script>
 	</body>
 </html>
