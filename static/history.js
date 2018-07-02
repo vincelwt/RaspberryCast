@@ -62,9 +62,9 @@ function updateHistoryDiv() {
             $("#history-div").append("<hr>");
 
             for (var i = uniqueArray.length - 1; i >= 0; i--) {
-                  var encoded_url = encodeURIComponent(uniqueArray[i]);
-
+                  
                   var historyLink = $("<a class='history-link-item' href='#'>" + uniqueArray[i] + "</a>").click(function() {
+                        var encoded_url = encodeURIComponent($(this).text());
                         mkrequest("/stream?url=" + encoded_url, 1);
                   });
 
