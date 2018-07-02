@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>RaspberryCast</title>
+		<title> LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL RaspberryCast</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="{{get_url('static', filename='remote.css') }}" rel="stylesheet">
 		<link href="{{get_url('static', filename='bootstrap.min.css') }}" rel="stylesheet">
@@ -83,6 +83,25 @@
 							</span>
 						</button>
 					</div>
+					<!-- History and playlist management -->
+					<div>
+						<button id="history-button" onClick="showHistory()" type="button" title="History" class="ninety btn btn-warning">
+							<span class="tb">
+								<span class="glyphicon glyphicon-list-alt  pull-left" aria-hidden="true"></span>
+								History
+							</span>
+						</button>
+					</div>
+					<div id="history-div" style="display:none">
+					</div>
+					<div id="last-div">
+						<button id="playlist-button" type="button" title="Playlist management" class="ninety btn btn-primary">
+							<span class="tb">
+								<span class="glyphicon glyphicon-edit pull-left" aria-hidden="true"></span>
+								Manage playlists
+							</span>
+						</button>
+					</div>
 				</div>
 			
 		</div>
@@ -92,6 +111,7 @@
 		<!-- script references -->
 		
 		<script src="{{get_url('static', filename='jquery-2.1.3.min.js') }}"></script>
+		<script src="{{get_url('static', filename='history.js') }}"></script>
 		<script src="{{get_url('static', filename='remote.js') }}"></script>
 	</body>
 </html>

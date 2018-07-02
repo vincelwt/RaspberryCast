@@ -1,8 +1,7 @@
 #whole {
 	width: 100%;
 	max-width: 500px;
-	height: 240px;
-	
+	height: 240px;	
 }
 
 .fifty {
@@ -40,6 +39,22 @@ span.glyphicon {
 span.tb {
 	top: -20px;
 	font-size: 1.2em;
+}
+
+#last-div {
+	padding-bottom: 20px;
+}
+
+
+#history-div {
+	width: 93%;
+	text-align: left;
+	font-size: 1.2em;
+}
+
+#clear-history-link-item {
+	font-style: bold;
+	color: red;
 }
 
 #clear_search {
