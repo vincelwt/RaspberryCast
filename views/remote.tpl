@@ -84,7 +84,7 @@
 						</button>
 					</div>
 					<!-- History and playlist management -->
-					<div id="last-div">
+					<div>
 						<button id="history-button" onClick="showHistory()" type="button" title="History" class="ninety btn btn-warning">
 							<span class="tb">
 								<span class="glyphicon glyphicon-list-alt  pull-left" aria-hidden="true"></span>
@@ -93,6 +93,16 @@
 						</button>
 					</div>
 					<div id="history-div" style="display:none">
+					</div>
+					<div id="last-div">
+						<button id="queue-button" onClick="showQueueManager()" type="button" title="Queue management" class="ninety btn btn-primary">
+							<span class="tb">
+								<span class="glyphicon glyphicon-edit pull-left" aria-hidden="true"></span>
+								Manage queue
+							</span>
+						</button>
+					</div>
+					<div id="queue-div" style="display:none">
 					</div>
 				</div>
 			
@@ -104,6 +114,7 @@
 		
 		<script src="{{get_url('static', filename='jquery-2.1.3.min.js') }}"></script>
 		<script src="{{get_url('static', filename='history.js') }}"></script>
+		<script src="{{get_url('static', filename='queue.js') }}"></script>
 		<script src="{{get_url('static', filename='remote.js') }}"></script>
 	</body>
 </html>

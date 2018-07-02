@@ -32,6 +32,14 @@ function showHistory() {
 	$( "#history-div" ).toggle("fast");
 }
 
+function showQueueManager() {
+	//Only update history when div is being toggled ON
+	if (!$( "#queue-div" ).is(":visible"))
+		updateQueueDiv();
+
+	$( "#queue-div" ).toggle("fast");
+}
+
 function mkrequest(url, response) {
 	try {
 		var newURL = document.location.origin+url;
@@ -45,7 +53,7 @@ function mkrequest(url, response) {
 		
 		var req = new XMLHttpRequest();
 		req.open('GET', newURL, true);
-		req.onreadystatechange = function (aEvt) {
+		req.onreadystatechange = function () {
 			if (req.readyState == 4) {
 				if (req.status == 200) {
 					if (req.responseText == "1") {
@@ -63,7 +71,7 @@ function mkrequest(url, response) {
 						message("An error occured during the treatment of the demand. Please make sure the link/action is compatible", 2);
 					}
 				} else {
-					message("Error during connecting requesting from server !", 2);
+					message("Error during connection request from server.", 2);
 				}
 			}
 		};
@@ -91,9 +99,10 @@ $(function() {
 		if ( $( "#media_url" ).val() !== "" ) {
 			var url = $( "#media_url" ).val();
 			var url_encoded_url = encodeURIComponent(url);
+			addToQueueUI(url);
 			mkrequest("/queue?url=" + url_encoded_url, 2)
 		} else {
-			message("You must enter a link !", 2)
+			message("You must enter a link!", 2)
 		}		
 	});
 

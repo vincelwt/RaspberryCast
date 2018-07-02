@@ -9,7 +9,7 @@ fi
 if [ $1 = "start" ]; then
 	if [ `id -u` -eq 0 ]
 	then
-		echo "Please start this script without root privileges!"
+		echo "Please run this script without root privileges!"
 		echo "Try again without sudo."
 		exit 0
 	fi
@@ -22,7 +22,7 @@ if [ $1 = "start" ]; then
 elif [ $1 = "stop" ] ; then
 	if [ `id -u` -ne 0 ]
 	then
-		echo "Please start this script with root privileges!"
+		echo "Please run this script with root privileges!"
 		echo "Try again with sudo."
 		exit 0
 	fi

@@ -41,6 +41,21 @@ span.tb {
 	font-size: 1.2em;
 }
 
+#queue-div {
+	text-align: left;
+}
+
+.item-image {
+	height: 50px;
+	display: inline-block;
+}
+
+.item-text {
+	margin-left: 10px;
+	width: 70%;
+	display: inline-block;
+}
+
 #last-div {
 	padding-bottom: 20px;
 }
