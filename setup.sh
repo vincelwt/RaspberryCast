@@ -2,7 +2,7 @@
 
 if [ `id -u` -ne 0 ]
 then
-  echo "Please start this script with root privileges!"
+  echo "Please run this script with root privileges!"
   echo "Try again with sudo."
   exit 0
 fi
@@ -52,7 +52,7 @@ pip install youtube-dl bottle livestreamer
 
 if [ "$?" = "1" ]
 then
-  echo "An unexpected error occured durin pip install!"
+  echo "An unexpected error occured during pip install!"
   exit 0
 fi
 
