@@ -2,10 +2,10 @@ function stopNote() {
 	chrome.notifications.clear('notif', function(id) { console.log("Last error:", chrome.runtime.lastError); });
 }
 
-function notif(msg) {
+function notif(title, msg) {
 	var opt = {
 		type: "basic",
-		title: "Raspberry Pi",
+		title: title,
 		message: msg,
 		iconUrl: "48.png"
 	};
@@ -20,19 +20,21 @@ function mkrequest(url, response) {
 	try {
 		var newURL = "http://"+localStorage.getItem('raspip')+":2020"+url;
 		if (response == 1) {
-			notif("Trying to get video stream URL. Please wait ~ 10 seconds.");
+			notif("RaspberryCast", "Processing video. Please wait ~ 10 seconds.");
 		}
 		var req = new XMLHttpRequest();
 		req.open('GET', newURL, true);
 		req.onreadystatechange = function (aEvt) {
 			if (req.readyState == 4) {
 				if (req.status == 200) {
-					if (req.responseText == "1") {
-						if (response == 1) {
-							notif("Success ! Video should now be playing.");	
+					if (response == 1) {
+						if (req.responseText == "1") {
+							notif("RaspberryCast", "Video should now start playing.");	
+						} else if (req.responseText == "2") {
+							notif("RaspberryCast", "Video has been added to queue.");	
+						} else {
+							notif("Error", "Please make sure the link is compatible");
 						}
-					} else {
-						notif("An error occured during the treatment of the link. Please make sure the link is compatible");
 					}
 				} else {
 					chrome.notifications.clear('notif', function(id) { console.log("Last error:", chrome.runtime.lastError); });
@@ -50,9 +52,13 @@ function mkrequest(url, response) {
 
 
 chrome.contextMenus.onClicked.addListener(function(info) {
-	var url_encoded_url = encodeURIComponent(info.linkUrl);	
-	var url = "/"+localStorage.cmFunction+"?url="+url_encoded_url+"&slow="+localStorage.modeslow;
-	mkrequest(url, 1);
+	var url_encoded_url = encodeURIComponent(info.linkUrl);
+	if (localStorage.cmFunction == "stream") {
+		mkrequest("/stream?url="+url_encoded_url+"&slow="+localStorage.modeslow, 1);
+	} else {
+		mkrequest("/queue?url="+url_encoded_url+"&slow="+localStorage.modeslow, 0);
+	}
+	
 });
 
 chrome.runtime.onInstalled.addListener(function() {

@@ -15,11 +15,13 @@
 	position: fixed;
 	top: 30px;
 	right: 5px;
+	background-color: red;
 }
 
 .fifty {
 	width: 45px;
 	margin: 10px 5px;
+	
 }
 
 .ninety {
