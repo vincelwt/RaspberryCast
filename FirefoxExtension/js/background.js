@@ -1,5 +1,5 @@
 function stopNote() {
-	chrome.notifications.clear('notif', function(id) { console.log("Last error:", chrome.runtime.lastError); });
+	browser.notifications.clear('notif', function(id) { console.log("Last error:", browser.runtime.lastError); });
 }
 
 function notif(title, msg) {
@@ -10,7 +10,7 @@ function notif(title, msg) {
 		iconUrl: "48.png"
 	};
 
-	chrome.notifications.create('notif', opt, function(id) { console.log("Last error:", chrome.runtime.lastError); });
+	browser.notifications.create('notif', opt, function(id) { console.log("Last error:", browser.runtime.lastError); });
 
 	setTimeout(stopNote, 4000);		
 }
@@ -37,7 +37,7 @@ function mkrequest(url, response) {
 						}
 					}
 				} else {
-					chrome.notifications.clear('notif', function(id) { console.log("Last error:", chrome.runtime.lastError); });
+					browser.notifications.clear('notif', function(id) { console.log("Last error:", browser.runtime.lastError); });
 					alert("Error during requesting from server ! Make sure the ip/port are corrects, and the server is running.");
 				}
 			}
@@ -51,7 +51,7 @@ function mkrequest(url, response) {
 }
 
 
-chrome.contextMenus.onClicked.addListener(function(info) {
+browser.contextMenus.onClicked.addListener(function(info) {
 	var url_encoded_url = encodeURIComponent(info.linkUrl);
 	if (localStorage.cmFunction == "stream") {
 		mkrequest("/stream?url="+url_encoded_url+"&slow="+localStorage.modeslow, 1);
@@ -61,11 +61,11 @@ chrome.contextMenus.onClicked.addListener(function(info) {
 	
 });
 
-chrome.runtime.onInstalled.addListener(function() {
-	chrome.tabs.create({url: "../options.html"});
+browser.runtime.onInstalled.addListener(function() {
+	browser.tabs.create({url: "../options.html"});
 });
 
-chrome.contextMenus.create({
+browser.contextMenus.create({
 	id: "Castnow",
 	title: "Send to Rpi",
 	contexts: ["link"]

@@ -1,6 +1,6 @@
 {
    "background": {
-      "scripts": [ "js/background.js", "js/popup.js", "js/jquery-2.1.3.min.js" ]
+      "scripts": [ "js/jquery-2.1.3.min.js", "js/background.js", "js/popup.js" ]
    },
    "browser_action": {
       "default_icon": "20.png",

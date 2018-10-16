@@ -26,28 +26,28 @@ function handlers() {
     });
 
 	$( "#pause" ).click(function() {
-		chrome.extension.getBackgroundPage().mkrequest("/video?control=pause", 0);
+		browser.extension.getBackgroundPage().mkrequest("/video?control=pause", 0);
 	});	
 
 	$( "#stop" ).click(function() {
-		chrome.extension.getBackgroundPage().mkrequest("/video?control=stop", 0);
+		browser.extension.getBackgroundPage().mkrequest("/video?control=stop", 0);
 		window.close();
 	});
 	
 	$( "#backward" ).click(function() {
-		chrome.extension.getBackgroundPage().mkrequest("/video?control=left", 0);
+		browser.extension.getBackgroundPage().mkrequest("/video?control=left", 0);
 	});
 	
 	$( "#forward" ).click(function() {
-		chrome.extension.getBackgroundPage().mkrequest("/video?control=right", 0);
+		browser.extension.getBackgroundPage().mkrequest("/video?control=right", 0);
 	});
 	
 	$( "#vol_down" ).click(function() {
-		chrome.extension.getBackgroundPage().mkrequest("/sound?vol=less", 0);
+		browser.extension.getBackgroundPage().mkrequest("/sound?vol=less", 0);
 	});
 	
 	$( "#vol_up" ).click(function() {
-		chrome.extension.getBackgroundPage().mkrequest("/sound?vol=more", 0);
+		browser.extension.getBackgroundPage().mkrequest("/sound?vol=more", 0);
 	});
 }
 
