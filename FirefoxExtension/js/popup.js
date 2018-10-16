@@ -1,20 +1,29 @@
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+
 function handlers() {
 
-	$( "#castbtn" ).click(function() {
-		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-			var url_encoded = encodeURIComponent(tabs[0].url);
-			chrome.extension.getBackgroundPage().mkrequest("/stream?url=" + url_encoded + "&slow="+localStorage.modeslow, 1);
-		});
-		window.close();
-	});
+    $( "#castbtn" ).click(function(){
+        browser.tabs.query({active: true, currentWindow: true})
+        .then(function(tabs){
+            browser.extension.getBackgroundPage().mkrequest("/stream?url=" + tabs[0].url
+                                                   + "&slow="+localStorage.modeslow, 1);
+            window.close();
+        })
+        .catch(onError);
+    });
 
 	$( "#addqueue" ).click(function() {
-		chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-			var url_encoded = encodeURIComponent(tabs[0].url);
-			chrome.extension.getBackgroundPage().mkrequest("/queue?url="+url_encoded + "&slow="+localStorage.modeslow, 1);
-		});
-		window.close();	
-	});	
+        browser.tabs.query({active: true, currentWindow: true})
+        .then(function(tabs){
+            browser.extension.getBackgroundPage().mkrequest("/queue?url=" + tabs[0].url
+                                                   + "&slow="+localStorage.modeslow, 1);
+            window.close();
+        })
+        .catch(onError);
+    });
 
 	$( "#pause" ).click(function() {
 		chrome.extension.getBackgroundPage().mkrequest("/video?control=pause", 0);
