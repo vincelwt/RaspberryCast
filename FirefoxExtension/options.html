@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Options</title>
+		<script src="js/options.js"></script>
+	</head>
+	<body>
+		<center>
+			<h1><img src="128.png" width="30px" style="margin-right: 10px;"/>RaspberryCast</h1>
+			<form name="settings">
+				<h2>Options :</h2>
+				<p>Ip adress (ex: 192.168.1.10) :</p> <input type="text" id="raspip" placeholder="Enter the IP"/>
+				<br>
+				<br>
+				<p>Mode slow connection (360p only):</p>
+				<input type="radio" name="mode_slow" id="bad_qual" value="True">On
+				<input type="radio" name="mode_slow" id="high_qual" value="False">Off
+				<br>
+				<br>
+				<p>Right click (context menu) button action:</p>
+				<input type="radio" name="cmFunction" id="cmFstream" value="stream">Cast now
+				<input type="radio" name="cmFunction" id="cmFqueue" value="queue">Add to queue
+				<br>
+				<br>
+				<button id="saveButton">Save</button>
+			</form>
+		</center>
+	</body>
+</html>
